@@ -6,8 +6,15 @@
     <description>Recent content in Studylogs on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/studylogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BC2016 Session 2.1: Fundamental Concepts</title>
+      <link>https://cyberntium.github.io/studylogs/bc2406-session2.1/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/bc2406-session2.1/</guid>
+      <description>&lt;h2 id=&#34;role-of-visualization-and-models&#34;&gt;&#xD;&#xA;  Role of Visualization and Models&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#role-of-visualization-and-models&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;h3 id=&#34;visualization&#34;&gt;&#xD;&#xA;  Visualization&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#visualization&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Get easier understanding than analytics models&lt;/li&gt;&#xA;&lt;li&gt;Communicate/explain the results in an easier way&lt;/li&gt;&#xA;&lt;li&gt;Requires minimal training&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;but-is-it-okay-to-just-depend-on-visualization&#34;&gt;&#xD;&#xA;  But is it okay to just depend on visualization?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#but-is-it-okay-to-just-depend-on-visualization&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;h2 id=&#34;obviously-no-but-why&#34;&gt;&#xD;&#xA;  Obviously no, but why?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#obviously-no-but-why&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Visualization at most show the relationship between 3 variables, preferably 2.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>BC2016 Session 2: Analytics Introduction</title>
       <link>https://cyberntium.github.io/studylogs/bc2406-session2/</link>

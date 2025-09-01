@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cyberntium.github.io/studylogs/bc2406-session2/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
+    <loc>https://cyberntium.github.io/studylogs/bc2406-session2.1/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cyberntium.github.io/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cyberntium.github.io/studylogs/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cyberntium.github.io/studylogs/bc2406-session2/</loc>
     <lastmod>2025-08-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cyberntium.github.io/tags/im2073/</loc>
@@ -18,9 +24,6 @@
     <lastmod>2025-08-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cyberntium.github.io/projects/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://cyberntium.github.io/studylogs/</loc>
     <lastmod>2025-08-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cyberntium.github.io/tags/</loc>
