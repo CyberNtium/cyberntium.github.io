@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>cyberntium</title>
-    <link>https://cyberntium.github.io/</link>
-    <description>Recent content on cyberntium</description>
+    <title>Studylogs on cyberntium</title>
+    <link>https://cyberntium.github.io/studylogs/</link>
+    <description>Recent content in Studylogs on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://cyberntium.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://cyberntium.github.io/studylogs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>BC2016 Session 2: Analytics Introduction</title>
       <link>https://cyberntium.github.io/studylogs/bc2406-session2/</link>
@@ -16,32 +16,11 @@
       <description>&lt;h1 id=&#34;1-introduction-to-rstudio&#34;&gt;&#xD;&#xA;  1: Introduction to RStudio&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-introduction-to-rstudio&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;h3 id=&#34;11-install-r-and-rstudio&#34;&gt;&#xD;&#xA;  1.1: Install R and RStudio&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#11-install-r-and-rstudio&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Download base R from their official website here: &lt;a href=&#34;https://cran.r-project.org/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://cran.r-project.org/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Make sure to choose the version corresponding to your OS. I&amp;rsquo;m using Windows for this part. (I hate it)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;figure class=&#34;center&#34;&gt;&lt;img src=&#34;https://cyberntium.github.io/images/baseR.png&#34;&#xA;    alt=&#34;baseR&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Follow the instructions listed and download the correct file. For Windows, download the “base” file.&lt;/li&gt;&#xA;&lt;li&gt;Run the installer and keep everything default, you can change it later if you want.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;12-install-rstudio-desktop&#34;&gt;&#xD;&#xA;  1.2: Install RStudio Desktop&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#12-install-rstudio-desktop&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Install RStudio Desktop here: &lt;a href=&#34;https://posit.co/download/rstudio-desktop/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://posit.co/download/rstudio-desktop/&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Web E-shop Project - BagusDrip</title>
-      <link>https://cyberntium.github.io/projects/webeshop/</link>
-      <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://cyberntium.github.io/projects/webeshop/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;https://cyberntium.github.io/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;directory-of-java-servlets&#34;&gt;&#xD;&#xA;  Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>BC2016 Session 1: Course Overview</title>
       <link>https://cyberntium.github.io/studylogs/bc2406-session1/</link>
       <pubDate>Sat, 30 Aug 2025 00:00:00 +0000</pubDate>
       <guid>https://cyberntium.github.io/studylogs/bc2406-session1/</guid>
       <description>&lt;h2 id=&#34;features&#34;&gt;&#xD;&#xA;  Features&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#features&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;i.) Business Focus&lt;br&gt;&#xA;ii.) Concepts Driven&lt;br&gt;&#xA;iii.) Can talk and do&lt;br&gt;&#xA;iv.) Stats and Scripting&lt;/p&gt;&#xA;&lt;h2 id=&#34;active-reinforced-learning&#34;&gt;&#xD;&#xA;  Active Reinforced Learning&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#active-reinforced-learning&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;i.) Pre-class Readings/Videos - Complete all main textbooks chapters + watch videos before each class&lt;br&gt;&#xA;ii.) Pre-class Exercises - &lt;strong&gt;Try&lt;/strong&gt; to finish as much as possible&lt;br&gt;&#xA;iii.) In-class Learning Activities - Stuff&lt;/p&gt;&#xA;&lt;h2 id=&#34;main-textbook&#34;&gt;&#xD;&#xA;  Main Textbook&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#main-textbook&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Chew C.H. (2021). Artificial Intelligence, TODO&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>About</title>
-      <link>https://cyberntium.github.io/about/</link>
-      <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://cyberntium.github.io/about/</guid>
-      <description>&lt;p&gt;Hi, I&amp;rsquo;m Carl 👋.&lt;br&gt;&#xA;I&amp;rsquo;m currently an Information Engineering and Media undergraduate at Nanyang Technological University (NTU).&#xA;This is my personal site where I share some academic projects, logs and maybe (if I am free&amp;hellip;) some blogs.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>First Post of this Site</title>
-      <link>https://cyberntium.github.io/blog/firstpost/</link>
-      <pubDate>Wed, 27 Aug 2025 21:04:09 +0800</pubDate>
-      <guid>https://cyberntium.github.io/blog/firstpost/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://cyberntium.github.io/images/smile.png&#34; alt=&#34;alt text&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;I really wonder what people have in mind when they first became motivated to make their own blog/portfolio website.&lt;br&gt;&#xA;Do people do it for fun? Or do people do it just to show off their full stack skills?&lt;br&gt;&#xA;Or maybe it&amp;rsquo;s because they saw someone else on LinkedIn doing it so now they felt left behind.&lt;/p&gt;&#xA;&lt;p&gt;Regardless, I don&amp;rsquo;t think any of those is a sin in itself.&#xA;We live in the era of vibe-coding, the skill expression from developing something from the ground up is somehow ruined. Even for me, I rely on AI way too much for my own good.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
