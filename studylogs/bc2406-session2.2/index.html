@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  BC2016 Session 2.2: Introduction to R Programming Basics · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  1. Check and Set your Working Directory in R
+  
+    
+    Link to heading
+  
+
+This was a very confusing part of RStudio for me when I first started since there are a lot of different ways to go about working directories. In our case here, what I will show is what worked for me in particular, so if you are not very comfortable with it, feel free to follow the professor’s method.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BC2016 Session 2.2: Introduction to R Programming Basics">
+  <meta name="twitter:description" content="1. Check and Set your Working Directory in RLink to headingThis was a very confusing part of RStudio for me when I first started since there are a lot of different ways to go about working directories. In our case here, what I will show is what worked for me in particular, so if you are not very comfortable with it, feel free to follow the professor’s method.">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/bc2406-session2.2/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="BC2016 Session 2.2: Introduction to R Programming Basics">
+  <meta property="og:description" content="1. Check and Set your Working Directory in RLink to headingThis was a very confusing part of RStudio for me when I first started since there are a lot of different ways to go about working directories. In our case here, what I will show is what worked for me in particular, so if you are not very comfortable with it, feel free to follow the professor’s method.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-09-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-01T00:00:00+00:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/bc2406-session2.2/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/bc2406-session2.2/">
+          BC2016 Session 2.2: Introduction to R Programming Basics
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="1-check-and-set-your-working-directory-in-r">
+  1. Check and Set your Working Directory in R
+  <a class="heading-link" href="#1-check-and-set-your-working-directory-in-r">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><em>This was a very confusing part of RStudio for me when I first started since there are a lot of different ways to go about working directories. In our case here, what I will show is what worked for me in particular, so if you are not very comfortable with it, feel free to follow the professor’s method.</em></p>
+<ul>
+<li>There will always be one working directory (WD) during any R session.</li>
+<li>Your WD will be the path where you get your spreadsheets, R scripts or any dataset for that matter.</li>
+<li>To check what is your current WD, type getwd() at your R console</li>
+<li>If you are using Windows, your WD is probably defaulted to your documents folder. Unless you are okay with that, let’s try to change that to the Unit 2 folder of this course for this showcase:</li>
+<li>
+<ul>
+<li>Type <code>setwd(&quot;your path address here&quot;)</code> and change the stuff inside to your own path</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Unless you are very familiar with your paths, there is another way to do this. Simply open the Unit 2 folder like so:</li>
+</ul>
+</li>
+</ul>
+<figure class="center"><img src="/images/rPath.png"
+    alt="RStudio">
+</figure>
+
+<ul>
+<li>
+<ul>
+<li>Copy the top address bar, that’s your path name:</li>
+</ul>
+</li>
+</ul>
+<figure class="center"><img src="/images/rAddress.png"
+    alt="RStudio">
+</figure>
+
+<ul>
+<li>
+<ul>
+<li>Paste it into the brackets of <code>setwd()</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Change all the backslashes “ \ “ to forward slashes “ / “. Don’t forget the quotation sign.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Finally you should have something like this:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>setwd(“C:/Users/name/Desktop/…”)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>Check with <code>getwd()</code> just in case</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-getting-data-into-rstudio">
+  2: Getting Data into RStudio
+  <a class="heading-link" href="#2-getting-data-into-rstudio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>The reason we change our WD is to test this ection</li>
+<li>But first, let&rsquo;s get familiar with the <em><strong>Assignment Operator: <code>&lt;-</code></strong></em></li>
+</ul>
+<h2 id="21-assignment-operator">
+  2.1: Assignment Operator
+  <a class="heading-link" href="#21-assignment-operator">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>As the name suggests, the assignment operator assigns a value to a name/object:<br>
+<code>x &lt;- value</code><br>
+<code>x &lt;&lt;- value</code><br>
+<code>value -&gt; x</code><br>
+<code>value -&gt;&gt; x</code></li>
+<li>“x” is your variable name and “value” is the value you want to assign to the “x”</li>
+<li>Type <code>age &lt;- 22</code>. You should see the code pop up in both the console and the environment panel</li>
+</ul>
+<blockquote>
+<p>What if you want to assign the same value to different variable names?</p></blockquote>
+<p><code>age1 &lt;- age2 &lt;- age3 &lt;- 22</code></p>
+<ul>
+<li>The assignment also works for an operation. For example: <code>sum &lt;- 3+4</code></li>
+<li>Type <code>sum</code> to see the sum. This works for every other mathematical operation, <code>+</code>, <code>-</code>, <code>x</code>, <code>/</code> and so on.</li>
+</ul>
+<h2 id="22-naming-convention">
+  2.2: Naming Convention
+  <a class="heading-link" href="#22-naming-convention">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Like any other programming language that you are familiar with, R also has its own naming convention:<br>
+<code>johnDoe</code><br>
+<code>john_doe</code><br>
+<code>john.doe</code></li>
+</ul>
+<h2 id="23-vectors-combination-or-whatever">
+  2.3: Vectors (Combination or whatever)
+  <a class="heading-link" href="#23-vectors-combination-or-whatever">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Type <code>c()</code> with your values inside the brackets to create a vector:<br>
+<code>c(1, 2, 3, 4, 5, 6)</code><br>
+<code>c(“john”, “david”, “mary”)</code><br>
+<code>c(TRUE, FALSE, TRUE)</code></li>
+</ul>
+<h2 id="24-basic-data-types">
+  2.4: Basic Data Types
+  <a class="heading-link" href="#24-basic-data-types">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Type <code>class()</code> with your variable inside the brackets to check what type is your data
+<figure class="center"><img src="/images/classR.png"
+    alt="RStudio">
+</figure>
+
+<a href="https://www.w3schools.com/r/r_data_types.asp"  class="external-link" target="_blank" rel="noopener">image source</a></li>
+<li>For example:</li>
+<li>
+<ul>
+<li><code>x &lt;- TRUE</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>class(x)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Output should be <strong><em>logical</em></strong></li>
+</ul>
+</li>
+</ul>
+<p><em>yea I&rsquo;m not sure why R decided to call boolean logical while literally every other languages out there uses boolean</em></p>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
