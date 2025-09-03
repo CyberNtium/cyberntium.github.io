@@ -97,7 +97,7 @@ type = byte, halfword, word(default), signed &amp; unsigned
   
 
 
-  Examples
+  Basic Examples
   
     
     Link to heading
@@ -117,7 +117,7 @@ where:
 &lt;Rd&gt; = destination for LDR but source for STR
 cond = condition flag
 type = byte, halfword, word(default), signed &amp; unsigned
-Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR Word (32 bits) LDRB STRB Byte (8 bits) LDRH STRH Halfword (16 bits) LDRSB N/A Signed Byte LDRSH N/A Signed Halfword LDM STM Multiple Words ExamplesLink to headingSTR r0, [r1]">
+Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR Word (32 bits) LDRB STRB Byte (8 bits) LDRH STRH Halfword (16 bits) LDRSB N/A Signed Byte LDRSH N/A Signed Halfword LDM STM Multiple Words Basic ExamplesLink to headingSTR r0, [r1]">
 
 <meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-ldr-str-instructions/">
   <meta property="og:site_name" content="cyberntium">
@@ -127,7 +127,7 @@ where:
 &lt;Rd&gt; = destination for LDR but source for STR
 cond = condition flag
 type = byte, halfword, word(default), signed &amp; unsigned
-Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR Word (32 bits) LDRB STRB Byte (8 bits) LDRH STRH Halfword (16 bits) LDRSB N/A Signed Byte LDRSH N/A Signed Halfword LDM STM Multiple Words ExamplesLink to headingSTR r0, [r1]">
+Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR Word (32 bits) LDRB STRB Byte (8 bits) LDRH STRH Halfword (16 bits) LDRSB N/A Signed Byte LDRSH N/A Signed Halfword LDM STM Multiple Words Basic ExamplesLink to headingSTR r0, [r1]">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="studylogs">
@@ -336,9 +336,9 @@ Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR
       </tr>
   </tbody>
 </table>
-<h3 id="examples">
-  Examples
-  <a class="heading-link" href="#examples">
+<h3 id="basic-examples">
+  Basic Examples
+  <a class="heading-link" href="#basic-examples">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -355,6 +355,161 @@ Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR
 </li>
 <li>
 <p>Load r2 with contents of memory location pointed to by contents of r1</p>
+</li>
+</ul>
+<h3 id="pre-indexed-instructions">
+  Pre-Indexed Instructions
+  <a class="heading-link" href="#pre-indexed-instructions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>Pre-indexed addressing basically adds an additional offset to the base address before executing LDR/STR</p>
+</li>
+<li>
+<p><code>LDR r0, [r1, #8]</code></p>
+</li>
+<li>
+<p>Goes into address of <code>r1 + 8</code> and loads into r0</p>
+</li>
+</ul>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>STR r0, [r1, #12]</code></li>
+<li><code>r01</code> has value of <code>0xABCDEF</code></li>
+<li><code>[r1]</code> has address of <code>0x200</code></li>
+<li>Offset by 12 so we add 12 to <code>0x200</code> &ndash;&gt; <code>0x20C</code> (hexadecimal)</li>
+<li>Finally we store whatever is inside <code>r0</code> into the address of <code>0x20C</code></li>
+</ul>
+<h3 id="pre-index-with-logical-shift-left-lsl">
+  Pre-Index with Logical Shift Left (LSL)
+  <a class="heading-link" href="#pre-index-with-logical-shift-left-lsl">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1">
+  Example
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><code>LDR r9, [r1, r8, LSL #2]</code></p>
+</li>
+<li>
+<p>Given that <code>[r1]</code> contains address value of <code>0x4000</code>, <code>[r8]</code> is <code>0x20</code></p>
+</li>
+<li>
+<p>Let&rsquo;s start with a basic algebraic expression view:</p>
+</li>
+<li>
+<p>We load whatever is in <code>[x]</code> into <code>r9</code></p>
+</li>
+<li>
+<p>We start with base address <code>[r1]</code> but offset by the value contained in the address <code>[r8]</code></p>
+</li>
+<li>
+<p>Then we perform a <em>Logical Shift Left</em> or LSL by 2 units on the offset <code>[r8]</code></p>
+</li>
+<li>
+<p>How it looks like:</p>
+</li>
+<li>
+<ul>
+<li><code>0x20</code> (hexadecimal) = <code>0010 0000</code> (binary)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>0010 0000</code> &ndash;&gt; LSL by 2 units</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>1000 0000</code> (binary) = <code>0x80</code> (hexadecimal)</li>
+</ul>
+</li>
+<li>
+<p>Finally, add the offset to the base address:</p>
+</li>
+<li>
+<ul>
+<li><code>0x4000</code> + <code>0x80</code> = <code>0x4080</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Load whatever is in the address <code>0x4080</code> into <code>r9</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="pre-index-with-write-back-">
+  Pre-Index with Write-Back <code>!</code>
+  <a class="heading-link" href="#pre-index-with-write-back-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-2">
+  Example
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>LDR r0, [r1, #4]!</code></li>
+<li>Do everything as usual but at the end updates the <code>[r1]</code> address with the new one with offset included</li>
+</ul>
+<h3 id="post-index">
+  Post-Index
+  <a class="heading-link" href="#post-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-3">
+  Example
+  <a class="heading-link" href="#example-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>Note that this is very similar to write-back but still a bit different</p>
+</li>
+<li>
+<p><code>LDR r2, [r1], #1</code></p>
+</li>
+<li>
+<p>Given that <code>[r1]</code> is <code>0x20</code>,</p>
+</li>
+<li>
+<p>First we load whatever is in base address <code>r1</code> into <code>r2</code></p>
+</li>
+<li>
+<p>Then we increase base address by offset <code>#1</code>, so <code>0x21</code></p>
+</li>
+<li>
+<p>Difference with Write-back:</p>
+</li>
+<li>
+<p><code>LDR r2, [r1, #1]!</code></p>
+</li>
+<li>
+<p>Increment to base address by offset first then load into r1</p>
 </li>
 </ul>
 
