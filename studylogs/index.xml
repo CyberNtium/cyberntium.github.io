@@ -6,8 +6,15 @@
     <description>Recent content in Studylogs on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Sep 2025 07:21:55 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Sep 2025 19:19:21 +0800</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/studylogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BC2406 Session 4 - Plots and Other Stuff</title>
+      <link>https://cyberntium.github.io/studylogs/bc2406-session4/</link>
+      <pubDate>Wed, 03 Sep 2025 19:19:21 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/bc2406-session4/</guid>
+      <description>&lt;h1 id=&#34;visualization-with-ggplot2-package&#34;&gt;&#xD;&#xA;  Visualization with ggplot2 package&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#visualization-with-ggplot2-package&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;code&gt;library(ggplot2)&lt;/code&gt;&lt;br&gt;&#xA;&lt;code&gt;ggplot(data = ins.dt[STATE == &#39;NY&#39;], aes(x = EARNINGS, y = INCOME)) + geom_points() + labs(title = &amp;quot;Figure 4.3: Income vs Earnings in NY&amp;quot;)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;This plot can be decomposed into 3 layers:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;First Layer: Data and the XY plane&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Second Layer: Scatter Points&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Third Layer: Figure Title&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>Microprocessors LDR STR Instructions</title>
       <link>https://cyberntium.github.io/studylogs/microprocessors-ldr-str-instructions/</link>

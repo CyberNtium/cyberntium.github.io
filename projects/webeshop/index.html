@@ -19,7 +19,7 @@
 This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.
 I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website here.
 
-  Directory of Java Servlets
+  1: Directory of Java Servlets
   
     
     Link to heading
@@ -35,7 +35,7 @@ The usual convention goes like this:">
   <meta name="twitter:title" content="Web E-shop Project - BagusDrip">
   <meta name="twitter:description" content="This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.
 I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website here.
-Directory of Java ServletsLink to headingThe first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.
+1: Directory of Java ServletsLink to headingThe first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.
 The usual convention goes like this:">
 
 <meta property="og:url" content="https://cyberntium.github.io/projects/webeshop/">
@@ -43,7 +43,7 @@ The usual convention goes like this:">
   <meta property="og:title" content="Web E-shop Project - BagusDrip">
   <meta property="og:description" content="This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.
 I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website here.
-Directory of Java ServletsLink to headingThe first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.
+1: Directory of Java ServletsLink to headingThe first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.
 The usual convention goes like this:">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
@@ -180,9 +180,9 @@ The usual convention goes like this:">
 
 <p><em>This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.</em><br>
 <em>I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website <a href="https://www3.ntu.edu.sg/home/ehchua/programming/index.html"  class="external-link" target="_blank" rel="noopener">here</a>.</em></p>
-<h2 id="directory-of-java-servlets">
-  Directory of Java Servlets
-  <a class="heading-link" href="#directory-of-java-servlets">
+<h2 id="1-directory-of-java-servlets">
+  1: Directory of Java Servlets
+  <a class="heading-link" href="#1-directory-of-java-servlets">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -198,13 +198,105 @@ The usual convention goes like this:</p>
 </span></span><span style="display:flex;"><span> │── index.html  
 </span></span></code></pre></div><p><em>Note that this is the convienent way that I was using when I did the project so it might not be &ldquo;indsutry standard&rdquo;. Please forgive me~</em></p>
 <p>Regardless, as we can see, all your server related java class codes should live in the nested folder of &ldquo;classes&rdquo; and your UI/UX files like html is just in the &ldquo;WebAppName&rdquo; folder. The images folder is the asset folder that I used to store the images of the products of my webapp.</p>
-<h2 id="server-side-logic-using-java-servlets">
-  Server-Side Logic using Java Servlets
-  <a class="heading-link" href="#server-side-logic-using-java-servlets">
+<h2 id="2-server-side-logic-using-java-servlets">
+  2: Server-Side Logic using Java Servlets
+  <a class="heading-link" href="#2-server-side-logic-using-java-servlets">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
+<h3 id="21-orderservletjava">
+  2.1: OrderServlet.java
+  <a class="heading-link" href="#21-orderservletjava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="211-libraries">
+  2.1.1: Libraries
+  <a class="heading-link" href="#211-libraries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First of all, we need to import some Java libraries, namely these ones:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>import java.io.*;
+</span></span><span style="display:flex;"><span>import java.sql.*;
+</span></span><span style="display:flex;"><span>import jakarta.servlet.*;
+</span></span><span style="display:flex;"><span>import jakarta.servlet.http.*;
+</span></span><span style="display:flex;"><span>import jakarta.servlet.annotation.*;
+</span></span></code></pre></div><p><code>java.io.*</code> handles the classic input output operations, namely the PrintWriter class which we will get to later.</p>
+<p><code>java.sql.*</code> provides the Java Database Connectivity (JDBC) classes for connecting to databases and other SQL operations. We will see something like <code>Connection</code>, <code>Statement</code>, <code>PreparedStatement</code> and <code>SQLException</code> later.</p>
+<p><code>jakarta.servlet.*</code> is the core package, which is just part of the Jakarta Servlet API that provides the servlet framework. Classes used are <code>Servlet</code> and <code>ServletException</code>.</p>
+<p><code>jakarta.servlet.http.*</code> is the http package of jakarta servlet. This provides the HttpServlet class which we need to extend every class to enable HTTP request handling. Classes like <code>HttpServletRequest</code> and <code>HTTPServletResponse</code> are used to process incoming requests and send responses.</p>
+<p>Finally, <code>jakarta.servlet.annotation.*</code> is required for a line above our public class which we are going to see later, aka <code>@WebServlet</code></p>
+<h4 id="212-the-servlet-class">
+  2.1.2: The Servlet Class
+  <a class="heading-link" href="#212-the-servlet-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<h4 id="defining-our-class-and-annotation">
+  Defining Our Class and Annotation
+  <a class="heading-link" href="#defining-our-class-and-annotation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>@WebServlet(&#34;/driporder&#34;)
+</span></span><span style="display:flex;"><span>public class OrderServlet extends HttpServlet {
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>@WebServlet(&quot;/driporder&quot;)</code> maps this particular servlet to the url that happens to contain <code>&quot;/driporder&quot;</code>, something like this: <code>http://localhost:xxxx/driporder</code>.<br>
+Essentially, after we host site on Tomcat and when a request comes in with the URL path containing <code>/driorder</code>, the <code>OrderServlet</code> class will execute.<br>
+If you are familiar with SpringBoot, it is very similar to the <code>@GetMapping</code> method.</p>
+<p>Next up is defining the public class of OrderServlet, which I assume everyone knows about at this point. More interestingly though, let&rsquo;s look at the extend:
+<code>public class OrderServlet extends HttpServlet</code><br>
+As mentioned in the libraries section, <code>HttpServlet</code> is a pre-defined class from the http package. We <strong>NEED</strong> to include this so that we can allow <code>doGet</code> and <code>doPost</code> stuff later.</p>
+<p>And finally, we can go into the first public class and see what&rsquo;s inside:<br>
+spoilers more class lmao 😞</p>
+<h4 id="doget-request-and-response">
+  doGet Request and Response
+  <a class="heading-link" href="#doget-request-and-response">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>@Override
+</span></span><span style="display:flex;"><span>public void doGet(HttpServletRequest request, HttpServletResponse response)
+</span></span><span style="display:flex;"><span>        thorws ServletException, IOException {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>So, Java OOP 101 here: We are overriding a method from the parent class which in this case would be the <code>HttpServlet</code>, and making our own version.</p>
+<blockquote>
+<p>Interestingly, I didn&rsquo;t know this when I was studying, this is a very healthy practice for programmers because in the case where you did not include <code>@Override</code> and misspelt <code>doGet()</code> with <code>doget()</code> or whatever, Java will just create a new method which is not very good. With the <code>@Override</code>, Java will check if the parameter is the same as your parent&rsquo;s and gives you an error if it exists.</p></blockquote>
+<p>Next, we define a public method named doGet, which will be called by Tomcat when an HTTP GET request is received using any URL with <code>/driporder</code>.</p>
+<blockquote>
+<p>What is an HTTP Get request?</p></blockquote>
+<p>It is simply a way of saying <em>I want to get or retrieve some data from a server</em>. This can be:</p>
+<ul>
+<li>Clicking a HyperLink on the web page</li>
+<li>Refreshing the page</li>
+<li>Typing a URL and pressing enter</li>
+</ul>
+<p>Regardless, all of these are just getting data, nothing will be changed.</p>
+<blockquote>
+<p>What is HttpServletRequest?</p></blockquote>
+<p>The request object we declare is all about the incoming request from the user. Later in the main body, we will see <code>request.getParameter(&quot;something&quot;)</code> which basically just means we are getting something from the user like <code>ID</code> or <code>Name</code></p>
+<blockquote>
+<p>What is HttpServletResponse?</p></blockquote>
+<p>The response&rsquo;s role is to send data back to the user&rsquo;s browser, opposite to request. For example, redirecting the user to somewhere using <code>response.sendRedirect(&quot;link&quot;)</code> to rickroll them or something lol. Of course, we can also send HTML code using <code>response.getWriter()</code> to tell the user something.</p>
+<p>Finally the <code>thorws ServletException, IOException</code> error detection. I will be very honest with you, I still don&rsquo;t really understand what this line means, all I can grasp is if there&rsquo;s some error, something will show up the user side as HTTP 500 error or something. Probably need to update this section in the future lol. TODO</p>
+<h4 id="configuring-responses">
+  Configuring Responses
+  <a class="heading-link" href="#configuring-responses">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 
   </article>
 </section>

@@ -6,8 +6,15 @@
     <description>Recent content on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Sep 2025 07:21:55 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Sep 2025 19:19:21 +0800</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BC2406 Session 4 - Plots and Other Stuff</title>
+      <link>https://cyberntium.github.io/studylogs/bc2406-session4/</link>
+      <pubDate>Wed, 03 Sep 2025 19:19:21 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/bc2406-session4/</guid>
+      <description>&lt;h1 id=&#34;visualization-with-ggplot2-package&#34;&gt;&#xD;&#xA;  Visualization with ggplot2 package&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#visualization-with-ggplot2-package&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;code&gt;library(ggplot2)&lt;/code&gt;&lt;br&gt;&#xA;&lt;code&gt;ggplot(data = ins.dt[STATE == &#39;NY&#39;], aes(x = EARNINGS, y = INCOME)) + geom_points() + labs(title = &amp;quot;Figure 4.3: Income vs Earnings in NY&amp;quot;)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;This plot can be decomposed into 3 layers:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;First Layer: Data and the XY plane&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Second Layer: Scatter Points&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Third Layer: Figure Title&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>Microprocessors LDR STR Instructions</title>
       <link>https://cyberntium.github.io/studylogs/microprocessors-ldr-str-instructions/</link>
@@ -41,7 +48,7 @@
       <link>https://cyberntium.github.io/projects/webeshop/</link>
       <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
       <guid>https://cyberntium.github.io/projects/webeshop/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;https://cyberntium.github.io/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;directory-of-java-servlets&#34;&gt;&#xD;&#xA;  Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://cyberntium.github.io/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;  1: Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
     </item>
     <item>
       <title>BC2016 Session 1: Course Overview</title>

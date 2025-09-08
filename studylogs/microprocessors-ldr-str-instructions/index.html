@@ -357,6 +357,13 @@ Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR
 <p>Load r2 with contents of memory location pointed to by contents of r1</p>
 </li>
 </ul>
+<h3 id="little-endian--big-endian-todo">
+  Little Endian &amp; Big Endian TODO
+  <a class="heading-link" href="#little-endian--big-endian-todo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <h3 id="pre-indexed-instructions">
   Pre-Indexed Instructions
   <a class="heading-link" href="#pre-indexed-instructions">
@@ -451,6 +458,21 @@ Common LDR/STR InstructionsLink to headingLoads Stores Size &amp; Type LDR STR
 <li>
 <ul>
 <li>Load whatever is in the address <code>0x4080</code> into <code>r9</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Another simple way to look at this is:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>[r1, r8, LSL #2]</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>final address will be <code>[r1] + [r4]*2^2</code></li>
 </ul>
 </li>
 </ul>
