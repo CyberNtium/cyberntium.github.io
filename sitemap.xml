@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cyberntium.github.io/studylogs/bc2406-session4/</loc>
-    <lastmod>2025-09-03T19:19:21+08:00</lastmod>
-  </url><url>
     <loc>https://cyberntium.github.io/</loc>
+    <lastmod>2025-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cyberntium.github.io/music/lookback/</loc>
+    <lastmod>2025-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cyberntium.github.io/music/</loc>
+    <lastmod>2025-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cyberntium.github.io/studylogs/bc2406-session4/</loc>
     <lastmod>2025-09-03T19:19:21+08:00</lastmod>
   </url><url>
     <loc>https://cyberntium.github.io/studylogs/</loc>
