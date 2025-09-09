@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  BC2406 Session 2.3: Fundamental Data Exploration · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Section 1
+  
+    
+    Link to heading
+  
+
+Create a vector (combination) of baby&rsquo;s age in months, use any arbitrary number
+age &lt;- c(1,3,5,2,11,9,3,9,12,3)
+Create a corresponding vector of baby&rsquo;s weight in kg
+weight &lt;- c(4.4,5.3,7.2,5.2,8.5,7.3,6.0,10.4,10.2,6.1)
+To calculate the average weight of all babies, we can use the mean() function:
+mean(weight)
+Output: 7.06
+To calculate the standard deviation of weight of all babies, we can use the sd() function:
+sd(weight)
+Output: 2.077498">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BC2406 Session 2.3: Fundamental Data Exploration">
+  <meta name="twitter:description" content="Section 1Link to headingCreate a vector (combination) of baby’s age in months, use any arbitrary number
+age &lt;- c(1,3,5,2,11,9,3,9,12,3)
+Create a corresponding vector of baby’s weight in kg
+weight &lt;- c(4.4,5.3,7.2,5.2,8.5,7.3,6.0,10.4,10.2,6.1)
+To calculate the average weight of all babies, we can use the mean() function:
+mean(weight)
+Output: 7.06
+To calculate the standard deviation of weight of all babies, we can use the sd() function:
+sd(weight)
+Output: 2.077498">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/bc2406-session2.3/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="BC2406 Session 2.3: Fundamental Data Exploration">
+  <meta property="og:description" content="Section 1Link to headingCreate a vector (combination) of baby’s age in months, use any arbitrary number
+age &lt;- c(1,3,5,2,11,9,3,9,12,3)
+Create a corresponding vector of baby’s weight in kg
+weight &lt;- c(4.4,5.3,7.2,5.2,8.5,7.3,6.0,10.4,10.2,6.1)
+To calculate the average weight of all babies, we can use the mean() function:
+mean(weight)
+Output: 7.06
+To calculate the standard deviation of weight of all babies, we can use the sd() function:
+sd(weight)
+Output: 2.077498">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-09-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-02T00:00:00+00:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/bc2406-session2.3/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/bc2406-session2.3/">
+          BC2406 Session 2.3: Fundamental Data Exploration
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="section-1">
+  Section 1
+  <a class="heading-link" href="#section-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Create a vector (combination) of baby&rsquo;s age in months, use any arbitrary number<br>
+<code>age &lt;- c(1,3,5,2,11,9,3,9,12,3)</code></p>
+<p>Create a corresponding vector of baby&rsquo;s weight in kg<br>
+<code>weight &lt;- c(4.4,5.3,7.2,5.2,8.5,7.3,6.0,10.4,10.2,6.1)</code></p>
+<p>To calculate the average weight of all babies, we can use the <code>mean()</code> function:<br>
+<code>mean(weight)</code><br>
+Output: 7.06</p>
+<p>To calculate the standard deviation of weight of all babies, we can use the <code>sd()</code> function:<br>
+<code>sd(weight)</code><br>
+Output: 2.077498</p>
+<p>Now, let&rsquo;s see the correlation between age and weight using the <code>cor()</code> function:<br>
+<code>cor(age, weight)</code><br>
+Output: 0.9075655<br>
+Correlation essentially measures the linear relationship between any given variables:</p>
+<ul>
+<li>1 = perfect positive linear relationship</li>
+<li>-1 = perfect negative linear relationship</li>
+<li>0 = no linear relationship between given variables</li>
+</ul>
+<p>In our case, age has a correlation score of ~0.91 with weight, which is quite high. Logical reasoning aside, the data is just random numbers, so it does not really mean anything. But given a real IRL dataset, we can use <code>cor()</code> to figure out some meaning behind some variables.</p>
+<hr>
+<p>Let&rsquo;s now plot a scatterplot with x-axis = age and y-axis = weight:<br>
+<code>plot(age, weight, col = &quot;red&quot;, main = &quot;Plot of Baby's Age Against Weight)</code></p>
+<figure class="center"><img src="https://i.imgur.com/iY4nVk0.jpeg"
+    alt="babyWeightAge">
+</figure>
+
+<hr>
+<p>Let&rsquo;s now create a sequence:<br>
+<code>id &lt;- seq(1, 10)</code><br>
+<code>seq()</code> creates a sequences <em>(duh)</em> starting from the 1st number you input and ends at your 2nd number.<br>
+Output:   1  2  3  4  5  6  7  8  9 10</p>
+<p>We can change the sequence by modifying the code:<br>
+<code>id2 &lt;- seq(1, 10, by = 2)</code><br>
+By adding the &ldquo;by&rdquo; and an arbitrary number, we can create a sequence with different increments, in this case would be increment of 2 starting from 1 and ending at 10
+Output:  1 3 5 7 9</p>
+<hr>
+<p>Let&rsquo;s now create a DataFrame dataset with 3 columns:<br>
+<code>baby_data &lt;- data.frame(id, age, weight)</code></p>
+<blockquote>
+<p>What exactly is a data frame?</p></blockquote>
+<p>A <em>data frame</em> is the fundamental data structure in R, which is used to store data in a table format, similar to what you see in Excel spreadsheets or just a normal table in general.</p>
+<ul>
+<li>Columns: The columns in a data frame area called <strong><em>variables</em></strong>. In our case here, the variables are <code>id</code>, <code>age</code> and <code>weight</code></li>
+<li>Rows: The rows in a data frame are called <strong><em>observations</em></strong>. In our case here, each row represents a specific baby with a specific ID, age and weight.</li>
+</ul>
+<p>Next, we create new variable names for the three columns in baby_data:<br>
+<code>names(baby_data) &lt;- c(&quot;ID&quot;, &quot;Age&quot;, &quot;Weight&quot;)</code></p>
+<p>We can then export this R data set into a CSV file. The file will be saved in your working directory.<br>
+<code>write.csv(baby_data, file = &quot;baby.csv&quot;)</code></p>
+<p>Additionally, if you don&rsquo;t want R to add row names to the Excel, we can do:
+<code>write.csv(baby_data, file = &quot;babyNoRowNames.csv&quot;, row.names = FALSE)</code></p>
+<hr>
+<h1 id="section-2">
+  Section 2
+  <a class="heading-link" href="#section-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<div class="notice note">
+  <div class="notice-title">
+    <i class="fa-solid fa-sticky-note" aria-hidden="true"></i>Note
+  </div>
+  <div class="notice-content"><em>These excel files are from this particular NTU module. I&rsquo;m not very sure about the copyrights about these issues, so I don&rsquo;t feel particularly comfortable sharing them online. I&rsquo;m probably just going to post a screenshot.</em> :3</div>
+</div>
+
+<p>First off, let&rsquo;s import the baby data set and store as baby2_data:<br>
+<code>baby2_data &lt;- read.csv(&quot;baby2.csv&quot;)</code></p>
+<figure class="center"><img src="/images/baby2.png"
+    alt="baby2">
+</figure>
+
+<p>Let&rsquo;s find the mean of the weight:<br>
+<code>mean(baby2_data$Weight)</code><br>
+Output: NA</p>
+<p>Interestingly, if there exists NA values inside the dataset itself, we cannot simply use the mean function on it because all output will end up as &ldquo;NA&rdquo;. However, we can modify the function to include a useful line <code>na.rm</code>:<br>
+<code>mean(baby2_data$Weight, na.rm = TRUE)</code><br>
+Output: 7.788088</p>
+<p>The difference here is that <code>na.rm</code> means removing NA columns, thus we can successfully compute the mean.</p>
+<p>This also works for standard deviation:<br>
+<code>sd(baby2_data$Weight, na.rm = TRUE)</code></p>
+<hr>
+<p>We can find out how many columns contain NA values:<br>
+<code>colSums(is.na(baby2_data))</code></p>
+<p><code>colSums</code> = the sum of columns<br>
+<code>is.na</code> = something that has NA values</p>
+<p>Another simply way is to use the handy <code>summary()</code> function:<br>
+<code>summary(baby2_data)</code><br>
+Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>       ID              Age             Weight      
+</span></span><span style="display:flex;"><span> Min.   :   1.0   Min.   : 1.000   Min.   : 4.400  
+</span></span><span style="display:flex;"><span> 1st Qu.: 250.8   1st Qu.: 4.000   1st Qu.: 6.300  
+</span></span><span style="display:flex;"><span> Median : 500.5   Median : 7.000   Median : 7.900  
+</span></span><span style="display:flex;"><span> Mean   : 500.5   Mean   : 6.613   Mean   : 7.788  
+</span></span><span style="display:flex;"><span> 3rd Qu.: 750.2   3rd Qu.:10.000   3rd Qu.: 9.300  
+</span></span><span style="display:flex;"><span> Max.   :1000.0   Max.   :40.000   Max.   :11.000  
+</span></span><span style="display:flex;"><span>                                   NA&#39;s   :1      
+</span></span></code></pre></div>
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
