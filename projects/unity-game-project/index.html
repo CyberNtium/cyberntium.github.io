@@ -13,19 +13,45 @@
 
 
 <meta name="author" content="Carl Ho">
-<meta name="description" content="My Personal Website">
+<meta name="description" content="
+  Preface - Things to Know Before Writing Any Scripts
+  
+    
+    Link to heading
+  
+
+
+
+void Start() function is called once when the gameObject is first initialised or when the scene starts
+
+
+void update() function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations
+
+
+
+  1. Moving Our Character
+  
+    
+    Link to heading
+  
+
+First, we initialize a Rigidbody2D variable as rb. Then, in the void Start() class, we do:">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Unity Game Project - Game Programming">
-  <meta name="twitter:description" content="My Personal Website">
+  <meta name="twitter:description" content="Preface - Things to Know Before Writing Any ScriptsLink to headingvoid Start() function is called once when the gameObject is first initialised or when the scene starts
+void update() function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations
+1. Moving Our CharacterLink to headingFirst, we initialize a Rigidbody2D variable as rb. Then, in the void Start() class, we do:">
 
 <meta property="og:url" content="https://cyberntium.github.io/projects/unity-game-project/">
   <meta property="og:site_name" content="cyberntium">
   <meta property="og:title" content="Unity Game Project - Game Programming">
-  <meta property="og:description" content="My Personal Website">
+  <meta property="og:description" content="Preface - Things to Know Before Writing Any ScriptsLink to headingvoid Start() function is called once when the gameObject is first initialised or when the scene starts
+void update() function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations
+1. Moving Our CharacterLink to headingFirst, we initialize a Rigidbody2D variable as rb. Then, in the void Start() class, we do:">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="projects">
@@ -159,7 +185,101 @@
       </h1>
     </header>
 
-    
+    <h1 id="preface---things-to-know-before-writing-any-scripts">
+  Preface - Things to Know Before Writing Any Scripts
+  <a class="heading-link" href="#preface---things-to-know-before-writing-any-scripts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>
+<p><code>void Start()</code> function is called once when the gameObject is first initialised or when the scene starts</p>
+</li>
+<li>
+<p><code>void update()</code> function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations</p>
+</li>
+</ul>
+<h2 id="1-moving-our-character">
+  1. Moving Our Character
+  <a class="heading-link" href="#1-moving-our-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>First, we initialize a <strong><em>Rigidbody2D</em></strong> variable as <em>rb</em>. Then, in the <code>void Start()</code> class, we do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>rb = GetComponent&lt;Rigidbody2D&gt;()
+</span></span></code></pre></div><p>This is to assign the <em>rb</em> component to the player <em>GameObject</em>, which is why the script is attached to the player in the first place. We do this in the <code>void Start()</code> function because we only want to get the component once and never change it again.</p>
+<figure class="center"><img src="https://i.imgur.com/eb9bbyv.png"
+    alt="RigidBodyComponent">
+</figure>
+
+<p>Unfortunately, this is not enough to move the player.<br>
+We need to then declare a private float variable, <em>xAxis</em>. Then, we create a void function, <strong><em>GetInputs()</em></strong>.
+Void functions do not return anything, but serve as methods that will be called when a player inputs anything. Thus, next we write inside the <strong><em>GetInputs()</em></strong> method:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>void GetInputs() {
+</span></span><span style="display:flex;"><span>    xAxis = Input.GetAxisRaw(&#34;Horizontal&#34;);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>All this does is:</p>
+<ul>
+<li>Return 1 if player presses right (D or right arrow)</li>
+<li>Return -1 if player presses left (A or left arrow)</li>
+<li>Return 0 if player does not press anything</li>
+</ul>
+<p>And stores them into the <em>xAxis</em> float variable.
+After this, we create a function <code>private void Move()</code> and insert:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>private void Move() {
+</span></span><span style="display:flex;"><span>    rb.linearVelocity = new Vector2(walkSpeed * xAxis, rb.linearVelocity.y);
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>rb</em> refers to the <em>RigidBody2D</em> component. So, <em>rb.linearVelocity</em> means the linear velocity of the rb which is our player. This will equal the RHS of the equation.</p>
+<p>Let’s breakdown the RHS:</p>
+<ul>
+<li><em>new Vector2D()</em>: This basically means we are initialising a new fresh <em>Vector2D</em> object with values every time <strong><em>Move()</em></strong> is called, which is why we put it inside the <strong><em>Update()</em></strong> function (refer to top)</li>
+</ul>
+<blockquote>
+<p>But what is <em>Vector2D</em>? We all took Physics in our 1st Year, do you remember what is a vector?</p></blockquote>
+<ul>
+<li>
+<p>Unity basically stores the x and y components in a “thing” called Vector2D. We are essentially telling the script to store the velocity component of our inputs to the <em>rb.linearVelocity</em> which will be updated every frame. For example:</p>
+</li>
+<li>
+<ul>
+<li>(5, 0) means moving to the right</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>(-5, 0) means moving to the left</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>(0, -10) means moving straight down</li>
+</ul>
+</li>
+<li>
+<p>Inside the <em>Vector2D()</em>, <em>xAxis * walkSpeed</em> will give us the speed and direction of the player.</p>
+</li>
+<li>
+<p>Why is <em>rb.linearVelocity.y</em> not changed? This is because we already have a gravity function in the RigidBody2D component inside unity:</p>
+</li>
+<li>
+<figure class="center"><img src="https://i.imgur.com/CMsQkHN.png"
+    alt="Gravity">
+</figure>
+
+</li>
+<li>
+<p>&hellip;so we can ignore it for now.</p>
+</li>
+</ul>
+<p>Finally, we put the <strong><em>Move()</em></strong> function inside <strong><em>Update()</em></strong>, and our player <em>GameObject</em> can now move when we press our inputs!</p>
+<figure class="center"><img src="https://i.imgur.com/W2Qntx2.gif"
+    alt="moving">
+</figure>
+
+
   </article>
 </section>
 
