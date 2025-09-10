@@ -6,8 +6,15 @@
     <description>Recent content in Projects on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity Game Project - Game Programming</title>
+      <link>https://cyberntium.github.io/projects/unity-game-project/</link>
+      <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://cyberntium.github.io/projects/unity-game-project/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Web E-shop Project - BagusDrip</title>
       <link>https://cyberntium.github.io/projects/webeshop/</link>

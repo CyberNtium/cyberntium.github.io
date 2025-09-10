@@ -6,8 +6,15 @@
     <description>Recent content in Studylogs on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Sep 2025 19:19:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Sep 2025 14:44:35 +0800</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/studylogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Microprocessors MOV Function</title>
+      <link>https://cyberntium.github.io/studylogs/microprocessors-mov/</link>
+      <pubDate>Tue, 09 Sep 2025 14:44:35 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/microprocessors-mov/</guid>
+      <description>&lt;div class=&#34;notice note&#34;&gt;&#xD;&#xA;  &lt;div class=&#34;notice-title&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-sticky-note&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;Note&#xD;&#xA;  &lt;/div&gt;&#xD;&#xA;  &lt;div class=&#34;notice-content&#34;&gt;&lt;em&gt;You should probably read this after you have read through the LDR STR Writeup for better understanding&lt;/em&gt;&lt;/div&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&#xA;&lt;h1 id=&#34;what-is-mov-&#34;&gt;&#xD;&#xA;  What is MOV ?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#what-is-mov-&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;Essentially, the MOV instruction copies data from a source to a destination:&lt;br&gt;&#xA;&lt;code&gt;MOV destination, source&lt;/code&gt;&lt;br&gt;&#xA;Some important notes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The data at the source is not modified&lt;/li&gt;&#xA;&lt;li&gt;The original data at the destination however is overwritten (if there is one)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;For example:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>BC2406 Session 4 - Plots and Other Stuff</title>
       <link>https://cyberntium.github.io/studylogs/bc2406-session4/</link>

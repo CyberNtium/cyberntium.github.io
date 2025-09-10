@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors MOV Function · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  
+    Note
+  
+  You should probably read this after you have read through the LDR STR Writeup for better understanding
+
+
+
+  What is MOV ?
+  
+    
+    Link to heading
+  
+
+Essentially, the MOV instruction copies data from a source to a destination:
+MOV destination, source
+Some important notes:
+
+The data at the source is not modified
+The original data at the destination however is overwritten (if there is one)
+
+For example:">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors MOV Function">
+  <meta name="twitter:description" content="NoteYou should probably read this after you have read through the LDR STR Writeup for better understandingWhat is MOV ?Link to headingEssentially, the MOV instruction copies data from a source to a destination:
+MOV destination, source
+Some important notes:
+The data at the source is not modified The original data at the destination however is overwritten (if there is one) For example:">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-mov/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors MOV Function">
+  <meta property="og:description" content="NoteYou should probably read this after you have read through the LDR STR Writeup for better understandingWhat is MOV ?Link to headingEssentially, the MOV instruction copies data from a source to a destination:
+MOV destination, source
+Some important notes:
+The data at the source is not modified The original data at the destination however is overwritten (if there is one) For example:">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-09-09T14:44:35+08:00">
+    <meta property="article:modified_time" content="2025-09-09T14:44:35+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-mov/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-mov/">
+          Microprocessors MOV Function
+        </a>
+      </h1>
+    </header>
+
+    <div class="notice note">
+  <div class="notice-title">
+    <i class="fa-solid fa-sticky-note" aria-hidden="true"></i>Note
+  </div>
+  <div class="notice-content"><em>You should probably read this after you have read through the LDR STR Writeup for better understanding</em></div>
+</div>
+
+<h1 id="what-is-mov-">
+  What is MOV ?
+  <a class="heading-link" href="#what-is-mov-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Essentially, the MOV instruction copies data from a source to a destination:<br>
+<code>MOV destination, source</code><br>
+Some important notes:</p>
+<ul>
+<li>The data at the source is not modified</li>
+<li>The original data at the destination however is overwritten (if there is one)</li>
+</ul>
+<p>For example:</p>
+<h4 id="1-mov-r1-r2">
+  1.) <code>MOV r1, r2</code>
+  <a class="heading-link" href="#1-mov-r1-r2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This line will copy the value of r2 and overwrite whatever is in r1 with it.</p>
+<h4 id="2-mov-r1-r2">
+  2.) <code>MOV r1, [r2]</code>
+  <a class="heading-link" href="#2-mov-r1-r2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This line will copy the value contained at the memory address of r2 into r1</p>
+<h4 id="3-mov-r1-r2">
+  3.) <code>MOV [r1], r2</code>
+  <a class="heading-link" href="#3-mov-r1-r2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This line will copy the content of r2 and put it in the memory address contained by r1</p>
+<hr>
+<h2 id="mov-limitations">
+  MOV Limitations
+  <a class="heading-link" href="#mov-limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>No ARM instructions can contain a 32 bit immediate constant</li>
+<li>
+<ul>
+<li>All ARM instructins are fixed as 32 bits long</li>
+</ul>
+</li>
+<li>The data processing instruction format has 12 bits avaible for operand2</li>
+<li>4 bit rotate value (0 - 15) is multiplied by two to give range 0-30 in steps of 2</li>
+<li>Rule to remember is &ldquo;8-bits shifted by an even number of bit positions&rdquo;</li>
+</ul>
+<figure class="center"><img src="https://i.imgur.com/2lcw7Cj.png"
+    alt="ROR">
+</figure>
+
+<hr>
+<h1 id="what-is-mov-with-rotation">
+  What is MOV with Rotation?
+  <a class="heading-link" href="#what-is-mov-with-rotation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>In Assembly (or in ARM architecture), every single instruction is 32 bits in size. The source register, destination register, shift amount, the main instruction itself (LDR, STR, MOV) and etc, all of these will ocupy bits in the 32 bits size.</p>
+<p>Specially for MOV, the max for immediate values is only 8 bits with a <strong><em>rotation</em></strong> bit of 4.</p>
+<p>So, the question is:</p>
+<blockquote>
+<p>What happens when we want to MOV a value that is 32 bits in size?</p></blockquote>
+<h3 id="scenario-1-mov-r6-10">
+  Scenario 1: <code>MOV r6, #10</code>
+  <a class="heading-link" href="#scenario-1-mov-r6-10">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this case, we are moving the immediate value of 10 (1010B or 0xA) into r6. And in fact, we can just do that because 10 is a very small number.</p>
+<h3 id="scenario-2-mov-r6-0x8c">
+  Scenario 2: <code>MOV r6, #0x8C</code>
+  <a class="heading-link" href="#scenario-2-mov-r6-0x8c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>For this case, 0x8C is 140 in decimal, which is lesser than the max which is (2^8)-1 = 255.</p>
+<h3 id="scenario-3-mov-r6-0xa400">
+  Scenario 3: <code>MOV r6, #0xA400</code>
+  <a class="heading-link" href="#scenario-3-mov-r6-0xa400">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>For this case, 0xA400 is 41984, which is, uh, bigger than 255. So, error occurs. What should we do here?</p>
+<h3 id="solution-for-scenario-3--mov-r6-0xa4-24">
+  Solution for Scenario 3:  <code>MOV r6, #0xA4, 24</code>
+  <a class="heading-link" href="#solution-for-scenario-3--mov-r6-0xa4-24">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s translate this line: First off we rotate A4 by 24 bits to the right, then we put it into r6.<br>
+To get a clearer picture, we have to look from the binary angle:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00000000 00000000 00000000 10100100 // 0xA4 in binary form
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    // rotate to right by 24 bits, or to the left by 8 bits (adds up to 32 bits)
+</span></span><span style="display:flex;"><span>                      &lt;--------
+</span></span><span style="display:flex;"><span>00000000 00000000 10100100 00000000 // now it becomes 0xA400, which is what we want to send originally
+</span></span></code></pre></div><h3 id="scenario-4-move-4096-to-r6">
+  Scenario 4: Move #4096 to r6
+  <a class="heading-link" href="#scenario-4-move-4096-to-r6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>4096 &ndash;&gt; 0x1000  &ndash;&gt; 00000000 00000000 00010000 00000000B</p>
+<h3 id="solution-for-scenario-4-mov-r6-0x40-26">
+  Solution for Scenario 4: <code>MOV r6, #0x40, 26</code>
+  <a class="heading-link" href="#solution-for-scenario-4-mov-r6-0x40-26">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00000000 00000000 00000000 01000000 // 0x40 in binary form
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    // rotate to right by 26 bits, or to the left by 6 bits (adds up to 32 bits)
+</span></span><span style="display:flex;"><span>                      &lt;--------
+</span></span><span style="display:flex;"><span>00000000 00000000 00010000 00000000 // now it becomes 0x1000, which is what we want to send originally
+</span></span></code></pre></div><h3 id="what-if-numbers-are-still-too-large">
+  What if numbers are still too large?
+  <a class="heading-link" href="#what-if-numbers-are-still-too-large">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><code>LDR rd, =const</code></p>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
