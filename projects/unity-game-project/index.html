@@ -279,6 +279,105 @@ After this, we create a function <code>private void Move()</code> and insert:</p
     alt="moving">
 </figure>
 
+<h2 id="2-jumping">
+  2. Jumping
+  <a class="heading-link" href="#2-jumping">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="21-basic-jump-concept">
+  2.1 Basic Jump() Concept
+  <a class="heading-link" href="#21-basic-jump-concept">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To make our codes easy to understand, it’s important to keep track of what state the player is at. If we initialise a new state every time a function is called, it is not a very efficient code.<br>
+Therefore, let’s make a new script called <code>PlayerStateList</code> to keep track of what state the player is at according to user inputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">public</span> <span style="color:#ff7b72">class</span> <span style="color:#f0883e;font-weight:bold">PlayerStateList</span> : MonoBehaviour 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">public</span> <span style="color:#ff7b72">bool</span> jumping = False; <span style="color:#8b949e;font-style:italic">//Don&#39;t forget this is in the PlayerStateList script</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Let jumping to be false by default since the player should not be jumping at the start of the game for no reason. Then, we need to reference this to the player controller file in the Start function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">void</span> Start ()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    pState = GetComponent&lt;PlayerStateList&gt;();
+</span></span><span style="display:flex;"><span>    rb = GetComponent&lt;Rigidbody2D&gt;(); <span style="color:#8b949e;font-style:italic">// From Move()</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>pState</code> stands for player state, this line looks for the component PlayerStateList which is the script we made just now. Now go back to Unity and drag the PlayerStateList script onto the Player gameObject.</p>
+<p>Let&rsquo;s talk about the actual jump function now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">if</span> (Input.GetButtonUp(<span style="color:#a5d6ff">&#34;Jump&#34;</span>) &amp;&amp; rb.linearVelocity.y &gt; <span style="color:#a5d6ff">0</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    rb.linearVelocity = <span style="color:#ff7b72">new</span> Vector2(rb.linearVelocity.x, <span style="color:#a5d6ff">0</span>);
+</span></span><span style="display:flex;"><span>    pState.jumping = <span style="color:#79c0ff">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is the first part of <code>Jump()</code>:</p>
+<ul>
+<li><code>Input.GetButtonUp(“Jump”)</code> basically means the moment immediately after you pressed and RELEASE the “Jump” button (in this case is Spacebar)</li>
+<li><code>rb.linearVelocity.y</code> checks if the rigidbody of Player is still moving upwards</li>
+<li><code>rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0)</code></li>
+<li>This creates a new Vector2 with:</li>
+<li>
+<ul>
+<li><code>rb.linearVelocity.x</code>, this is your current horizontal movement, meaning you keep all your momentum in the X-axis, that’s why you can jump left and right.
+Set your Y component to zero. This means that you kill upwards velocity</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>This ultimately means that you stop going higher the moment you release the “Jump” button.</li>
+</ul>
+</li>
+<li>Finally, we set <code>pState.jumping = false</code> because we have in fact stopped jumping after releasing the “Jump” button</li>
+</ul>
+<p>And that’s basically how the main <code>Jump()</code> would work in an ideal scenario.</p>
+<h3 id="22-grounded">
+  2.2 Grounded()
+  <a class="heading-link" href="#22-grounded">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">public</span> <span style="color:#ff7b72">bool</span> Grounded()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
+</span></span><span style="display:flex;"><span>        || Physics2D.Raycast(groundCheckPoint.position + <span style="color:#ff7b72">new</span> Vector3(groundCheckX, <span style="color:#a5d6ff">0</span>, <span style="color:#a5d6ff">0</span>), Vector2.down, groundCheckY, whatIsGround)
+</span></span><span style="display:flex;"><span>        || Physics2D.Raycast(groundCheckPoint.position + <span style="color:#ff7b72">new</span> Vector3(-groundCheckX, <span style="color:#a5d6ff">0</span>, <span style="color:#a5d6ff">0</span>), Vector2.down, groundCheckY, whatIsGround))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We declare a public method called <code>Grounded()</code> that returns a boolean value, true or false.</p>
+<p>Then, let’s explain what is <code>Physics2D.Raycast</code>:</p>
+<p>The general formula or format for this function is as follows:</p>
+<p><strong><em>Physics2D.Raycast(origin, direction, distance, layerMask)</em></strong></p>
+<p>Physics2D.Raycast function shoots an invisible ray according to your configuration and reports if the ray hits something in game. You can imagine it as a sensor in the form of a layer pointer.</p>
+<ul>
+<li>
+<p>origin = a vector2 that specifies the starting point of your Raycast</p>
+</li>
+<li>
+<p>direction = a vector 2 that defines the angle/path of your Raycast. Is it up or down or 45 degrees up and so on</p>
+</li>
+<li>
+<p>distance = this is a float that we can customise for the maximum length of the Raycast which it can travel before cutting off</p>
+</li>
+<li>
+<p>layerMask = this is an integer that filters which gameObject the Raycast can see. If you look at top right when you have a gameObject selected you can see:</p>
+</li>
+<li>
+<figure class="center"><img src="https://i.imgur.com/wxyICVd.png"
+    alt="layerMask">
+</figure>
+
+</li>
+<li></li>
+</ul>
 
   </article>
 </section>
