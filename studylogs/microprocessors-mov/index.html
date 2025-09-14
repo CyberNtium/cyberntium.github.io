@@ -280,9 +280,9 @@ Some important notes:</p>
   </a>
 </h3>
 <p>For this case, 0x8C is 140 in decimal, which is lesser than the max which is (2^8)-1 = 255.</p>
-<h3 id="scenario-3-mov-r6-0xa400">
-  Scenario 3: <code>MOV r6, #0xA400</code>
-  <a class="heading-link" href="#scenario-3-mov-r6-0xa400">
+<h3 id="scenario-3-0xa400">
+  Scenario 3: <code>#0xA400</code>
+  <a class="heading-link" href="#scenario-3-0xa400">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -302,9 +302,9 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 24 bits, or to the left by 8 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000000 10100100 00000000 // now it becomes 0xA400, which is what we want to send originally
-</span></span></code></pre></div><h3 id="scenario-4-move-4096-to-r6">
-  Scenario 4: Move #4096 to r6
-  <a class="heading-link" href="#scenario-4-move-4096-to-r6">
+</span></span></code></pre></div><h3 id="scenario-4-4096">
+  Scenario 4: <code>#4096</code>
+  <a class="heading-link" href="#scenario-4-4096">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -322,15 +322,80 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 26 bits, or to the left by 6 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000000 00010000 00000000 // now it becomes 0x1000, which is what we want to send originally
-</span></span></code></pre></div><h3 id="what-if-numbers-are-still-too-large">
-  What if numbers are still too large?
-  <a class="heading-link" href="#what-if-numbers-are-still-too-large">
+</span></span></code></pre></div><h3 id="scenario-5-0x7d8">
+  Scenario 5: <code>#0x7D8</code>
+  <a class="heading-link" href="#scenario-5-0x7d8">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><code>LDR rd, =const</code></p>
-
+<p>0x7D8 &ndash;&gt; 011111011000 B &ndash;&gt; 00000000 00000000 00000111 11011000 B</p>
+<h3 id="solution-for-scenario-5-mov-r6-0xfb">
+  Solution for Scenario 5: <code>MOV r6, #0xFB</code>
+  <a class="heading-link" href="#solution-for-scenario-5-mov-r6-0xfb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00000000 00000000 00000000 11111011 // 0x7D8 in binary form
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    // rotate to right by 29 bits, or to the left by 3 bits (adds up to 32 bits)
+</span></span><span style="display:flex;"><span>                      &lt;--------
+</span></span><span style="display:flex;"><span>00000000 00000000 00000111 11011000 // now it becomes 0x7D8, which is what we want to send originally
+</span></span></code></pre></div><p>But is this allow?<br>
+<em><strong>NO</strong></em><br>
+<div class="notice warning">
+  <div class="notice-title">
+    <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i>Warning
+  </div>
+  <div class="notice-content">Remember that any 8-bits can only be shifted by an <strong>EVEN</strong> number of bit positions</div>
+</div>
+</p>
+<p>Since the only way to become 0x7DB is to shift an odd number of bit positions, this operation is impossible to perform for the <code>MOV</code> function.</p>
+<p>Instead, we can use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">LDR</span> <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x7D8</span>
+</span></span></code></pre></div><p>*<em>remember that there&rsquo;s no hashtag behind the 0x7D8!</em></p>
+<h3 id="scenario-6-0x17400">
+  Scenario 6: <code>#0x17400</code>
+  <a class="heading-link" href="#scenario-6-0x17400">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>0x17400 &ndash;&gt; 00010111010000000000 B &ndash;&gt; 00000000 00000001 01110100 00000000 B</p>
+<h3 id="solution-for-scenario-6-mov-r6-0x5d">
+  Solution for Scenario 6: <code>MOV r6, #0x5D</code>
+  <a class="heading-link" href="#solution-for-scenario-6-mov-r6-0x5d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00000000 00000000 00000000 01011101 // 0x5D in binary form
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    // rotate to right by 22 bits, or to the left by 10 bits (adds up to 32 bits)
+</span></span><span style="display:flex;"><span>                      &lt;--------
+</span></span><span style="display:flex;"><span>00000000 00000001 01110100 00000000 // now it becomes 0x17400, which is what we want to send originally
+</span></span></code></pre></div><h3 id="scenario-7-0x1980">
+  Scenario 7: <code>#0x1980</code>
+  <a class="heading-link" href="#scenario-7-0x1980">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>0x1980 &ndash;&gt; 0001100110000000 B &ndash;&gt; 00000000 00000000 00011001 10000000 B</p>
+<h3 id="solution-for-scenario-7-mov-r6-0x66">
+  Solution for Scenario 7: <code>MOV r6, #0x66</code>
+  <a class="heading-link" href="#solution-for-scenario-7-mov-r6-0x66">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00000000 00000000 00000000 01100110 B// 0x66 in binary form
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    // rotate to right by 26 bits, or to the left by 6 bits (adds up to 32 bits)
+</span></span><span style="display:flex;"><span>                      &lt;--------
+</span></span><span style="display:flex;"><span>00000000 00000000 00011001 10000000 // now it becomes 0x1980, which is what we want to send originally
+</span></span></code></pre></div>
   </article>
 </section>
 
