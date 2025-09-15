@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors Loop · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Loop Example
+  
+    
+    Link to heading
+  
+
+This is a program that counts the number of leading zeroes in a register
+        AREA MyCode, CODE, READONLY
+        ENTRY
+
+start
+        MOV r3, #0x00F00000   ; test value
+        MOV r4, #0            ; clear shift counter
+        CMP r3, #0
+        BLE finish
+
+loop
+        MOVS r3, r3, LSL #1   ; shift left one bit
+        ADD r4, r4, #1        ; increment counter
+        BPL loop              ; repeat if MSB still 0
+
+finish
+        B finish              ; stop here (infinite loop)
+
+        END
+
+finish
+
+
+MOV r3, #0x00F00000">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors Loop">
+  <meta name="twitter:description" content="Loop ExampleLink to headingThis is a program that counts the number of leading zeroes in a register
+AREA MyCode, CODE, READONLY ENTRY start MOV r3, #0x00F00000 ; test value MOV r4, #0 ; clear shift counter CMP r3, #0 BLE finish loop MOVS r3, r3, LSL #1 ; shift left one bit ADD r4, r4, #1 ; increment counter BPL loop ; repeat if MSB still 0 finish B finish ; stop here (infinite loop) END finish MOV r3, #0x00F00000">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-loop/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors Loop">
+  <meta property="og:description" content="Loop ExampleLink to headingThis is a program that counts the number of leading zeroes in a register
+AREA MyCode, CODE, READONLY ENTRY start MOV r3, #0x00F00000 ; test value MOV r4, #0 ; clear shift counter CMP r3, #0 BLE finish loop MOVS r3, r3, LSL #1 ; shift left one bit ADD r4, r4, #1 ; increment counter BPL loop ; repeat if MSB still 0 finish B finish ; stop here (infinite loop) END finish MOV r3, #0x00F00000">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-09-14T08:40:32+08:00">
+    <meta property="article:modified_time" content="2025-09-14T08:40:32+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-loop/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-loop/">
+          Microprocessors Loop
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="loop-example">
+  Loop Example
+  <a class="heading-link" href="#loop-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>This is a program that counts the number of leading zeroes in a register</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">MyCode</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">start</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#0x00F00000   ; test value
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#0            ; clear shift counter
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BLE</span> <span style="color:#79c0ff;font-weight:bold">finish</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOVS</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">LSL</span> <span style="color:#8b949e;font-style:italic">#1   ; shift left one bit
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#1        ; increment counter
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BPL</span> <span style="color:#79c0ff;font-weight:bold">loop</span>              <span style="color:#8b949e;font-style:italic">; repeat if MSB still 0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">finish</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">B</span> <span style="color:#79c0ff;font-weight:bold">finish</span>              <span style="color:#8b949e;font-style:italic">; stop here (infinite loop)
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">finish</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><code>MOV r3, #0x00F00000</code></p>
+</li>
+<li>
+<ul>
+<li>This line first set the r3 value to a value that we want</li>
+</ul>
+</li>
+<li>
+<p><code>MOV r4, #0</code></p>
+</li>
+<li>
+<ul>
+<li>This line resets the counter, it&rsquo;s not really necessary, but a good practice</li>
+</ul>
+</li>
+<li>
+<p><code>CMP r3, #0</code></p>
+</li>
+<li>
+<p><code>BLE finish</code></p>
+</li>
+<li>
+<ul>
+<li>This two lines <em>compares</em> r3 value with immediate constant zero, if yes, then branch to finish below; If no, then go into the loop</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>BLE</code> means &ldquo;branch if less than or equal&rdquo; for the previous line</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>In this case, <code>BLE</code> will branch to finish if the previous <code>CMP</code> outputs &lt;= 0 value, meaning, if r3 is less than or equal to 0, skip the loop and go the finish immediately</li>
+</ul>
+</li>
+<li>
+<p><code>MOVS r3, r3, LSL #1</code></p>
+</li>
+<li>
+<ul>
+<li>r3 = 00000000 11110000 00000000 00000000 B = 0x00F00000 (original)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>shift left by 1 bit</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r3 = 00000001 11100000 00000000 00000000 B = 0x01E00000 (shifted)</li>
+</ul>
+</li>
+<li>
+<p><code>ADD r4, r4, #1</code></p>
+</li>
+<li>
+<ul>
+<li>Update the counter for each bit shifted for r3</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r4 = r4 + 1</li>
+</ul>
+</li>
+<li>
+<p><code>BPL loop</code></p>
+</li>
+<li>
+<ul>
+<li>BPL means &ldquo;<strong>B</strong>ranch if <strong>PL</strong>us&rdquo;, meaning it checks if the N flag is zero or one</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>If zero, repeat the loop</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>If one, exit loop</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>So, loop is repeated as long as the MSB of r3 is 0.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>This is because as we shift r3 left more and more, we will reach a point where the MSB is not zero, which is when we have counted all the leading zeroes</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>11110000 00000000 00000000 00000000 B</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>&lt;&mdash;&mdash;&mdash;-</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="for-loop-example">
+  For Loop Example
+  <a class="heading-link" href="#for-loop-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h4 id="example-in-c-language">
+  Example in C language
+  <a class="heading-link" href="#example-in-c-language">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#ff7b72">for</span> (j<span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">0</span>; j<span style="color:#ff7b72;font-weight:bold">&lt;</span><span style="color:#a5d6ff">10</span>; i<span style="color:#ff7b72;font-weight:bold">++</span>){
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="in-assembly">
+  In Assembly
+  <a class="heading-link" href="#in-assembly">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span> <span style="color:#79c0ff;font-weight:bold">Done</span>
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">B</span> <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>
+</span></span></code></pre></div><ul>
+<li><code>MOV r1, #0</code></li>
+<li>
+<ul>
+<li>This line clears the loop counter</li>
+</ul>
+</li>
+<li><code>CMP r1, #10</code></li>
+<li><code>BGE Done</code></li>
+<li>
+<ul>
+<li>First line compares r1 with the value 10.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>BGE means &ldquo;Branch if greater or equal&rdquo;</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>So, if r1 is &gt;= 10, branch to Done. If not, continue down</li>
+</ul>
+</li>
+<li><code>ADD r1, r1, #1</code></li>
+<li><code>B loop</code></li>
+<li>
+<ul>
+<li>First line updates the loop counter, r1 = r1 + 1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Then branch back up to loop</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="count-down-loop">
+  Count Down Loop
+  <a class="heading-link" href="#count-down-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>We should always use a count down loop if possible because it saves a CMP operation, meaning more efficient</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>    <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#d2a8ff;font-weight:bold">SUBS</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>    <span style="color:#d2a8ff;font-weight:bold">BGT</span> <span style="color:#79c0ff;font-weight:bold">Loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>
+</span></span></code></pre></div><ul>
+<li><code>BGT Loop</code> means &ldquo;Branch if greater than&rdquo;</li>
+<li>
+<ul>
+<li>This means that if the previous operation outputs more than zero, it will branch to loop, repeating it</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>If the previous operation outputs less than zero, exit loop</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>In this case, r1 - 1 will eventually reach 0 or negative, which will trigger BGT to not branch, effectively exiting the loop</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="summation-loop-example">
+  Summation Loop Example
+  <a class="heading-link" href="#summation-loop-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">SummationLoop</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADR</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">arrayA</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">LDR</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, [<span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">LSL</span> <span style="color:#8b949e;font-style:italic">#2]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span> <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>    <span style="color:#79c0ff;font-weight:bold">B</span>   <span style="color:#79c0ff;font-weight:bold">Done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">arrayA</span>  <span style="color:#79c0ff;font-weight:bold">DCD</span> -<span style="color:#a5d6ff">1</span>, -<span style="color:#a5d6ff">2</span>, -<span style="color:#a5d6ff">3</span>, -<span style="color:#a5d6ff">4</span>, -<span style="color:#a5d6ff">5</span>, -<span style="color:#a5d6ff">6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><code>MOV r0, #0</code></p>
+</li>
+<li>
+<p><code>MOV r1, #5</code></p>
+</li>
+<li>
+<p><code>ADR r2, arrayA</code></p>
+</li>
+<li>
+<ul>
+<li>First line is to initialise sum as 0</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Second line is to initialise the counter as 5 since we are counting from 0 to 5 (6 numbers)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Third line is to load the address of the arrayA to r2</li>
+</ul>
+</li>
+<li>
+<p><code>LDR r3, [r2, r1, LSL #2]</code></p>
+</li>
+<li>
+<ul>
+<li>We load the LSB number in the arrayA into r3.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Remember LDR operation, r2 + r1*4, and since r1 is 5, total is r2 + 20</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We do LSL #2 because each word inside arrayA occupies 4 bits</li>
+</ul>
+</li>
+<li>
+<p><code>ADD r0, r0, r3</code></p>
+</li>
+<li>
+<p><code>SUBS r1, r1, #1</code></p>
+</li>
+<li>
+<p><code>BGE loop</code></p>
+</li>
+<li>
+<ul>
+<li>Then, we do r0 = r0 + r3</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Update the counter, r1 = r1 - 1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>BGE stands for &ldquo;Branch if Greater Than or Equal&rdquo;. Since r1 is &gt;= 0, repeat the loop</li>
+</ul>
+</li>
+<li>
+<p><code>arrayA DCD -1, -2, -3, -4, -5, -6</code></p>
+</li>
+<li>
+<ul>
+<li>DCD stands for Define Constant Data (32-bit words)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="greatest-common-divisor-algorithm-example">
+  Greatest Common Divisor Algorithm Example
+  <a class="heading-link" href="#greatest-common-divisor-algorithm-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">gcd</span>     
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BEQ</span>     <span style="color:#79c0ff;font-weight:bold">finish</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BLT</span>     <span style="color:#79c0ff;font-weight:bold">less</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span>    <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">gcd</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">less</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">SUB</span>    <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">gcd</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">finish</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><code>CMP r0, r1</code></p>
+</li>
+<li>
+<ul>
+<li>Compare if r0 is equal to r1</li>
+</ul>
+</li>
+<li>
+<p><code>BEQ finish</code></p>
+</li>
+<li>
+<ul>
+<li>BEQ means &ldquo;Branch if Equal&rdquo;, so branch to &ldquo;finish&rdquo; if r0 = r1</li>
+</ul>
+</li>
+<li>
+<p><code>BLT less</code></p>
+</li>
+<li>
+<ul>
+<li>BLT stands for &ldquo;Branch if less than&rdquo;, so branch to the &ldquo;less&rdquo; loop if r0 &lt; r1</li>
+</ul>
+</li>
+<li>
+<p><code>SUB r0, r1, r1</code></p>
+</li>
+<li>
+<p><code>B gcd</code></p>
+</li>
+<li>
+<ul>
+<li>r0 = r0 - 1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>branch back to &ldquo;gcd&rdquo;, repeating the loop</li>
+</ul>
+</li>
+<li>
+<p><code>SUB r1, r1, r0</code></p>
+</li>
+<li>
+<ul>
+<li>This is in the &ldquo;less&rdquo; loop because r0 &lt; r1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r1 = r1 - r0</li>
+</ul>
+</li>
+<li>
+<p><code>B gcd</code></p>
+</li>
+<li>
+<ul>
+<li>branch back to &ldquo;gcd&rdquo;</li>
+</ul>
+</li>
+</ul>
+<h4 id="numbered-example">
+  Numbered Example:
+  <a class="heading-link" href="#numbered-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>a = 18, b = 6
+</span></span><span style="display:flex;"><span>First Loop:  a &gt; b
+</span></span><span style="display:flex;"><span>             a = 18 - 6 = 12
+</span></span><span style="display:flex;"><span>             b = 6
+</span></span><span style="display:flex;"><span>Second Loop: a &gt; b
+</span></span><span style="display:flex;"><span>             a = 12 - 6 = 6
+</span></span><span style="display:flex;"><span>             b = 6
+</span></span><span style="display:flex;"><span>Third Loop:  a = b
+</span></span><span style="display:flex;"><span>             Done
+</span></span></code></pre></div><h2 id="but-the-loop-can-be-better">
+  But the loop can be better:
+  <a class="heading-link" href="#but-the-loop-can-be-better">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">gcd</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBGT</span>   <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBLT</span>   <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">gcd</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>
+</span></span></code></pre></div><ul>
+<li>Compare if r0 is equal to r1</li>
+<li>r0 - r1 if r0 &gt; r1</li>
+<li>r1 - r0 if r0 &lt; r1</li>
+<li>BNE, branch if r0 is not equal to r1, once equal go next</li>
+</ul>
+<hr>
+<h1 id="other-useful-condition-codes">
+  Other Useful Condition Codes
+  <a class="heading-link" href="#other-useful-condition-codes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<figure class="center"><img src="https://i.imgur.com/4yJINf2.png"
+    alt="conditionCode">
+</figure>
+
+<hr>
+<h1 id="tut5-q4">
+  TUT5 Q4
+  <a class="heading-link" href="#tut5-q4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Find the maximum value in a list of 32-bit values located in memory. Assume the values are in two’s complement representations. Your program should have 50 values in the list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">MaxFinder</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span> <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">max</span>     <span style="color:#79c0ff;font-weight:bold">RN</span>      <span style="color:#a5d6ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">counter</span> <span style="color:#79c0ff;font-weight:bold">RN</span>      <span style="color:#a5d6ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">49</span>    <span style="color:#8b949e;font-style:italic">; initialise counter as 49 since we start at 0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADR</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">Values</span>      <span style="color:#8b949e;font-style:italic">; load the address of the array below into r2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">max</span>, [<span style="color:#79c0ff;font-weight:bold">r2</span>], <span style="color:#8b949e;font-style:italic">#4   ; load the first element of array as max, post-index increment by 4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">r2</span>], <span style="color:#8b949e;font-style:italic">#4   ; load the 2nd element which was performed by the post-index just now into r4, and post-index increase by #4 again
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">max</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>         
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">MOVLT</span>   <span style="color:#79c0ff;font-weight:bold">max</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">Done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Values</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span>     -<span style="color:#a5d6ff">847</span>   <span style="color:#a5d6ff">321</span>  -<span style="color:#a5d6ff">456</span>   <span style="color:#a5d6ff">789</span>  -<span style="color:#a5d6ff">123</span>   <span style="color:#a5d6ff">654</span>  -<span style="color:#a5d6ff">987</span>   <span style="color:#a5d6ff">234</span>   <span style="color:#a5d6ff">567</span>  -<span style="color:#a5d6ff">890</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span>     <span style="color:#a5d6ff">412</span>  -<span style="color:#a5d6ff">678</span>   <span style="color:#a5d6ff">901</span>  -<span style="color:#a5d6ff">345</span>   <span style="color:#a5d6ff">876</span>  -<span style="color:#a5d6ff">234</span>   <span style="color:#a5d6ff">543</span>  -<span style="color:#a5d6ff">789</span>   <span style="color:#a5d6ff">123</span>   <span style="color:#a5d6ff">456</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span>     -<span style="color:#a5d6ff">567</span>   <span style="color:#a5d6ff">890</span>  -<span style="color:#a5d6ff">321</span>   <span style="color:#a5d6ff">678</span>  -<span style="color:#a5d6ff">901</span>   <span style="color:#a5d6ff">345</span>  -<span style="color:#a5d6ff">876</span>   <span style="color:#a5d6ff">234</span>  -<span style="color:#a5d6ff">543</span>   <span style="color:#a5d6ff">789</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span>     <span style="color:#a5d6ff">234</span>  -<span style="color:#a5d6ff">456</span>   <span style="color:#a5d6ff">789</span>  -<span style="color:#a5d6ff">123</span>   <span style="color:#a5d6ff">567</span>  -<span style="color:#a5d6ff">890</span>   <span style="color:#a5d6ff">321</span>  -<span style="color:#a5d6ff">678</span>   <span style="color:#a5d6ff">901</span>  -<span style="color:#a5d6ff">345</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span>     -<span style="color:#a5d6ff">789</span>   <span style="color:#a5d6ff">123</span>  -<span style="color:#a5d6ff">654</span>   <span style="color:#a5d6ff">987</span>  -<span style="color:#a5d6ff">234</span>   <span style="color:#a5d6ff">456</span>  -<span style="color:#a5d6ff">789</span>   <span style="color:#a5d6ff">567</span>   <span style="color:#a5d6ff">890</span>  -<span style="color:#a5d6ff">321</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><code>max RN 1</code></p>
+</li>
+<li>
+<p><code>counter RN 0</code></p>
+</li>
+<li>
+<ul>
+<li>Name register 1 as max to contain the maximum and register 0 as counter for loop counter</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>RN (i think) stands for &ldquo;register name&rdquo;, could be wrong though\</li>
+</ul>
+</li>
+<li>
+<p><code>LDR  counter, =49</code></p>
+</li>
+<li>
+<p><code>ADR  r2, Values</code></p>
+</li>
+<li>
+<p><code>LDR  max, [r2], #4</code></p>
+</li>
+<li>
+<ul>
+<li>Set counter to be 49 because we start counting from 0 to 49, aka 50 times</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Load the starting address of the array into r2</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Load the first index of the array into r2, then perform post-index increment by 4 because each word in the DCD array is 4 bits. Now r2 points to the 2nd element</li>
+</ul>
+</li>
+<li>
+<p><code>LDR r4, [r2], #4</code></p>
+</li>
+<li>
+<p><code>CMP max, r4</code></p>
+</li>
+<li>
+<p><code>MOVLT max, r4</code></p>
+</li>
+<li>
+<p><code>SUBS counter, counter, #1</code></p>
+</li>
+<li>
+<p><code>BNE loop</code></p>
+</li>
+<li>
+<ul>
+<li>Inside the loop, we load the second element of the array into a new register, r4. Then post-index increment by #4. r2 now points at the 3rd element</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Compare max and r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>If max is less than r4, update max by replacing with r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Update counter by subtracting one, update the S Flag</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>BNE, branch to loop again if counter is not equal to zero</li>
+</ul>
+</li>
+</ul>
+<h1 id="tut5-q5">
+  TUT5 Q5
+  <a class="heading-link" href="#tut5-q5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Convert the following C iteration statements into assembly language.</p>
+<h2 id="tut5-q5a">
+  TUT5 Q5a
+  <a class="heading-link" href="#tut5-q5a">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="c-code">
+  C Code
+  <a class="heading-link" href="#c-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#ff7b72">for</span> (i<span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">0</span>; i<span style="color:#ff7b72;font-weight:bold">&lt;</span><span style="color:#a5d6ff">10</span>; i<span style="color:#ff7b72;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="assembly-code">
+  Assembly Code
+  <a class="heading-link" href="#assembly-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BLT</span> <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span></code></pre></div><h2 id="tut5-q5b">
+  TUT5 Q5b
+  <a class="heading-link" href="#tut5-q5b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="c-code-1">
+  C Code
+  <a class="heading-link" href="#c-code-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#ff7b72">for</span> (i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">1</span>; i <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#a5d6ff">11</span>; i <span style="color:#ff7b72;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">for</span> (j <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">5</span>; j <span style="color:#ff7b72;font-weight:bold">&gt;</span> <span style="color:#a5d6ff">0</span>; j <span style="color:#ff7b72;font-weight:bold">--</span>) {
+</span></span><span style="display:flex;"><span>                ...
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="assembly-code-1">
+  Assembly Code
+  <a class="heading-link" href="#assembly-code-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop1</span>   <span style="color:#79c0ff;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span> <span style="color:#79c0ff;font-weight:bold">loop1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#11
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BLT</span> <span style="color:#79c0ff;font-weight:bold">loop0</span>
+</span></span></code></pre></div><h2 id="tut5-q5c">
+  TUT5 Q5c
+  <a class="heading-link" href="#tut5-q5c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="c-code-2">
+  C Code
+  <a class="heading-link" href="#c-code-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#ff7b72">for</span> (i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">18</span>; i <span style="color:#ff7b72;font-weight:bold">&gt;</span> <span style="color:#a5d6ff">3</span>; i <span style="color:#ff7b72;font-weight:bold">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">for</span> (j <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">16</span>; j <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#a5d6ff">40</span>; j <span style="color:#ff7b72;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff7b72">for</span> (k <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; k <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#a5d6ff">30</span>; k <span style="color:#ff7b72;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>                        ...
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="assembly-code-2">
+  Assembly Code
+  <a class="heading-link" href="#assembly-code-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#18
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop0</span>   
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#16
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop2</span>   <span style="color:#79c0ff;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#30
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BLT</span> <span style="color:#79c0ff;font-weight:bold">loop2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#40
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BLT</span> <span style="color:#79c0ff;font-weight:bold">loop1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span> <span style="color:#79c0ff;font-weight:bold">loop0</span>
+</span></span></code></pre></div>
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
