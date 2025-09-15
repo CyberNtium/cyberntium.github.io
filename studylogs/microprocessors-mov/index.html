@@ -3,7 +3,7 @@
 
 <head>
   <title>
-  Microprocessors MOV Function · cyberntium
+  Microprocessors Constant and Literals · cyberntium
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@ For example:">
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Microprocessors MOV Function">
+  <meta name="twitter:title" content="Microprocessors Constant and Literals">
   <meta name="twitter:description" content="NoteYou should probably read this after you have read through the LDR STR Writeup for better understandingWhat is MOV ?Link to headingEssentially, the MOV instruction copies data from a source to a destination:
 MOV destination, source
 Some important notes:
@@ -48,7 +48,7 @@ The data at the source is not modified The original data at the destination howe
 
 <meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-mov/">
   <meta property="og:site_name" content="cyberntium">
-  <meta property="og:title" content="Microprocessors MOV Function">
+  <meta property="og:title" content="Microprocessors Constant and Literals">
   <meta property="og:description" content="NoteYou should probably read this after you have read through the LDR STR Writeup for better understandingWhat is MOV ?Link to headingEssentially, the MOV instruction copies data from a source to a destination:
 MOV destination, source
 Some important notes:
@@ -177,7 +177,7 @@ The data at the source is not modified The original data at the destination howe
     <header>
       <h1 class="title">
         <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-mov/">
-          Microprocessors MOV Function
+          Microprocessors Constant and Literals
         </a>
       </h1>
     </header>
@@ -280,17 +280,17 @@ Some important notes:</p>
   </a>
 </h3>
 <p>For this case, 0x8C is 140 in decimal, which is lesser than the max which is (2^8)-1 = 255.</p>
-<h3 id="scenario-3-0xa400">
-  Scenario 3: <code>#0xA400</code>
-  <a class="heading-link" href="#scenario-3-0xa400">
+<h3 id="tut5-q2a-0xa400">
+  TUT5 Q2a: <code>#0xA400</code>
+  <a class="heading-link" href="#tut5-q2a-0xa400">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <p>For this case, 0xA400 is 41984, which is, uh, bigger than 255. So, error occurs. What should we do here?</p>
-<h3 id="solution-for-scenario-3--mov-r6-0xa4-24">
-  Solution for Scenario 3:  <code>MOV r6, #0xA4, 24</code>
-  <a class="heading-link" href="#solution-for-scenario-3--mov-r6-0xa4-24">
+<h3 id="solution-for-tut5-q2a--mov-r6-0xa4-24">
+  Solution for TUT5 Q2a:  <code>MOV r6, #0xA4, 24</code>
+  <a class="heading-link" href="#solution-for-tut5-q2a--mov-r6-0xa4-24">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -302,9 +302,9 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 24 bits, or to the left by 8 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000000 10100100 00000000 // now it becomes 0xA400, which is what we want to send originally
-</span></span></code></pre></div><h3 id="scenario-4-4096">
-  Scenario 4: <code>#4096</code>
-  <a class="heading-link" href="#scenario-4-4096">
+</span></span></code></pre></div><h3 id="scenario-3-4096">
+  Scenario 3: <code>#4096</code>
+  <a class="heading-link" href="#scenario-3-4096">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -322,17 +322,17 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 26 bits, or to the left by 6 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000000 00010000 00000000 // now it becomes 0x1000, which is what we want to send originally
-</span></span></code></pre></div><h3 id="scenario-5-0x7d8">
-  Scenario 5: <code>#0x7D8</code>
-  <a class="heading-link" href="#scenario-5-0x7d8">
+</span></span></code></pre></div><h3 id="tut5-q2b-0x7d8">
+  TUT5 Q2b: <code>#0x7D8</code>
+  <a class="heading-link" href="#tut5-q2b-0x7d8">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <p>0x7D8 &ndash;&gt; 011111011000 B &ndash;&gt; 00000000 00000000 00000111 11011000 B</p>
-<h3 id="solution-for-scenario-5-mov-r6-0xfb">
-  Solution for Scenario 5: <code>MOV r6, #0xFB</code>
-  <a class="heading-link" href="#solution-for-scenario-5-mov-r6-0xfb">
+<h3 id="tut5-q2b-mov-r6-0xfb">
+  TUT5 Q2b: <code>MOV r6, #0xFB</code>
+  <a class="heading-link" href="#tut5-q2b-mov-r6-0xfb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -355,17 +355,17 @@ To get a clearer picture, we have to look from the binary angle:</p>
 <p>Instead, we can use:</p>
 <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">LDR</span> <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x7D8</span>
 </span></span></code></pre></div><p>*<em>remember that there&rsquo;s no hashtag behind the 0x7D8!</em></p>
-<h3 id="scenario-6-0x17400">
-  Scenario 6: <code>#0x17400</code>
-  <a class="heading-link" href="#scenario-6-0x17400">
+<h3 id="tut5-q2c-0x17400">
+  TUT5 Q2c: <code>#0x17400</code>
+  <a class="heading-link" href="#tut5-q2c-0x17400">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <p>0x17400 &ndash;&gt; 00010111010000000000 B &ndash;&gt; 00000000 00000001 01110100 00000000 B</p>
-<h3 id="solution-for-scenario-6-mov-r6-0x5d">
-  Solution for Scenario 6: <code>MOV r6, #0x5D</code>
-  <a class="heading-link" href="#solution-for-scenario-6-mov-r6-0x5d">
+<h3 id="solution-for-tut5-q2c-mov-r6-0x5d">
+  Solution for TUT5 Q2c: <code>MOV r6, #0x5D</code>
+  <a class="heading-link" href="#solution-for-tut5-q2c-mov-r6-0x5d">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -375,17 +375,17 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 22 bits, or to the left by 10 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000001 01110100 00000000 // now it becomes 0x17400, which is what we want to send originally
-</span></span></code></pre></div><h3 id="scenario-7-0x1980">
-  Scenario 7: <code>#0x1980</code>
-  <a class="heading-link" href="#scenario-7-0x1980">
+</span></span></code></pre></div><h3 id="tut5-q2d-0x1980">
+  TUT5 Q2d: <code>#0x1980</code>
+  <a class="heading-link" href="#tut5-q2d-0x1980">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <p>0x1980 &ndash;&gt; 0001100110000000 B &ndash;&gt; 00000000 00000000 00011001 10000000 B</p>
-<h3 id="solution-for-scenario-7-mov-r6-0x66">
-  Solution for Scenario 7: <code>MOV r6, #0x66</code>
-  <a class="heading-link" href="#solution-for-scenario-7-mov-r6-0x66">
+<h3 id="solution-for-tut5-q2d-mov-r6-0x66">
+  Solution for TUT5 Q2d: <code>MOV r6, #0x66</code>
+  <a class="heading-link" href="#solution-for-tut5-q2d-mov-r6-0x66">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -395,7 +395,113 @@ To get a clearer picture, we have to look from the binary angle:</p>
 </span></span><span style="display:flex;"><span>                    // rotate to right by 26 bits, or to the left by 6 bits (adds up to 32 bits)
 </span></span><span style="display:flex;"><span>                      &lt;--------
 </span></span><span style="display:flex;"><span>00000000 00000000 00011001 10000000 // now it becomes 0x1980, which is what we want to send originally
-</span></span></code></pre></div>
+</span></span></code></pre></div><hr>
+<h1 id="mvn-move-negative">
+  MVN (Move Negative)
+  <a class="heading-link" href="#mvn-move-negative">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><code>MVN</code> is essentially the same as MOV except it moves the <em>one&rsquo;s complement</em> of the value into a given register:</p>
+<ul>
+<li>
+<p><code>MVN r0, #0</code>
+0 = 0x00000000
+r0 will have the opposite = 0xFFFFFFFF</p>
+</li>
+<li>
+<p><code>MVN r0, #0xFF, 8</code></p>
+</li>
+</ul>
+<p>Remember <em>rotation</em> from MOV<br>
+<code>0xFF</code> = <code>00000000 00000000 00000000 FFFFFFFF B</code><br>
+*rotation to right by 8 bits or left by 24 bits<br>
+          =&gt; <code>FFFFFFFF 00000000 00000000 00000000 B</code><br>
+          =   <code>0xFF000000</code><br>
+But its <code>MVN</code>, so take the opposite:<br>
+<code>r0</code>  =  <code>0x00FFFFFF</code></p>
+<h2 id="tut5-q1c---mvn-r7-2">
+  TUT5 Q1c - <code>MVN r7, #2 </code>
+  <a class="heading-link" href="#tut5-q1c---mvn-r7-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>We move the immediate value 2 into register 7 but take the one&rsquo;s implement value</li>
+<li>2 -&gt; <code>0x00000002</code> -&gt; <code>00000000 00000000 00000000 00000010 B</code></li>
+<li>r7 -&gt; <code>0xFFFFFFFD</code> -&gt; <code>11111111 11111111 11111111 11111101 B</code></li>
+</ul>
+<h2 id="tut5-q1d---mvn-r7-0x8c-4">
+  TUT5 Q1d - <code>MVN r7, #0x8C, 4</code>
+  <a class="heading-link" href="#tut5-q1d---mvn-r7-0x8c-4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><code>0x8C</code>  -&gt; <code>0x0000008C</code> -&gt; <code>00000000 00000000 00000000 10001100 B</code></li>
+<li><code>r7</code> -&gt; <code>0xFFFFFF73</code>  -&gt; <code>11111111 11111111 11111111 01110011 B</code></li>
+<li>rotate -&gt; <code>0x3FFFFFF7</code>-&gt; <code>00111111 11111111 11111111 11110111 B</code></li>
+</ul>
+<hr>
+<h1 id="pseudo-ldr">
+  Pseudo LDR
+  <a class="heading-link" href="#pseudo-ldr">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li><code>LDR &lt;Rd&gt;, &lt;numeric constant&gt;</code></li>
+<li>We encounter this before when the immediate constant is too big</li>
+<li>Using <code>LDR</code> we can load all possible 32-bit constant</li>
+</ul>
+<h2 id="examples">
+  Examples
+  <a class="heading-link" href="#examples">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>
+<p><code>LDR r0, =42</code></p>
+</li>
+<li>
+<ul>
+<li>Translate to <code>MOV r0, #42</code></li>
+</ul>
+</li>
+<li>
+<p><code>LDR r0, =0xFFFFFFFF</code></p>
+</li>
+<li>
+<ul>
+<li>Translate to <code>MVN r0, #0</code></li>
+</ul>
+</li>
+<li>
+<p><code>LDR r1, =0x55555555</code></p>
+</li>
+<li>
+<ul>
+<li>This number is not representable by either <code>MOV</code> or <code>MVN</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>The immediate constant will be store in the <em>literal pool</em> in the memory</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Final translation =&gt; <code>LDR r1, [PC, #N]</code> where N is the offset to the literal pool</li>
+</ul>
+</li>
+</ul>
+
   </article>
 </section>
 

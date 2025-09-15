@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors Arithmetic · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Addition &amp; Subtraction
+  
+    
+    Link to heading
+  
+
+
+  Addition
+  
+    
+    Link to heading
+  
+
+
+ADD r1, r2, r3
+
+
+Add values of r2 and r3 then store them in r1
+
+
+
+
+r1 = r2 &#43; r3
+
+
+
+
+  Subtraction
+  
+    
+    Link to heading
+  
+
+
+SUB r1, r2, r3
+
+
+Subtract r2 with r3 and store it inside r1
+
+
+
+
+r1 = r2 - r3
+
+
+
+
+  Reverse Subtraction
+  
+    
+    Link to heading
+  
+
+
+RSB r1, r2, r3
+
+
+Subtract r3 with r2 and store it inside r1
+
+
+
+
+r1 = r3 - r2
+
+
+
+
+  64-bit Addition &amp; Subtraction
+  
+    
+    Link to heading
+  
+
+
+  64-bit Addition
+  
+    
+    Link to heading
+  
+
+TODO">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors Arithmetic">
+  <meta name="twitter:description" content="Addition &amp; SubtractionLink to headingAdditionLink to headingADD r1, r2, r3 Add values of r2 and r3 then store them in r1 r1 = r2 &#43; r3 SubtractionLink to headingSUB r1, r2, r3 Subtract r2 with r3 and store it inside r1 r1 = r2 - r3 Reverse SubtractionLink to headingRSB r1, r2, r3 Subtract r3 with r2 and store it inside r1 r1 = r3 - r2 64-bit Addition &amp; SubtractionLink to heading64-bit AdditionLink to headingTODO">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-arithmetic/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors Arithmetic">
+  <meta property="og:description" content="Addition &amp; SubtractionLink to headingAdditionLink to headingADD r1, r2, r3 Add values of r2 and r3 then store them in r1 r1 = r2 &#43; r3 SubtractionLink to headingSUB r1, r2, r3 Subtract r2 with r3 and store it inside r1 r1 = r2 - r3 Reverse SubtractionLink to headingRSB r1, r2, r3 Subtract r3 with r2 and store it inside r1 r1 = r3 - r2 64-bit Addition &amp; SubtractionLink to heading64-bit AdditionLink to headingTODO">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-09-14T07:12:58+08:00">
+    <meta property="article:modified_time" content="2025-09-14T07:12:58+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-arithmetic/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-arithmetic/">
+          Microprocessors Arithmetic
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="addition--subtraction">
+  Addition &amp; Subtraction
+  <a class="heading-link" href="#addition--subtraction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h4 id="addition">
+  Addition
+  <a class="heading-link" href="#addition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>ADD r1, r2, r3</code></li>
+<li>
+<ul>
+<li>Add values of <code>r2</code> and <code>r3</code> then store them in <code>r1</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r2 + r3</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="subtraction">
+  Subtraction
+  <a class="heading-link" href="#subtraction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>SUB r1, r2, r3</code></li>
+<li>
+<ul>
+<li>Subtract <code>r2</code> with <code>r3</code> and store it inside <code>r1</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r2 - r3</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="reverse-subtraction">
+  Reverse Subtraction
+  <a class="heading-link" href="#reverse-subtraction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>RSB r1, r2, r3</code></li>
+<li>
+<ul>
+<li>Subtract <code>r3</code> with <code>r2</code> and store it inside <code>r1</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r3 - r2</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="64-bit-addition--subtraction">
+  64-bit Addition &amp; Subtraction
+  <a class="heading-link" href="#64-bit-addition--subtraction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h4 id="64-bit-addition">
+  64-bit Addition
+  <a class="heading-link" href="#64-bit-addition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>TODO</p>
+<hr>
+<h1 id="multiplication">
+  Multiplication
+  <a class="heading-link" href="#multiplication">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li><code>MUL r4, r3, r1</code></li>
+<li>
+<ul>
+<li>Multiply r3 and r1 then store inside r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r4 = r3 * r1
+TODO</li>
+</ul>
+</li>
+</ul>
+<h2 id="multiplication-by-a-constant">
+  Multiplication by a Constant
+  <a class="heading-link" href="#multiplication-by-a-constant">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>
+<p>We can perform multiplication without using <code>MUL</code> by utilising the barrel shifter</p>
+</li>
+<li>
+<p><code>MOV r1, r0, LSL#2</code></p>
+</li>
+<li>
+<ul>
+<li>Shifting values inside <code>r0</code> by <code>2^2=4</code> is the same as <code>r0 * 4</code> and store inside r1</li>
+</ul>
+</li>
+</ul>
+<h4 id="multiply-by-5">
+  Multiply by 5
+  <a class="heading-link" href="#multiply-by-5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>ADD r0, r1, r1, LSL#2</code></li>
+<li>
+<ul>
+<li>r0 = r1 + r1*4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r0 = r1 * 5</li>
+</ul>
+</li>
+</ul>
+<h4 id="multiply-by-7">
+  Multiply by 7
+  <a class="heading-link" href="#multiply-by-7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>RSB r0, r1, r1, LSL#3</code></li>
+<li>
+<ul>
+<li>r0 = r1 * 8 - r1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r0 = r1 * 7</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="tut5-q3a---135">
+  TUT5 Q3a - 135
+  <a class="heading-link" href="#tut5-q3a---135">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Line 1: <code>RSB r1, r4, r4, LSL#3</code></li>
+<li>
+<ul>
+<li><code>r1 = r4*8 - r4</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Shift r4 by 2^3 = 8 and minus r4 then store inside r1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r4*7</code></li>
+</ul>
+</li>
+<li>Line 2: <code>ADD r0, r1, r4, LSL#7</code></li>
+<li>
+<ul>
+<li><code>r0 = r1 + r4*128</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Shift r4 again by 2^7=128 and add to r1 from just now</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r0 = r4*7 + r4*128</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Sum of these two becomes 135</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r0 = r4*135</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="tut-q3b---255">
+  TUT Q3b - 255
+  <a class="heading-link" href="#tut-q3b---255">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><code>RSB r0, r4, r4, LSL#8</code></li>
+<li>Reverse subtract: Shift r4 by 8 meaning times r4 by 2^8=256 and minus r4 itself</li>
+</ul>
+<h2 id="tut-q3c---18">
+  TUT Q3c - 18
+  <a class="heading-link" href="#tut-q3c---18">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Line 1: <code>ADD r1, r4, r4</code></li>
+<li>
+<ul>
+<li><code>r1 = r4 + r4 = r4 * 2</code></li>
+</ul>
+</li>
+<li>Line 2: <code>ADD r0, r1, r4, LSL#4</code></li>
+<li>
+<ul>
+<li><code>r1 = r0 + r4*16</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r4*2 + r4*16</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r1 = r4*18</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="tut-q3d---16384">
+  TUT Q3d - 16384
+  <a class="heading-link" href="#tut-q3d---16384">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><code>ADD r1, r4, r4, LSL#14</code></li>
+<li>
+<ul>
+<li>r1 = r4 + r4*16384</li>
+</ul>
+</li>
+<li><code>SUB r0 , r1, r4</code></li>
+<li>
+<ul>
+<li>r0 = r1 - r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r0 = r4 * 16385 - r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r0 = r4 * 16384</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
