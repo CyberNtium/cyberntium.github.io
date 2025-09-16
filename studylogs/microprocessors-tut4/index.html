@@ -19,19 +19,56 @@
     
     Link to heading
   
-">
+
+Describe the contents of register r13 after the following instructions complete, assuming that memory contains the values shown below. Register r0 contains 0x4000 1000, and the memory system is little-endian.
+
+  
+      
+          Address
+          Contents
+      
+  
+  
+      
+          0x4000 1000
+          0x06
+      
+      
+          0x4000 1001
+          0xFC
+      
+      
+          0x4000 1002
+          0x03
+      
+      
+          0x4000 1003
+          0xFF
+      
+  
+
+
+  a.) LDRSB r13, [r0]
+  
+    
+    Link to heading
+  
+
+LDRSB means Load Register Signed Byte">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Microprocessors TUT4">
-  <meta name="twitter:description" content="Question 1Link to heading">
+  <meta name="twitter:description" content="Question 1Link to headingDescribe the contents of register r13 after the following instructions complete, assuming that memory contains the values shown below. Register r0 contains 0x4000 1000, and the memory system is little-endian.
+Address Contents 0x4000 1000 0x06 0x4000 1001 0xFC 0x4000 1002 0x03 0x4000 1003 0xFF a.) LDRSB r13, [r0]Link to headingLDRSB means Load Register Signed Byte">
 
 <meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-tut4/">
   <meta property="og:site_name" content="cyberntium">
   <meta property="og:title" content="Microprocessors TUT4">
-  <meta property="og:description" content="Question 1Link to heading">
+  <meta property="og:description" content="Question 1Link to headingDescribe the contents of register r13 after the following instructions complete, assuming that memory contains the values shown below. Register r0 contains 0x4000 1000, and the memory system is little-endian.
+Address Contents 0x4000 1000 0x06 0x4000 1001 0xFC 0x4000 1002 0x03 0x4000 1003 0xFF a.) LDRSB r13, [r0]Link to headingLDRSB means Load Register Signed Byte">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="studylogs">
@@ -168,7 +205,183 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-
+<p>Describe the contents of register r13 after the following instructions complete, assuming that memory contains the values shown below. Register r0 contains 0x4000 1000, and the memory system is little-endian.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address</th>
+          <th>Contents</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x4000 1000</td>
+          <td>0x06</td>
+      </tr>
+      <tr>
+          <td>0x4000 1001</td>
+          <td>0xFC</td>
+      </tr>
+      <tr>
+          <td>0x4000 1002</td>
+          <td>0x03</td>
+      </tr>
+      <tr>
+          <td>0x4000 1003</td>
+          <td>0xFF</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="a-ldrsb-r13-r0">
+  a.) LDRSB r13, [r0]
+  <a class="heading-link" href="#a-ldrsb-r13-r0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>LDRSB means Load Register Signed Byte</p>
+<ul>
+<li>This instruction loads a Sign Byte from the address 0x4000 1000 into r13</li>
+<li>Since each address takes a byte, we only take 1 number and load into r13 and extend it to 32-bit word</li>
+<li>r13 now contains <code>0x00000006</code></li>
+</ul>
+<h4 id="b-ldrsh-r13-r0">
+  b.) LDRSH r13, [r0]
+  <a class="heading-link" href="#b-ldrsh-r13-r0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>LDRSH means Load Register Signed Halfword</p>
+<ul>
+<li>Halfwords are 2 bytes, 16-bits, we take 2 number and load into r13</li>
+<li>Note that 0xFC is a negative number, s0 we need to do sign extension when we form the 32-bit word</li>
+<li>r13 now contains <code>0xFFFFFC06</code></li>
+</ul>
+<h4 id="c-ldr-r13-r0">
+  c.) LDR r13, [r0]
+  <a class="heading-link" href="#c-ldr-r13-r0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>LDR means Load Register</p>
+<ul>
+<li>This instruction loads a whole 32-bit word into r13</li>
+<li>Thus, we take all the four numbers and load into r13</li>
+<li>R13 now contains <code>0xFF03FC06</code></li>
+</ul>
+<h4 id="d-ldrh-r13-r0">
+  d.) LDRH r13, [r0]
+  <a class="heading-link" href="#d-ldrh-r13-r0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>LDRH means Load Register Halfword</p>
+<ul>
+<li>Same as LDRSH, but since its not signed, we do not need to perform sign extension</li>
+<li>r13 now contains <code>0x0000FC06</code></li>
+</ul>
+<hr>
+<h1 id="question-2">
+  Question 2
+  <a class="heading-link" href="#question-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Calculate the effective address of the following instructions if register r3 = 0x4000 1000 and register r4 = 0x20:</p>
+<h4 id="a-strh-r9-r3-r4">
+  a.) STRH r9, [r3, r4]
+  <a class="heading-link" href="#a-strh-r9-r3-r4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>STRH means Store Halfword</p>
+<ul>
+<li>Pre-index offset: r3 + r4</li>
+<li>Final address: 0x4000 1000 + 0x20 = 0x4000 1020</li>
+</ul>
+<h4 id="b-ldrb-r8-r3-r4-lsl3">
+  b.) LDRB r8, [r3, r4, LSL#3]
+  <a class="heading-link" href="#b-ldrb-r8-r3-r4-lsl3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>LDRB means Load Byte, so meaning we load a byte</p>
+<ul>
+<li>Pre-index with Logical Shift Left: r3 + r4*(2^3)</li>
+<li>Final address:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>    0x20 = 0010 0000   
+</span></span><span style="display:flex;"><span>    LSL #8 Shift left by 3 bits
+</span></span><span style="display:flex;"><span>    0x100 = 00000000 00000000 00000001 00000000
+</span></span><span style="display:flex;"><span>    Add to offset:
+</span></span><span style="display:flex;"><span>    0x4000 1000 + 0x100 = 0x4000 1100
+</span></span></code></pre></div><h4 id="c-ldr-r7-r3-r4">
+  c.) LDR r7, [r3], r4
+  <a class="heading-link" href="#c-ldr-r7-r3-r4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Post indexing, update r3 by +r4 after loading [r3] into r7</li>
+<li>Final Address before post-index = 0x4000 1000</li>
+<li>Final Address after post-index = 0x4000 1020 for r3</li>
+</ul>
+<h4 id="d-strb-r6-r3-r4-asr-2">
+  d.) STRB r6, [r3], r4, ASR #2
+  <a class="heading-link" href="#d-strb-r6-r3-r4-asr-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Post indexing with Asymptotic Shift Right by 2^2</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>0x20 = 0010 0000
+</span></span><span style="display:flex;"><span>ASR by 2 bits
+</span></span><span style="display:flex;"><span>0x8 = 0000 1000
+</span></span><span style="display:flex;"><span>Effective Address Before Post-index = 0x4000 1000
+</span></span><span style="display:flex;"><span>Effective Address After Post-index  = 0x4000 1000 + 0x8
+</span></span><span style="display:flex;"><span>                                    = 0x4000 1008
+</span></span></code></pre></div><h1 id="question-3">
+  Question 3
+  <a class="heading-link" href="#question-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Write a program that sums word-length values in memory, storing the result in register r2. Include the following table of values to sum in your code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>TABLE   DCD 0xFEBBA, 0x1234, 0x8888  
+</span></span><span style="display:flex;"><span>        DCD 0x13, 0x8080808, 0xFFFF
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">WordSum</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">sum</span>     <span style="color:#79c0ff;font-weight:bold">RN</span>      <span style="color:#a5d6ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">counter</span> <span style="color:#79c0ff;font-weight:bold">RN</span>      <span style="color:#a5d6ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#8b949e;font-style:italic">#6
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADR</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">TABLE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">r3</span>], <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">sum</span>, <span style="color:#79c0ff;font-weight:bold">sum</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#79c0ff;font-weight:bold">counter</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">Done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">TABLE</span>   <span style="color:#79c0ff;font-weight:bold">DCD</span> <span style="color:#a5d6ff">0xFEBBA</span>, <span style="color:#a5d6ff">0x1234</span>, <span style="color:#a5d6ff">0x8888</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">DCD</span> <span style="color:#a5d6ff">0x13</span>, <span style="color:#a5d6ff">0x8080808</span>, <span style="color:#a5d6ff">0xFFFF</span>
+</span></span></code></pre></div>
   </article>
 </section>
 
