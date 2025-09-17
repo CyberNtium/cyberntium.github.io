@@ -339,6 +339,7 @@ Set your Y component to zero. This means that you kill upwards velocity</li>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s go through the <code>Grounded()</code> function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">public</span> <span style="color:#ff7b72">bool</span> Grounded()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
@@ -378,6 +379,245 @@ Set your Y component to zero. This means that you kill upwards velocity</li>
 </li>
 <li>
 <p>Layer = Ground, which we have set it to be since it’s the floor</p>
+</li>
+</ul>
+<p>Now, let&rsquo;s go back to our orignal Raycast:</p>
+<p><code>Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)</code></p>
+<p>These are some new variables, so let’s initialise them above:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>[Header(&#34;Ground Check Settings:&#34;)]
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> Transform groundCheckPoint;
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> <span style="color:#ff7b72">float</span> groundCheckY = <span style="color:#a5d6ff">0.2f</span>;
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> <span style="color:#ff7b72">float</span> groundCheckX = <span style="color:#a5d6ff">0.5f</span>;
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> LayerMask whatIsGround;
+</span></span></code></pre></div><ul>
+<li>
+<p><code>groundCheckPoint</code> is declared as a public field under your PlayerController, thus we can link it with an empty gameObject as a child under the Player gameObject and drag it to be at our player’s feet or most bottom position like so:</p>
+</li>
+<li>
+<figure class="center"><img src="https://i.imgur.com/FVMlFVB.png"
+    alt="stuff">
+</figure>
+
+</li>
+<li>
+<p>And then finally, we drag the empty gameObject “Ground Check Point” to the public field that we declared just now in PlayerController:</p>
+</li>
+<li>
+<figure class="center"><img src="https://i.imgur.com/OSsRWgM.png"
+    alt="text">
+</figure>
+
+</li>
+<li>
+<p>groundCheckY is declared as a float type, that represents the length of the Raycast</p>
+</li>
+<li>
+<p>groundCheckX is the offset of the Raycast in the horizontal axis, which will be explained later</p>
+</li>
+<li>
+<p>whatIsGround is basically checking what type of layer what we want our Raycast is hitting, in this case will be ground, which we need to indicate in Unity when saving the script:</p>
+</li>
+<li>
+<figure class="center"><img src="https://i.imgur.com/opLxWSs.png"
+    alt="layerMask">
+</figure>
+
+</li>
+<li>
+<p>After everything here, let’s go back to the main Ground() function:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">public</span> <span style="color:#ff7b72">bool</span> Grounded()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
+</span></span><span style="display:flex;"><span>        || Physics2D.Raycast(groundCheckPoint.position + <span style="color:#ff7b72">new</span> Vector3(groundCheckX, <span style="color:#a5d6ff">0</span>, <span style="color:#a5d6ff">0</span>), Vector2.down, groundCheckY, whatIsGround)
+</span></span><span style="display:flex;"><span>        || Physics2D.Raycast(groundCheckPoint.position + <span style="color:#ff7b72">new</span> Vector3(-groundCheckX, <span style="color:#a5d6ff">0</span>, <span style="color:#a5d6ff">0</span>), Vector2.down, groundCheckY, whatIsGround))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Inside the if statement, we are checking if:</p>
+<ul>
+<li>groundCheckPoint.position = position at our feet</li>
+<li>Vector2.down = downward direction</li>
+<li>groundCheckY = length of 0.2f</li>
+<li>whatIsGround = checking of gameObjects tagged with “Ground”</li>
+</ul>
+<p>OR:</p>
+<ul>
+<li>groundCheckPoint.position + new Vector3(groundCheckX, 0, 0) …</li>
+</ul>
+<p>AND:</p>
+<ul>
+<li>groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0) …</li>
+</ul>
+<p>What the heck are these two ORs inside the if statement:<br>
+Starting at the original place at the Player’s feet, we do an offset of groundCheckX = 0.5 and -0.5 to ensure that even if the player is a bit off the ground, the player will still be considered grounded. A simple illustration is this:
+<figure class="center"><img src="https://i.imgur.com/x48n7MP.jpeg"
+    alt="raycast">
+</figure>
+</p>
+<blockquote>
+<p>Another question is why use Vector3 for the offsets?</p></blockquote>
+<p>Well, Unity’s Transform has always been in 3D even if the game we are developing is in 2D. Thus, when we use something.position, the .position returns a Vector3 component, so if we just do <code>something.position + new Vector2(groundCheckX, 0, 0)</code>, this will give us an error because a Vector3 cannot be added to a Vector2 directly.</p>
+<h3 id="23-updatejumpvariables">
+  2.3 UpdateJumpVariables()
+  <a class="heading-link" href="#23-updatejumpvariables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s initialise some variables first:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>[Header(&#34;Vertical Movement Settings:&#34;)]
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> <span style="color:#ff7b72">float</span> jumpForce = <span style="color:#a5d6ff">45</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">private</span> <span style="color:#ff7b72">int</span> jumpBufferCounter = <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> <span style="color:#ff7b72">int</span> jumpBufferFrames;
+</span></span><span style="display:flex;"><span>prviate <span style="color:#ff7b72">float</span> coyoteTimeCounter = <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>[SerializeField] <span style="color:#ff7b72">private</span> <span style="color:#ff7b72">float</span> coyoteTime;
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">private</span> <span style="color:#ff7b72">int</span> airJumpCounter = <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>[SerializeField] prviate <span style="color:#ff7b72">int</span> maxAirJump;
+</span></span></code></pre></div><ul>
+<li>jumpForce, a float type that is serializable in Unity is basically the strength of our player’s jump</li>
+<li>jumpBufferCounter is an int type that is used in the jump buffer logic. It is set as zero at start. Explained later</li>
+<li>jumpBufferFrames is a serializable int type that can be adjusted in game which defines how long the jump buffer would last. Explained later.</li>
+<li>coyoteTimeCounter is another int type that is used to track coyote time. Not serializable.</li>
+<li>coyoteTime is a serializable type that represents the coyote time and how long it lasts. Explained later</li>
+<li>airJumpCounter is an int that functions as a counter that tracks how many times the player has jumped. Not serializable.</li>
+<li>maxAirJump, serializable, the total amount of jumps the player is allowed to make. Explained later.</li>
+</ul>
+<p>Let’s start with the UpdateJumpVariable() function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">void</span> updateJumpVariables() {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Grounded()) 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        p.State.jumping = <span style="color:#79c0ff">false</span>;
+</span></span><span style="display:flex;"><span>        coyoteTimeCounter = coyoteTime;
+</span></span><span style="display:flex;"><span>        airJumpCounter = <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">else</span> {
+</span></span><span style="display:flex;"><span>        coyoteTimeCounter -= Time.deltaTime;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Input.GetButtonDown(<span style="color:#a5d6ff">&#34;Jump&#34;</span>)) {
+</span></span><span style="display:flex;"><span>        jumpBufferCounter = jumpBufferFrames;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">else</span> {
+</span></span><span style="display:flex;"><span>        jumpBufferCounter --;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The first if statement checks if the player is Grounded() or touching the ground (explained just now). If the player is touching the ground, we set the jumping player state to be false.<br>
+We also set the coyoteTimeCounter to be assigned to the coyoteTime we set in Unity, or another way of saying, reset the coyoteTimeCounter. We also reset our airJumpCounter back to 0 so that players can double jump again after landing on ground.</p>
+</li>
+<li>
+<p>If the player is not touching ground however, we set <code>coyoteTimeCounter -= Time.deltaTime</code>. This basically means that coyoteTimeCounter continuously counts down by subtracting its value by time.deltaTime which is the seconds since the last frame until coyoteTime runs out.</p>
+</li>
+<li>
+<p>The next if statement checks if the “Jump” button was pressed at a particular point of time. Then we set jumpBufferCounter to be equal to jumpBufferFrames, meaning resetting the jump buffer counter to its max value. Thus, when you land soon, you will still jump automatically.</p>
+</li>
+<li>
+<p>The else statement here checks if the “Jump” button was not pressed in this frame, if so, it decreases the jump buffer counter continuously eventually reaching zero and “forgets” the jump input.</p>
+</li>
+</ul>
+<h3 id="24-final-jump-method">
+  2.4 Final Jump() Method
+  <a class="heading-link" href="#24-final-jump-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#ff7b72">void</span> Jump() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (Input.GetButtonUp(<span style="color:#a5d6ff">&#34;Jump&#34;</span>) &amp;* rb.linearVelocity.y &gt; <span style="color:#a5d6ff">0</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        rb.linearVelocity = <span style="color:#ff7b72">new</span> Vector2(rb.linearVelocity.x, <span style="color:#a5d6ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        pState.jumping = <span style="color:#79c0ff">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (!pState.jumping) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> (jumpBufferCounter &gt; <span style="color:#a5d6ff">0</span> &amp;&amp; coyoteTimeCounter &gt; <span style="color:#a5d6ff">0</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            rb.linearVelocity = <span style="color:#ff7b72">new</span> Vector2(rb.linearVelocity.x, jumpForce);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            pState.jumping = <span style="color:#79c0ff">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">else</span> <span style="color:#ff7b72">if</span> (!Grounded() &amp;&amp; airJumpCounter &lt; maxAirJump &amp;&amp; Input.GetButton(<span style="color:#a5d6ff">&#34;Jump&#34;</span>)) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            pState.jumping = <span style="color:#79c0ff">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            airJumpCounter ++;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            rb.linearVelocity = <span style="color:#ff7b72">new</span> Vector2(rb.linearVelocity.x, jumpForce);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The first if statement was already explained in section 2.1, the rest implements all the other components into our Jump() method.</p>
+<p>The 2nd if statement checks if the “Jump” has been pressed, then we run everything inside the block, which consists of nested statements:</p>
+<ul>
+<li>
+<p>1st IF: this checks if the player pressed the “jump” button within the last frames. Also, it checks if the coyote time is above zero</p>
+</li>
+<li>
+<p>If both these conditions check out, we do:</p>
+</li>
+<li>
+<ul>
+<li><code>rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We set our player’s rigidBody linearVelocity to a new Vector2 like in the very first IF statement: for x component, since we want to keep the horizontal movement, it&rsquo;s the same. But for the Y component, we set it to be jumpForce which we have initialised earlier.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We set the player jump state to be True to prevent spamming the button.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Finally we set the jumpBufferCounter to be zero to prevent another jump to be triggered.</li>
+</ul>
+</li>
+<li>
+<p>ELSE IF statement: This checks if the player is not ground and the player has not reached their max air jumps:</p>
+</li>
+<li>
+<ul>
+<li>If all these conditions are true:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We set player jumping state to be True</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We increase the air jump counter by 1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Finally, we set the player rigidBody linearVelocity to a new Vector2:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>Where we keep the same horizontal movement, but set the vertical Y component to the jumpForce.</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 

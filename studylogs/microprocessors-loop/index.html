@@ -896,6 +896,31 @@ AREA MyCode, CODE, READONLY ENTRY start MOV r3, #0x00F00000 ; test value MOV r4,
 </span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#1
 </span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CMP</span> <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#3
 </span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span> <span style="color:#79c0ff;font-weight:bold">loop0</span>
+</span></span></code></pre></div><h1 id="other-interesting-loop-codes">
+  Other Interesting Loop Codes
+  <a class="heading-link" href="#other-interesting-loop-codes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="factorial">
+  Factorial
+  <a class="heading-link" href="#factorial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">FactLoop</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#10         ; set your factorial target
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>          <span style="color:#8b949e;font-style:italic">; store r0 in a temporary register
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MULNE</span>   <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>      <span style="color:#8b949e;font-style:italic">; multiply if r0 =/= 0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>            <span style="color:#8b949e;font-style:italic">; branch back to loop if r0 =/= 0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Done</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">Done</span>
 </span></span></code></pre></div>
   </article>
 </section>
