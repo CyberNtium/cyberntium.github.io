@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IM3180 on cyberntium</title>
-    <link>https://cyberntium.github.io/tags/im3180/</link>
+    <link>http://localhost:1313/tags/im3180/</link>
     <description>Recent content in IM3180 on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://cyberntium.github.io/tags/im3180/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/im3180/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unity Game Project - Game Programming</title>
-      <link>https://cyberntium.github.io/projects/unity-game-project/</link>
+      <link>http://localhost:1313/projects/unity-game-project/</link>
       <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>https://cyberntium.github.io/projects/unity-game-project/</guid>
+      <guid>http://localhost:1313/projects/unity-game-project/</guid>
       <description>&lt;h1 id=&#34;preface---things-to-know-before-writing-any-scripts&#34;&gt;&#xD;&#xA;  Preface - Things to Know Before Writing Any Scripts&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#preface---things-to-know-before-writing-any-scripts&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;void Start()&lt;/code&gt; function is called once when the gameObject is first initialised or when the scene starts&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;void update()&lt;/code&gt; function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;1-moving-our-character&#34;&gt;&#xD;&#xA;  1. Moving Our Character&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-moving-our-character&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;First, we initialize a &lt;strong&gt;&lt;em&gt;Rigidbody2D&lt;/em&gt;&lt;/strong&gt; variable as &lt;em&gt;rb&lt;/em&gt;. Then, in the &lt;code&gt;void Start()&lt;/code&gt; class, we do:&lt;/p&gt;</description>
     </item>
   </channel>

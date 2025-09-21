@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on cyberntium</title>
-    <link>https://cyberntium.github.io/blog/</link>
+    <link>http://localhost:1313/blog/</link>
     <description>Recent content in Blogs on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 27 Aug 2025 21:04:09 +0800</lastBuildDate>
-    <atom:link href="https://cyberntium.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First Post of this Site</title>
-      <link>https://cyberntium.github.io/blog/firstpost/</link>
+      <link>http://localhost:1313/blog/firstpost/</link>
       <pubDate>Wed, 27 Aug 2025 21:04:09 +0800</pubDate>
-      <guid>https://cyberntium.github.io/blog/firstpost/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://cyberntium.github.io/images/smile.png&#34; alt=&#34;alt text&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;I really wonder what people have in mind when they first became motivated to make their own blog/portfolio website.&lt;br&gt;&#xA;Do people do it for fun? Or do people do it just to show off their full stack skills?&lt;br&gt;&#xA;Or maybe it&amp;rsquo;s because they saw someone else on LinkedIn doing it so now they felt left behind.&lt;/p&gt;&#xA;&lt;p&gt;Regardless, I don&amp;rsquo;t think any of those is a sin in itself.&#xA;We live in the era of vibe-coding, the skill expression from developing something from the ground up is somehow ruined. Even for me, I rely on AI way too much for my own good.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/blog/firstpost/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/smile.png&#34; alt=&#34;alt text&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;I really wonder what people have in mind when they first became motivated to make their own blog/portfolio website.&lt;br&gt;&#xA;Do people do it for fun? Or do people do it just to show off their full stack skills?&lt;br&gt;&#xA;Or maybe it&amp;rsquo;s because they saw someone else on LinkedIn doing it so now they felt left behind.&lt;/p&gt;&#xA;&lt;p&gt;Regardless, I don&amp;rsquo;t think any of those is a sin in itself.&#xA;We live in the era of vibe-coding, the skill expression from developing something from the ground up is somehow ruined. Even for me, I rely on AI way too much for my own good.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

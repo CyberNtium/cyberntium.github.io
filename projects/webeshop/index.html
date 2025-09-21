@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
   Web E-shop Project - BagusDrip · cyberntium
 </title>
@@ -38,7 +38,7 @@ I give thanks to Professor Chua Hock Chuan for guiding us and providing useful i
 1: Directory of Java ServletsLink to headingThe first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.
 The usual convention goes like this:">
 
-<meta property="og:url" content="https://cyberntium.github.io/projects/webeshop/">
+<meta property="og:url" content="http://localhost:1313/projects/webeshop/">
   <meta property="og:site_name" content="cyberntium">
   <meta property="og:title" content="Web E-shop Project - BagusDrip">
   <meta property="og:description" content="This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.
@@ -58,7 +58,7 @@ The usual convention goes like this:">
 
 
 
-<link rel="canonical" href="https://cyberntium.github.io/projects/webeshop/">
+<link rel="canonical" href="http://localhost:1313/projects/webeshop/">
 
 
 <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -68,7 +68,7 @@ The usual convention goes like this:">
 
   
   
-  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
 
 
 
@@ -78,7 +78,7 @@ The usual convention goes like this:">
   
     
     
-    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
   
 
 
@@ -126,7 +126,7 @@ The usual convention goes like this:">
     <nav class="navigation">
   <section class="container">
     
-    <a class="navigation-title" href="https://cyberntium.github.io/">
+    <a class="navigation-title" href="http://localhost:1313/">
       cyberntium
     </a>
     
@@ -172,7 +172,7 @@ The usual convention goes like this:">
   <article>
     <header>
       <h1 class="title">
-        <a class="title-link" href="https://cyberntium.github.io/projects/webeshop/">
+        <a class="title-link" href="http://localhost:1313/projects/webeshop/">
           Web E-shop Project - BagusDrip
         </a>
       </h1>
@@ -224,12 +224,12 @@ The usual convention goes like this:</p>
   </a>
 </h4>
 <p>First of all, we need to import some Java libraries, namely these ones:</p>
-<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>import java.io.*;
-</span></span><span style="display:flex;"><span>import java.sql.*;
-</span></span><span style="display:flex;"><span>import jakarta.servlet.*;
-</span></span><span style="display:flex;"><span>import jakarta.servlet.http.*;
-</span></span><span style="display:flex;"><span>import jakarta.servlet.annotation.*;
-</span></span></code></pre></div><p><code>java.io.*</code> handles the classic input output operations, namely the PrintWriter class which we will get to later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">java.io.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">java.sql.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.http.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.annotation.*</span>;<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>java.io.*</code> handles the classic input output operations, namely the PrintWriter class which we will get to later.</p>
 <p><code>java.sql.*</code> provides the Java Database Connectivity (JDBC) classes for connecting to databases and other SQL operations. We will see something like <code>Connection</code>, <code>Statement</code>, <code>PreparedStatement</code> and <code>SQLException</code> later.</p>
 <p><code>jakarta.servlet.*</code> is the core package, which is just part of the Jakarta Servlet API that provides the servlet framework. Classes used are <code>Servlet</code> and <code>ServletException</code>.</p>
 <p><code>jakarta.servlet.http.*</code> is the http package of jakarta servlet. This provides the HttpServlet class which we need to extend every class to enable HTTP request handling. Classes like <code>HttpServletRequest</code> and <code>HTTPServletResponse</code> are used to process incoming requests and send responses.</p>
@@ -248,13 +248,13 @@ The usual convention goes like this:</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>@WebServlet(&#34;/driporder&#34;)
-</span></span><span style="display:flex;"><span>public class OrderServlet extends HttpServlet {
-</span></span><span style="display:flex;"><span>    ...
-</span></span><span style="display:flex;"><span>    ...
-</span></span><span style="display:flex;"><span>    ...
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><code>@WebServlet(&quot;/driporder&quot;)</code> maps this particular servlet to the url that happens to contain <code>&quot;/driporder&quot;</code>, something like this: <code>http://localhost:xxxx/driporder</code>.<br>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">@WebServlet</span>(<span style="color:#a5d6ff">&#34;/driporder&#34;</span>)<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">public</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">class</span> <span style="color:#f0883e;font-weight:bold">OrderServlet</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">extends</span><span style="color:#6e7681"> </span>HttpServlet<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>...<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>...<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>...<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>@WebServlet(&quot;/driporder&quot;)</code> maps this particular servlet to the url that happens to contain <code>&quot;/driporder&quot;</code>, something like this: <code>http://localhost:xxxx/driporder</code>.<br>
 Essentially, after we host site on Tomcat and when a request comes in with the URL path containing <code>/driorder</code>, the <code>OrderServlet</code> class will execute.<br>
 If you are familiar with SpringBoot, it is very similar to the <code>@GetMapping</code> method.</p>
 <p>Next up is defining the public class of OrderServlet, which I assume everyone knows about at this point. More interestingly though, let&rsquo;s look at the extend:
@@ -269,12 +269,12 @@ spoilers more class lmao 😞</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>@Override
-</span></span><span style="display:flex;"><span>public void doGet(HttpServletRequest request, HttpServletResponse response)
-</span></span><span style="display:flex;"><span>        thorws ServletException, IOException {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><p>So, Java OOP 101 here: We are overriding a method from the parent class which in this case would be the <code>HttpServlet</code>, and making our own version.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">@Override</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">public</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">void</span><span style="color:#6e7681"> </span><span style="color:#d2a8ff;font-weight:bold">doGet</span>(HttpServletRequest<span style="color:#6e7681"> </span>request,<span style="color:#6e7681"> </span>HttpServletResponse<span style="color:#6e7681"> </span>response)<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span>thorws<span style="color:#6e7681"> </span>ServletException,<span style="color:#6e7681"> </span>IOException<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>So, Java OOP 101 here: We are overriding a method from the parent class which in this case would be the <code>HttpServlet</code>, and making our own version.</p>
 <blockquote>
 <p>Interestingly, I didn&rsquo;t know this when I was studying, this is a very healthy practice for programmers because in the case where you did not include <code>@Override</code> and misspelt <code>doGet()</code> with <code>doget()</code> or whatever, Java will just create a new method which is not very good. With the <code>@Override</code>, Java will check if the parameter is the same as your parent&rsquo;s and gives you an error if it exists.</p></blockquote>
 <p>Next, we define a public method named doGet, which will be called by Tomcat when an HTTP GET request is received using any URL with <code>/driporder</code>.</p>
@@ -301,6 +301,219 @@ spoilers more class lmao 😞</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>response.setContentType(<span style="color:#a5d6ff">&#34;text/html&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>PrintWriter<span style="color:#6e7681"> </span>out<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>response.getWriter();<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>response</code> here as mentioned before, is the <code>HttpServletResponse</code> object, which represents the message we want to sent to the user. When we say <code>.setContentType()</code>, we are essentially setting a header for the body of the data that we want to sent. You can kind of think of it as a type of metadata that lists down the specification of the data that you want to send. For example, when you send a parcel to someone, you need to have the recipient&rsquo;s address, your address, stamp or whatever on the parcel. Those stuff is this header.<br>
+And, in our case, our &ldquo;data address&rdquo; aka header is set to be a HTML document. Without this label, the browser will just pass through the raw HTML codes with all its syntaxes.<br>
+<code>PrintWriter out = response.getWriter()</code> here is the content inside the parcel. We first declare a PrintWriter object called &ldquo;out&rdquo; and assign it to <code>response.getWriter()</code> which means getting a PrintWriter object from <code>response</code>.<br>
+For the rest of the code, if we do <code>out.println(&quot;...&quot;)</code>, we are basically writing a line of text (in HTML) into this stream, and the browser will receive it and renders into the final web page.</p>
+<h4 id="213-connecting-to-mysql-database">
+  2.1.3: Connecting to MySQL Database
+  <a class="heading-link" href="#213-connecting-to-mysql-database">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">try</span><span style="color:#6e7681"> </span>(<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>Connection<span style="color:#6e7681"> </span>conn<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>DriverManager.getConnection<span style="color:#6e7681"> </span>(<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">&#34;jdbc:mysql://localhost:xxxx/BagusDrip?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC&#34;</span>,<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">&#34;admin69&#34;</span>,<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;new_password69420&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>Statement<span style="color:#6e7681"> </span>stmt<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>conn.createStatement();<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>)<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>We first declare a Connection object call conn and initialise it as <code>DriverManager.getConnection(jdbc stuff)</code>. This is so that every time we do <code>conn.whatever</code> we are performing something that is directly related to the mySQL database, retrieving products information for example. Now, for the long line inside its bracket, it&rsquo;s essentially the JDBC URL which provides all the information you need to connect to the database. Note that we are using a very terrible way to connect to the database for simplicity sake, please do not do this in a professional setting, unless you want to get punched by your manager.</p>
+<p><code>Statement stmt = conn.createStatement()</code> Once we establish the connection with the database, this line will create a Statement object which is used to excecute static SQL statements, which we will touch on later.</p>
+<h4 id="214-getting-user-inputs">
+  2.1.4: Getting User Inputs
+  <a class="heading-link" href="#214-getting-user-inputs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>custName<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;cust_name&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#6e7681"> </span>custEmail<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;cust_email&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#6e7681"> </span>custPhone<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;cust_phone&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#ff7b72;font-weight:bold">[]</span><span style="color:#6e7681"> </span>productIds<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameterValues(<span style="color:#a5d6ff">&#34;id[]&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#ff7b72;font-weight:bold">[]</span><span style="color:#6e7681"> </span>models<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameterValues(<span style="color:#a5d6ff">&#34;model[]&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#ff7b72;font-weight:bold">[]</span><span style="color:#6e7681"> </span>prices<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameterValues(<span style="color:#a5d6ff">&#34;price[]&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#ff7b72;font-weight:bold">[]</span><span style="color:#6e7681"> </span>categories<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameterValues(<span style="color:#a5d6ff">&#34;category[]&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#ff7b72;font-weight:bold">[]</span><span style="color:#6e7681"> </span>quantities<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameterValues(<span style="color:#a5d6ff">&#34;quantity[]&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>request.getParameter()</code> is for retrieving a single piece of information, returning the user&rsquo;s input as a single <code>String</code>. In this case, we want to get the user&rsquo;s name, email and phone.<br>
+<code>request.getParameterValues()</code> is basically the same thing but for multiple values that share the same name. That&rsquo;s why this method returns an array of <code>String</code>s, which we can loop through each one individually.</p>
+<h4 id="215-checking-for-empty-cart">
+  2.1.5: Checking for Empty Cart
+  <a class="heading-link" href="#215-checking-for-empty-cart">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">if</span><span style="color:#6e7681"> </span>(productIds<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">==</span><span style="color:#6e7681"> </span><span style="color:#79c0ff">null</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">||</span><span style="color:#6e7681"> </span>productIds.length<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">==</span><span style="color:#6e7681"> </span>0)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;h3&gt;No items in the cart. Please go back and add products.&lt;/h3&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;&lt;a href=&#39;cart.html&#39;&gt;Back to Cart&lt;/a&gt;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">return</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>So, after getting the inputs from user, we first check if the cart is empty. The if statement checks for two things:</p>
+<ul>
+<li><code>productIds == null</code>: This checks whether the <code>productIds</code> array that we initialised earlier even exist at all</li>
+<li>OR</li>
+<li><code>productIds.length == 0</code>: This checks whether the array exists but contains zero items.
+If either of these conditions is true, there are no products to order, so we will run the code body of the if statement:</li>
+<li><code>out.println(&quot;&lt;h3&gt;No items in the cart. Please go back and add products.&lt;/h3&gt;&quot;)</code>
+Remember earlier when we talked about HTML stuff, this is exactly what I am refering to. <code>out.println()</code> prints out the HTML code inside to be render for the webpage format.<br>
+<code>&lt;h3&gt;</code> means heading 3, but basically a heading.<br>
+<code>&lt;p&gt;</code> means paragraph. The browser will automatically add a space before and after the text to separate it from other stuff.<br>
+<code>&lt;a&gt;</code> means anchor, which is used for hyperlink. Thus, you see we put the <code>cart.html</code> there to direct the user to their cart page.</li>
+</ul>
+<h4 id="216-update-the-database">
+  2.1.6: Update the Database
+  <a class="heading-link" href="#216-update-the-database">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<h4 id="insert-statement">
+  Insert Statement
+  <a class="heading-link" href="#insert-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>insertSql<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;INSERT INTO order_records (product_id, cust_name, cust_email, cust_phone, model, category, price, quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)&#34;</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>PreparedStatement<span style="color:#6e7681"> </span>pstmt<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>conn.prepareStatement(insertSql);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>String insertSql</code> is a SQL query. You probably notice the weird ? symbols at the end of the line, they are actually used as placeholders for the values that will be inserted.<br>
+You probably also noticed why did we declare a Statement which is vaguely similar to <code>stmt</code>, which is <code>PreparedStatement pstmt</code>.</p>
+<blockquote>
+<p>What is the difference between PreparedStatement and normal Statement?</p></blockquote>
+<p>Both <code>PreparedStatement</code> and <code>Statement</code> run SQL queries. However, <code>Statement</code> is only best for simple queries that do not deal with user inputs as it executes a query by concatenating strings together. If a user enters any malicious code, that code can be executed by the sql database. This is the infamous, <strong>SQL Injection</strong>.<br>
+<code>PreparedStatement</code> on the other hand, use the ? symbol as a placeholder, where they are <em>literal value</em> to be inserted into the SQL databases. So, for example, if I want to destroy your database, I type in <code>'); DROP TABLE products;--</code>, <code>PreparedStatement</code> will not see this as a code, but just some string, aka literal values.</p>
+<h4 id="processing-products">
+  Processing Products
+  <a class="heading-link" href="#processing-products">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">for</span><span style="color:#6e7681"> </span>(<span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>i<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>0;<span style="color:#6e7681"> </span>i<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">&lt;</span><span style="color:#6e7681"> </span>productIds.length;<span style="color:#6e7681"> </span>i<span style="color:#ff7b72;font-weight:bold">++</span>)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>productId<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>Integer.parseInt(productIds<span style="color:#ff7b72;font-weight:bold">[</span>i<span style="color:#ff7b72;font-weight:bold">]</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>String<span style="color:#6e7681"> </span>model<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>models<span style="color:#ff7b72;font-weight:bold">[</span>i<span style="color:#ff7b72;font-weight:bold">]</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">float</span><span style="color:#6e7681"> </span>price<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>Float.parseFloat(prices<span style="color:#ff7b72;font-weight:bold">[</span>i<span style="color:#ff7b72;font-weight:bold">]</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>String<span style="color:#6e7681"> </span>category<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>categories<span style="color:#ff7b72;font-weight:bold">[</span>i<span style="color:#ff7b72;font-weight:bold">]</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>quantity<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>Integer.parseInt(quantities<span style="color:#ff7b72;font-weight:bold">[</span>i<span style="color:#ff7b72;font-weight:bold">]</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>...<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Time for the leetcode practice to shine lol (I regret not doing more leetcode&hellip;)</p>
+<p>The <code>for</code> loop starts with i = 0 and iterating through the <code>productIds</code> array and goes up to the total number of items in the cart which is <code>productIds.length - 1</code>.  We do not include the minus 1 because &ldquo;&lt;&rdquo; symbol is not inclusive of the max value, which means the same thing as minus 1.</p>
+<p>Since <code>request.getParameterValues()</code> from before only returns value in <code>String</code>s, we need to convert them into <code>int</code> or <code>float</code> to perform mathematical operation on them:</p>
+<ul>
+<li><code>int productId = Integer.parseInt(productIds[i])</code>: <code>Integer.parseInt</code> essentially converts a string into an int</li>
+<li><code>float price = Float.parseFloat(prices[i])</code>: Same thing but for float</li>
+</ul>
+<h4 id="updating-product-inventory">
+  Updating Product Inventory
+  <a class="heading-link" href="#updating-product-inventory">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="notice note">
+  <div class="notice-title">
+    <i class="fa-solid fa-sticky-note" aria-hidden="true"></i>Note
+  </div>
+  <div class="notice-content"><em>Note that there&rsquo;s some SQL table and database names that are not mentioned beforehand, just stick with it for now, I will make a separate blog dedicated to the SQL and JDBC server configuration</em></div>
+</div>
+
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>updateSql<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;UPDATE products SET qty = qty - &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>quantity<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34; WHERE id = &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>productId<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34; AND qty &gt;= &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>quantity;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>updateCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>stmt.executeUpdate(updateSql);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">if</span><span style="color:#6e7681"> </span>(updateCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">==</span><span style="color:#6e7681"> </span>0)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Error: Not enough stock for product ID: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>productId<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34; (Requested: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>quantity<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;)&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">continue</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>updateCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34; record updated for product ID: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>productId<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Let&rsquo;s slow down for the first SQL line, which is an UPDATE statement to modify any existing record:</p>
+<ul>
+<li><code>UPDATE products</code> - Specify which table we are modifying, in this case is the <code>products</code> table</li>
+<li><code>SET qty = qty - quantity</code>- Decrease the <code>qty</code> column by the amount ordered</li>
+<li><code>WHERE id = productId AND qty &gt;= quantity</code> - Most important part. Only if the database qty has enough products, it will decrease by subtracting the requested quantity. Basically saying, if there is stock, let the customer add to their cart, if not, don&rsquo;t.</li>
+</ul>
+<p><code>stmt.executeUpdate(updateSql)</code> - This essentially executes the SQL line above. Since it returns an int, the number of rows that is modified, we store it as a int called updateCount.</p>
+<ul>
+<li><code>if (updateCount == 0)</code> basically means if there is no stock since no rows are modified.</li>
+<li>We go into the if statement, and print out the no stock message. Recall that we will return in HTML format, so remember your <code>&lt;p&gt;</code> encapsulating your print statement in the middle.</li>
+<li><code>continue</code> allows the for loop to stop the current iteration and go to the next item (productId)</li>
+</ul>
+<div class="notice warning">
+  <div class="notice-title">
+    <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i>Warning
+  </div>
+  <div class="notice-content"><p><em>Note that as I mentioned few sections ago, it is really not safe to use the normal <code>Statement</code> because it allows SQL injections. Instead, we should use <code>PreparedStatement</code> like what we did for the  <code>insertsql</code> String. I just did it this way because I forgor and only noticed it 2 month after I made the code. The more safe code will be below:</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>updateSql<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;UPDATE products SET qty = qty - ? WHERE id = ? AND qty &gt;= ?&#34;</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>PreparedStatement<span style="color:#6e7681"> </span>updateStmt<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>conn.prepareStatement(updateSql);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>updateStmt.setInt(1,<span style="color:#6e7681"> </span>quantity);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>updateStmt.setInt(2,<span style="color:#6e7681"> </span>productId);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>updateStmt.setInt(3,<span style="color:#6e7681"> </span>quantity);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>updateCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>updateStmt.executeUpdate();<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>&hellip;and rests are the same.
+Could I have deleted the one above? Probably. But it&rsquo;s better to reflect on my mistakes :3</p></div>
+</div>
+
+<h4 id="insert-order-records">
+  Insert Order Records
+  <a class="heading-link" href="#insert-order-records">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>pstmt.setInt(1,<span style="color:#6e7681"> </span>productId);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setString(2,<span style="color:#6e7681"> </span>custName);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setString(3,<span style="color:#6e7681"> </span>custEmail);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setString(4,<span style="color:#6e7681"> </span>custPhone);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setString(5,<span style="color:#6e7681"> </span>model);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setString(6,<span style="color:#6e7681"> </span>category);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setFloat(7,<span style="color:#6e7681"> </span>price);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>pstmt.setInt(8,<span style="color:#6e7681"> </span>quantity);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">int</span><span style="color:#6e7681"> </span>insertCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>pstmt.executeUpdate();<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>insertCount<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34; record inserted into order_records for product ID: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>productId<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>The final part of the insufferably long <code>for</code> loop statement.</p>
+<ul>
+<li>The <code>pstmt</code> from 1 to 8 is where we fill in the placeholders &ldquo;?&rdquo; for the <code>insertSql</code> query 3 sections ago. Essentially, 1 is pointing to the first &ldquo;?&rdquo;, and 2 points to the second &ldquo;?&rdquo; and so on. Make sure to use the correct data type, int or string or whatever</li>
+<li>Final step is <code>int insertCount = pstmt.executeUpdate()</code>:</li>
+<li>
+<ul>
+<li><code>pstmt.executeUpdate()</code> sends the complete INSERT query to the database to do its thing</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Since the method returns the numbers of rows, we store it as an int. Since we are incerting a single record for each products, this value would be &ldquo;1&rdquo; if the insertion did go through.</li>
+</ul>
+</li>
+<li>Finally, we print an HTML mesage to the user telling them that they have succefully added some product id into their cart</li>
+</ul>
+<h4 id="confirmation">
+  Confirmation
+  <a class="heading-link" href="#confirmation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>response.sendRedirect(<span style="color:#a5d6ff">&#34;orderconfirm.html&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>This line redirects the user to a confirmation page named &ldquo;orderconfirm.html&rdquo; that probably just prints out something like &ldquo;Thank you for purchasing&rdquo; or whatever.</p>
+<h4 id="217-error-handling">
+  2.1.7: Error Handling
+  <a class="heading-link" href="#217-error-handling">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">catch</span><span style="color:#6e7681"> </span>(SQLException<span style="color:#6e7681"> </span>ex)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">            </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Error: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>ex.getMessage()<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">            </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Check Tomcat console for details.&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">            </span>ex.printStackTrace();<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>...<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>SQLException</code> is a type of exception thrown by Java when the database operation goes to shit. We reference it to a variable call ex in this case:</p>
+<ul>
+<li>For the user, we print out whatever is from the ex using <code>ex.getMessage()</code> and tell the user something&rsquo;s gone awry with SQL</li>
+<li>For us, we do <code>ex.printStackTrace()</code> as this prints a detailed trace of the error in the Tomcat console so we can go and find whatever error it is.</li>
+</ul>
 
   </article>
 </section>
@@ -328,7 +541,7 @@ spoilers more class lmao 😞</p>
 
   
   
-  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  <script src="/js/coder.js"></script>
   
 
   
