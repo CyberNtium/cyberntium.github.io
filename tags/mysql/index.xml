@@ -2,18 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MySQL on cyberntium</title>
-    <link>http://localhost:1313/tags/mysql/</link>
+    <link>https://cyberntium.github.io/tags/mysql/</link>
     <description>Recent content in MySQL on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://cyberntium.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Web E-shop Project - BagusDrip</title>
-      <link>http://localhost:1313/projects/webeshop/</link>
+      <title>Web E-shop Project - BagusDrip - Part 2</title>
+      <link>https://cyberntium.github.io/projects/webeshop-product/</link>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://cyberntium.github.io/projects/webeshop-product/</guid>
+      <description>&lt;h1 id=&#34;productservletjava&#34;&gt;&#xD;&#xA;  ProductServlet.java&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#productservletjava&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>Web E-shop Project - BagusDrip - Part 1</title>
+      <link>https://cyberntium.github.io/projects/webeshop/</link>
       <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/webeshop/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;  1: Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
+      <guid>https://cyberntium.github.io/projects/webeshop/</guid>
+      <description>&lt;h1 id=&#34;orderservletjava&#34;&gt;&#xD;&#xA;  OrderServlet.java&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#orderservletjava&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;figure&gt;&lt;img src=&#34;https://cyberntium.github.io/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;  1: Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

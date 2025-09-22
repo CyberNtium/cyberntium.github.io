@@ -2,25 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on cyberntium</title>
-    <link>http://localhost:1313/projects/</link>
+    <link>https://cyberntium.github.io/projects/</link>
     <description>Recent content in Projects on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/projects/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://cyberntium.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web E-shop Project - BagusDrip - Part 2</title>
+      <link>https://cyberntium.github.io/projects/webeshop-product/</link>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://cyberntium.github.io/projects/webeshop-product/</guid>
+      <description>&lt;h1 id=&#34;productservletjava&#34;&gt;&#xD;&#xA;  ProductServlet.java&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#productservletjava&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;</description>
+    </item>
     <item>
       <title>Unity Game Project - Game Programming</title>
-      <link>http://localhost:1313/projects/unity-game-project/</link>
+      <link>https://cyberntium.github.io/projects/unity-game-project/</link>
       <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/unity-game-project/</guid>
+      <guid>https://cyberntium.github.io/projects/unity-game-project/</guid>
       <description>&lt;h1 id=&#34;preface---things-to-know-before-writing-any-scripts&#34;&gt;&#xD;&#xA;  Preface - Things to Know Before Writing Any Scripts&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#preface---things-to-know-before-writing-any-scripts&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;void Start()&lt;/code&gt; function is called once when the gameObject is first initialised or when the scene starts&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;void update()&lt;/code&gt; function is called every frame (60 times per second if we are doing 60 FPS). This is done for anything that needs continuous checking like player inputs or playing animations&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;1-moving-our-character&#34;&gt;&#xD;&#xA;  1. Moving Our Character&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-moving-our-character&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;First, we initialize a &lt;strong&gt;&lt;em&gt;Rigidbody2D&lt;/em&gt;&lt;/strong&gt; variable as &lt;em&gt;rb&lt;/em&gt;. Then, in the &lt;code&gt;void Start()&lt;/code&gt; class, we do:&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Web E-shop Project - BagusDrip</title>
-      <link>http://localhost:1313/projects/webeshop/</link>
+      <title>Web E-shop Project - BagusDrip - Part 3</title>
+      <link>https://cyberntium.github.io/projects/webshop-sql/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://cyberntium.github.io/projects/webshop-sql/</guid>
+      <description>&lt;h1 id=&#34;mysql-the-bane-of-my-existence&#34;&gt;&#xD;&#xA;  MySQL (the bane of my existence)&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#mysql-the-bane-of-my-existence&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;As everyone already know, MySQL is a type of Relational Database Management System (RDBMS). For our purposes, it is used to store, manage and retrieve everything related to the Webapp including, customer information, product IDs, product quantities, order records and so on. Said data is stored in tables that has rows and columns. And according to the wiki, the tables are &lt;strong&gt;related&lt;/strong&gt; based on common columns, that&amp;rsquo;s why it&amp;rsquo;s called &lt;em&gt;Relational database&lt;/em&gt;. Wow, who would have thought.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Web E-shop Project - BagusDrip - Part 1</title>
+      <link>https://cyberntium.github.io/projects/webeshop/</link>
       <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/webeshop/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;  1: Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
+      <guid>https://cyberntium.github.io/projects/webeshop/</guid>
+      <description>&lt;h1 id=&#34;orderservletjava&#34;&gt;&#xD;&#xA;  OrderServlet.java&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#orderservletjava&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;figure&gt;&lt;img src=&#34;https://cyberntium.github.io/images/bagusdrip-logo.png&#34;&#xA;    alt=&#34;alt text&#34; width=&#34;200px&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;This was a academic project on developing a full-stack web-app using Java Servlets on Tomcat and MySQL as backend. The course code is IM2073.&lt;/em&gt;&lt;br&gt;&#xA;&lt;em&gt;I give thanks to Professor Chua Hock Chuan for guiding us and providing useful information on said project with his wonderful website &lt;a href=&#34;https://www3.ntu.edu.sg/home/ehchua/programming/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;  1: Directory of Java Servlets&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-directory-of-java-servlets&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;The first thing we do is to set up a clear directory in the Jakarta Servlet folder directory for our shop names and where we want to insert our java class codes.&lt;br&gt;&#xA;The usual convention goes like this:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
