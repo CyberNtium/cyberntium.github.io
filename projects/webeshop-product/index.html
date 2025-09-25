@@ -3,7 +3,7 @@
 
 <head>
   <title>
-  Web E-shop Project - BagusDrip - Part 2 · cyberntium
+  Web E-shop Project - BagusDrip - Part 3 · cyberntium
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,24 +14,116 @@
 
 <meta name="author" content="Carl Ho">
 <meta name="description" content="
-  ProductServlet.java
+  2.2: ProductServlet.java
   
     
     Link to heading
   
-">
+
+
+  2.2.1: Importing Libraries
+  
+    
+    Link to heading
+  
+
+import java.io.*;
+import java.sql.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+Same explanation like in Part 1, refer them for more detail
+I&rsquo;m just gonna speedrun through them like this:
+
+java.io.* - For input and output stuff like the PrintWriter thingie we use to send HTML code to the browser
+java.sql.* - For interacting with MySQL databases
+jakarta.servlet.* - servlet stuff, like literally anything that has the word servlet inside, like ServletException
+jakarta.servlet.http.* - HTTP request handling
+jakarta.servlet.annotation.* - Map to the URL
+
+
+  2.2.2: Servlet Class
+  
+    
+    Link to heading
+  
+
+@WebServlet(&#34;/dripproduct&#34;)
+public class ProductServlet extends HttpServlet {
+
+@WebServlet(&quot;/dripproduct&quot;) - This maps this particular servlet to the URL path of /dripproduct. For example, &ldquo;www.realwebsite.com/dripproduct&#34;
+ProductServlet extends to HttpServlet which we got from the library, to allow HTTP request like doGet and doPost
+
+
+  2.2.3: doGet
+  
+    
+    Link to heading
+  
+
+@Override
+public void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+HttpServletResquest request - For methods that involves getting data from user
+HttpServletResponse response - For methods that involves sending response back to user, aka browser
+throws ServletException, IOException - Debugging purposes, sends an error log to the tomcat console if there&rsquo;s any errors with the servlet codes or input output codes
+
+
+  2.2.4: Response to User
+  
+    
+    Link to heading
+  
+
+response.setContentType(&#34;text/html&#34;);
+PrintWriter out = response.getWriter();
+
+response.setContentType(&quot;text/html&quot;) - Sets the browser response type to be HTML, meaning it would be expecting HTML
+PrintWriter out = response.getWriter() - Create a handy method to print out HTML codes using Printwriter, basically out.println(&quot;blahblahblah&quot;)
+
+
+  2.2.5: HTML Code
+  
+    
+    Link to heading
+  
+
+
+  2.2.5.1: HTML Header
+  
+    
+    Link to heading
+  
+
+out.println(&#34;&lt;!DOCTYPE html&gt;&#34;);
+out.println(&#34;&lt;html lang=&#34;en&#34;&gt;&#34;);
+out.println(&#34;&lt;head&gt;&#34;);
+out.println(&#34;&lt;title&gt;Product Details - BagusDrip&lt;/title&gt;&#34;);
+out.println(&#34;&lt;link rel=&#39;stylesheet&#39; href=&#39;styles.css&#39;&gt;&#34;);
+out.println(&#34;&lt;/head&gt;&#34;);
+out.println(&#34;&lt;body&gt;&#34;);
+
+Did I mentioned setting the browser content type to HTML and printing them out using out.println? Cool
+Since this is essentially the same as just doing HTML, I&rsquo;m just going to ignore the out.println statments for each line because it will be annoying to type out everything
+
+This point onwards is more like a short HTML refresher:">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Web E-shop Project - BagusDrip - Part 2">
-  <meta name="twitter:description" content="ProductServlet.javaLink to heading">
+  <meta name="twitter:title" content="Web E-shop Project - BagusDrip - Part 3">
+  <meta name="twitter:description" content="2.2: ProductServlet.javaLink to heading2.2.1: Importing LibrariesLink to headingimport java.io.*; import java.sql.*; import jakarta.servlet.*; import jakarta.servlet.http.*; import jakarta.servlet.annotation.*; Same explanation like in Part 1, refer them for more detail
+I’m just gonna speedrun through them like this:
+java.io.* - For input and output stuff like the PrintWriter thingie we use to send HTML code to the browser java.sql.* - For interacting with MySQL databases jakarta.servlet.* - servlet stuff, like literally anything that has the word servlet inside, like ServletException jakarta.servlet.http.* - HTTP request handling jakarta.servlet.annotation.* - Map to the URL 2.2.2: Servlet ClassLink to heading@WebServlet(&#34;/dripproduct&#34;) public class ProductServlet extends HttpServlet { @WebServlet(&#34;/dripproduct&#34;) - This maps this particular servlet to the URL path of /dripproduct. For example, “www.realwebsite.com/dripproduct&#34; ProductServlet extends to HttpServlet which we got from the library, to allow HTTP request like doGet and doPost 2.2.3: doGetLink to heading@Override public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { HttpServletResquest request - For methods that involves getting data from user HttpServletResponse response - For methods that involves sending response back to user, aka browser throws ServletException, IOException - Debugging purposes, sends an error log to the tomcat console if there’s any errors with the servlet codes or input output codes 2.2.4: Response to UserLink to headingresponse.setContentType(&#34;text/html&#34;); PrintWriter out = response.getWriter(); response.setContentType(&#34;text/html&#34;) - Sets the browser response type to be HTML, meaning it would be expecting HTML PrintWriter out = response.getWriter() - Create a handy method to print out HTML codes using Printwriter, basically out.println(&#34;blahblahblah&#34;) 2.2.5: HTML CodeLink to heading2.2.5.1: HTML HeaderLink to headingout.println(&#34;&lt;!DOCTYPE html&gt;&#34;); out.println(&#34;&lt;html lang=&#34;en&#34;&gt;&#34;); out.println(&#34;&lt;head&gt;&#34;); out.println(&#34;&lt;title&gt;Product Details - BagusDrip&lt;/title&gt;&#34;); out.println(&#34;&lt;link rel=&#39;stylesheet&#39; href=&#39;styles.css&#39;&gt;&#34;); out.println(&#34;&lt;/head&gt;&#34;); out.println(&#34;&lt;body&gt;&#34;); Did I mentioned setting the browser content type to HTML and printing them out using out.println? Cool Since this is essentially the same as just doing HTML, I’m just going to ignore the out.println statments for each line because it will be annoying to type out everything This point onwards is more like a short HTML refresher:">
 
 <meta property="og:url" content="https://cyberntium.github.io/projects/webeshop-product/">
   <meta property="og:site_name" content="cyberntium">
-  <meta property="og:title" content="Web E-shop Project - BagusDrip - Part 2">
-  <meta property="og:description" content="ProductServlet.javaLink to heading">
+  <meta property="og:title" content="Web E-shop Project - BagusDrip - Part 3">
+  <meta property="og:description" content="2.2: ProductServlet.javaLink to heading2.2.1: Importing LibrariesLink to headingimport java.io.*; import java.sql.*; import jakarta.servlet.*; import jakarta.servlet.http.*; import jakarta.servlet.annotation.*; Same explanation like in Part 1, refer them for more detail
+I’m just gonna speedrun through them like this:
+java.io.* - For input and output stuff like the PrintWriter thingie we use to send HTML code to the browser java.sql.* - For interacting with MySQL databases jakarta.servlet.* - servlet stuff, like literally anything that has the word servlet inside, like ServletException jakarta.servlet.http.* - HTTP request handling jakarta.servlet.annotation.* - Map to the URL 2.2.2: Servlet ClassLink to heading@WebServlet(&#34;/dripproduct&#34;) public class ProductServlet extends HttpServlet { @WebServlet(&#34;/dripproduct&#34;) - This maps this particular servlet to the URL path of /dripproduct. For example, “www.realwebsite.com/dripproduct&#34; ProductServlet extends to HttpServlet which we got from the library, to allow HTTP request like doGet and doPost 2.2.3: doGetLink to heading@Override public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { HttpServletResquest request - For methods that involves getting data from user HttpServletResponse response - For methods that involves sending response back to user, aka browser throws ServletException, IOException - Debugging purposes, sends an error log to the tomcat console if there’s any errors with the servlet codes or input output codes 2.2.4: Response to UserLink to headingresponse.setContentType(&#34;text/html&#34;); PrintWriter out = response.getWriter(); response.setContentType(&#34;text/html&#34;) - Sets the browser response type to be HTML, meaning it would be expecting HTML PrintWriter out = response.getWriter() - Create a handy method to print out HTML codes using Printwriter, basically out.println(&#34;blahblahblah&#34;) 2.2.5: HTML CodeLink to heading2.2.5.1: HTML HeaderLink to headingout.println(&#34;&lt;!DOCTYPE html&gt;&#34;); out.println(&#34;&lt;html lang=&#34;en&#34;&gt;&#34;); out.println(&#34;&lt;head&gt;&#34;); out.println(&#34;&lt;title&gt;Product Details - BagusDrip&lt;/title&gt;&#34;); out.println(&#34;&lt;link rel=&#39;stylesheet&#39; href=&#39;styles.css&#39;&gt;&#34;); out.println(&#34;&lt;/head&gt;&#34;); out.println(&#34;&lt;body&gt;&#34;); Did I mentioned setting the browser content type to HTML and printing them out using out.println? Cool Since this is essentially the same as just doing HTML, I’m just going to ignore the out.println statments for each line because it will be annoying to type out everything This point onwards is more like a short HTML refresher:">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="projects">
@@ -160,18 +252,688 @@
     <header>
       <h1 class="title">
         <a class="title-link" href="https://cyberntium.github.io/projects/webeshop-product/">
-          Web E-shop Project - BagusDrip - Part 2
+          Web E-shop Project - BagusDrip - Part 3
         </a>
       </h1>
     </header>
 
-    <h1 id="productservletjava">
-  ProductServlet.java
-  <a class="heading-link" href="#productservletjava">
+    <h3 id="22-productservletjava">
+  2.2: ProductServlet.java
+  <a class="heading-link" href="#22-productservletjava">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
+</h3>
+<h4 id="221-importing-libraries">
+  2.2.1: Importing Libraries
+  <a class="heading-link" href="#221-importing-libraries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">java.io.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">java.sql.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.http.*</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">import</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">jakarta.servlet.annotation.*</span>;<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Same explanation like in Part 1, refer them for more <a href="https://cyberntium.github.io/projects/webeshop/"  class="external-link" target="_blank" rel="noopener">detail</a><br>
+I&rsquo;m just gonna speedrun through them like this:</p>
+<ul>
+<li><code>java.io.*</code> - For input and output stuff like the PrintWriter thingie we use to send HTML code to the browser</li>
+<li><code>java.sql.*</code> - For interacting with MySQL databases</li>
+<li><code>jakarta.servlet.*</code> - servlet stuff, like literally anything that has the word servlet inside, like ServletException</li>
+<li><code>jakarta.servlet.http.*</code> - HTTP request handling</li>
+<li><code>jakarta.servlet.annotation.*</code> - Map to the URL</li>
+</ul>
+<h4 id="222-servlet-class">
+  2.2.2: Servlet Class
+  <a class="heading-link" href="#222-servlet-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">@WebServlet</span>(<span style="color:#a5d6ff">&#34;/dripproduct&#34;</span>)<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">public</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">class</span> <span style="color:#f0883e;font-weight:bold">ProductServlet</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">extends</span><span style="color:#6e7681"> </span>HttpServlet<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>@WebServlet(&quot;/dripproduct&quot;)</code> - This maps this particular servlet to the URL path of /dripproduct. For example, &ldquo;<a href="https://www.realwebsite.com/dripproduct%22"  class="external-link" target="_blank" rel="noopener">www.realwebsite.com/dripproduct"</a></li>
+<li><code>ProductServlet</code> extends to <code>HttpServlet</code> which we got from the library, to allow HTTP request like doGet and doPost</li>
+</ul>
+<h4 id="223-doget">
+  2.2.3: doGet
+  <a class="heading-link" href="#223-doget">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">@Override</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">public</span><span style="color:#6e7681"> </span><span style="color:#ff7b72">void</span><span style="color:#6e7681"> </span><span style="color:#d2a8ff;font-weight:bold">doGet</span>(HttpServletRequest<span style="color:#6e7681"> </span>request,<span style="color:#6e7681"> </span>HttpServletResponse<span style="color:#6e7681"> </span>response)<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#ff7b72">throws</span><span style="color:#6e7681"> </span>ServletException,<span style="color:#6e7681"> </span>IOException<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>HttpServletResquest request</code> - For methods that involves getting data from user</li>
+<li><code>HttpServletResponse response</code> - For methods that involves sending response back to user, aka browser</li>
+<li><code>throws ServletException, IOException</code> - Debugging purposes, sends an error log to the tomcat console if there&rsquo;s any errors with the servlet codes or input output codes</li>
+</ul>
+<h4 id="224-response-to-user">
+  2.2.4: Response to User
+  <a class="heading-link" href="#224-response-to-user">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>response.setContentType(<span style="color:#a5d6ff">&#34;text/html&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>PrintWriter<span style="color:#6e7681"> </span>out<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>response.getWriter();<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>response.setContentType(&quot;text/html&quot;)</code> - Sets the browser response type to be HTML, meaning it would be expecting HTML</li>
+<li><code>PrintWriter out = response.getWriter()</code> - Create a handy method to print out HTML codes using Printwriter, basically <code>out.println(&quot;blahblahblah&quot;)</code></li>
+</ul>
+<h4 id="225-html-code">
+  2.2.5: HTML Code
+  <a class="heading-link" href="#225-html-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<h4 id="2251-html-header">
+  2.2.5.1: HTML Header
+  <a class="heading-link" href="#2251-html-header">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;!DOCTYPE html&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;html lang=&#34;</span>en<span style="color:#a5d6ff">&#34;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;head&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;title&gt;Product Details - BagusDrip&lt;/title&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;link rel=&#39;stylesheet&#39; href=&#39;styles.css&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;/head&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;body&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li>Did I mentioned setting the browser content type to HTML and printing them out using <code>out.println</code>? Cool</li>
+<li>Since this is essentially the same as just doing HTML, I&rsquo;m just going to ignore the <code>out.println</code> statments for each line because it will be annoying to type out everything</li>
+</ul>
+<p>This point onwards is more like a short HTML refresher:</p>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> - Declares this document to be HTML5</li>
+<li><code>&lt;html lang=&quot;en&quot;&gt;</code> - Set default language to english. Fun fact, you can do just <code>&lt;html&gt;</code> and the code will still work. I&rsquo;m not saying you should do it, just saying it still works</li>
+<li><code>&lt;head&gt;</code> - Begins your head section to put your metadata</li>
+<li><code>&lt;title&gt;Product Details - BagusDrip&lt;/title&gt;</code> - Sets the title to, well, that</li>
+<li><code>&lt;link rel='stylesheet' href='styles.css'&gt;</code> - Links the page to an external CSS stylesheet file called <code>styles.css</code></li>
+<li><code>&lt;/head&gt;</code> - Closes your head section</li>
+<li><code>&lt;body&gt;</code> - Beings your body section of the page, which contains the visible content</li>
+<li></li>
+</ul>
+<h4 id="2252-header-logo">
+  2.2.5.2: Header Logo
+  <a class="heading-link" href="#2252-header-logo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;div class=&#39;header-logo&#39; style=&#39;position: absolute; top: 10px; left: 10px;&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  &lt;a href=&#39;index.html&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;    &lt;img src=&#39;images/bagusdrip-logo.png&#39; alt=&#39;BagusDrip&#39; width=&#39;100&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;    &lt;h1&gt;BagusDrip&lt;/h1&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  &lt;/a&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;/div&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>&lt;div class='header-logo' style='position: absolute; top: 10px; left: 10px;'&gt;</code> - Let&rsquo;s unpack this:</li>
+<li>
+<ul>
+<li>A <code>div</code> is a container element in HTML. It does not bear any meaning on its own, but is used to group content with style</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>class='header-logo</code> - Basically names the <code>div</code> &ldquo;header-logo&rdquo;. A class lets you target it with CSS or javascript to style it</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>style='position: absolute; top: 10px; left: 10px;</code>:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>style = &quot;...&quot;</code> is basically the inline CSS styling</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>position: absolute</code> means positioning this dic relative to its nearest positioned ancestor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>top: 10px; left: 10px;</code> means placing it 10px from the top and 10px from the left from the ancestor</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>I hate HTML because the syntax does not make sense when you read them, but to other people its very easy, I guess I&rsquo;m just a bit dumb</p>
+<ul>
+<li>
+<p><code>  &lt;a href='index.html'&gt;</code> - Create a hyperlink that directs the user to the homepage which is named &ldquo;index.html&rdquo;</p>
+</li>
+<li>
+<p>You might notice there&rsquo;s a special <code>a</code> there, it&rsquo;s called an anchor tag:</p>
+</li>
+<li>
+<ul>
+<li><code>a</code> - Wraps whatever inside just like a <code>div</code> but everything inside will be a clickable link.</li>
+</ul>
+</li>
+<li>
+<p><code>    &lt;img src='images/bagusdrip-logo.png' alt='BagusDrip' width='100'&gt;</code> - Display an image from the &ldquo;images&rdquo; folder and an image called &ldquo;bagusdrip-logo.png&rdquo;, <code>alt</code> provides an &ldquo;alternative&rdquo; wording description to the image in case the the image goes missing</p>
+</li>
+<li>
+<p><code>    &lt;h1&gt;BagusDrip&lt;/h1&gt;</code>:</p>
+</li>
+<li>
+<ul>
+<li><code>&lt;h1&gt;</code> is heading level 1, meaning its the biggest font size you can use in a HTML page</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>In this case, we are printing out &ldquo;BagusDrip&rdquo; in the biggest font, which usually means that this is the title</li>
+</ul>
+</li>
+<li>
+<p><code>&quot;  &lt;/a&gt;&quot;</code> - Close the anchor body</p>
+</li>
+<li>
+<p><code>&lt;/div&gt;</code> - Close the main div body</p>
+</li>
+</ul>
+<h4 id="2253-product-ids">
+  2.2.5.3: Product IDs
+  <a class="heading-link" href="#2253-product-ids">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>id<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;id&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#ff7b72">if</span><span style="color:#6e7681"> </span>(id<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">==</span><span style="color:#6e7681"> </span><span style="color:#79c0ff">null</span>)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;h3&gt;No product selected!&lt;/h3&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;&lt;a href=&#39;index.html&#39;&gt;Back to Home&lt;/a&gt;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;/body&gt;&lt;/html&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#ff7b72">return</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>String id = request.getParameter(&quot;id&quot;)</code> - Using the HttpServlet object request, we get the value for the id parameter from the URL query string and store it inside a string called &ldquo;id&rdquo;. For example, &ldquo;&hellip;com/dripproduct?id=1&rdquo;. The &ldquo;?&rdquo; marks the start of each query statement</li>
+<li>Then we check if &ldquo;id&rdquo; is null, meaning no product is selected, we will then print out a statement telling the user that he/she did not pick a product, and provide a link to the main page, aka &ldquo;index.html&rdquo;. Then, <code>return</code> which stops the doGet method from going further.</li>
+</ul>
+<h4 id="2254-mysql-database-connection">
+  2.2.5.4: MySQL Database Connection
+  <a class="heading-link" href="#2254-mysql-database-connection">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">try</span><span style="color:#6e7681"> </span>(<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>Connection<span style="color:#6e7681"> </span>conn<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>DriverManager.getConnection(<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">&#34;jdbc:mysql://localhost:3306/BagusDrip?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC&#34;</span>,<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">&#34;username&#34;</span>,<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;password123&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>PreparedStatement<span style="color:#6e7681"> </span>pstmt<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>conn.prepareStatement(<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">&#34;SELECT id, brand, model, category, price, qty, image_url FROM products WHERE id = ?&#34;</span>)<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/BagusDrip....&quot;)</code>:</li>
+<li>
+<ul>
+<li><code>DriverManager.getConnection</code> - This tries to establish a connection to a MySQL database</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>jdbc:mysql://localhost:xxxx/BagusDrip</code> - Connects the the &ldquo;BagusDrip&rdquo; database on port 3306</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC</code> - Allows retrieving the public keys, disable SSL, and set timezone to UTC</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>&quot;username&quot;, &quot;password123&quot;</code> - Username and password</li>
+</ul>
+</li>
+</ul>
+<div class="notice warning">
+  <div class="notice-title">
+    <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i>Warning
+  </div>
+  <div class="notice-content">Again, I wrote this in OrderServlet, but I will reiterate it here again. It is very terrible to hardcode your password and username like this.</div>
+</div>
+
+<ul>
+<li><code>conn.prepareStatement</code> - Prepares an SQL statement (hence the name duh) to select the details from:</li>
+<li><code>&quot;SELECT id, brand, model, category, price, qty, image_url FROM products WHERE id = ?&quot;</code> these. The &ldquo;?&rdquo; is a placeholder for product ID</li>
+</ul>
+<h4 id="2255-sql-query-parameter">
+  2.2.5.5: SQL Query Parameter
+  <a class="heading-link" href="#2255-sql-query-parameter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>pstmt.setInt(1,<span style="color:#6e7681"> </span>Integer.parseInt(id));<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>ResultSet<span style="color:#6e7681"> </span>rset<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>pstmt.executeQuery();<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>pstmt.setInt(1, Integer.parseInt(id))</code> - As I mentioned just now, the &ldquo;?&rdquo; is a placeholder for product ID. Hence, this line sets the placeholder to the integer value of the <code>id</code> parameter.</li>
+<li><code>ResultSet rset = pstmt.executeQuery()</code> - Executes the query and stores the result in &ldquo;rset&rdquo;, which is a ResultSet object</li>
+</ul>
+<h4 id="2256-processing-query-results">
+  2.2.5.6: Processing Query Results
+  <a class="heading-link" href="#2256-processing-query-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">if</span><span style="color:#6e7681"> </span>(rset.next())<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>...<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>This checks if a row exists when we move the cursor to the first row of the result set, meaning if it finds a product, enter the if block, if not, don&rsquo;t.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;div class=&#39;product-details&#39; style=&#39;text-align: center; padding: 80px 20px 20px 20px;&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;h2&gt;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;model&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/h2&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;img src=&#39;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;image_url&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#39; width=&#39;300&#39; alt=&#39;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;model&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Brand: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;brand&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Category: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;category&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Price: &lt;span class=&#39;price&#39; data-sgd=&#39;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getFloat(<span style="color:#a5d6ff">&#34;price&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#39;&gt;S$&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getFloat(<span style="color:#a5d6ff">&#34;price&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/span&gt;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Stock: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getInt(<span style="color:#a5d6ff">&#34;qty&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><em>Again, I&rsquo;m not typing out the <code>out.println</code> later to save time~</em></p>
+<p>When the product is found, we enter the if block:</p>
+<ul>
+<li>
+<p><code>&lt;div class='product-details' style='text-align: center; padding: 80px 20px 20px 20px;'&gt;</code>:</p>
+</li>
+<li>
+<ul>
+<li>Creates a new div container named &ldquo;product-details&rdquo; and some styling stuff</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;h2&gt;&quot; + rset.getString(&quot;model&quot;) + &quot;&lt;/h2&gt;</code>:</p>
+</li>
+<li>
+<ul>
+<li>Create a level 2 heading to display the product&rsquo;s model</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;img src='&quot; + rset.getString(&quot;image_url&quot;) + &quot;' width='300' alt='&quot; + rset.getString(&quot;model&quot;) + &quot;'&gt;</code></p>
+</li>
+<li>
+<ul>
+<li>Display the model image which we have put inside the directory, set the width, and alt text as the model of product</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;p&gt;Brand: &quot; + rset.getString(&quot;brand&quot;) + &quot;&lt;/p&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;p&gt;Category: &quot; + rset.getString(&quot;category&quot;) + &quot;&lt;/p&gt;</code>:</p>
+</li>
+<li>
+<ul>
+<li>New paragraphs to display the brands and category</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;p&gt;Price: &lt;span class='price' data-sgd='&quot; + rset.getFloat(&quot;price&quot;) + &quot;'&gt;S$&quot; + rset.getFloat(&quot;price&quot;) + &quot;&lt;/span&gt;&lt;/p&gt;</code></p>
+</li>
+<li>
+<ul>
+<li>Another paragraph to display the price</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Then we create a <code>span</code>, which means inline element, which means we stay at the same line and don&rsquo;t go to a new line</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We name the inline &ldquo;price&rdquo;, we set a new attribute called &ldquo;data-sgd&rdquo; and assign it to the price. Then we close the opening of the <code>span</code> element</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Then for the body of <code>span</code>, we print out &ldquo;S$&rdquo; then concatenate it with the actual price. Finally we close the span and the paragraph.</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;p&gt;Stock: &quot; + rset.getInt(&quot;qty&quot;) + &quot;&lt;/p&gt;</code>:</p>
+</li>
+<li>
+<ul>
+<li>New paragraph again to display the stock left</li>
+</ul>
+</li>
+</ul>
+<h4 id="2257-inputing-the-quantity">
+  2.2.5.7: Inputing the Quantity
+  <a class="heading-link" href="#2257-inputing-the-quantity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;label for=&#39;quantity&#39;&gt;Quantity: &lt;/label&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;input type=&#39;number&#39; id=&#39;quantity&#39; min=&#39;1&#39; max=&#39;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getInt(<span style="color:#a5d6ff">&#34;qty&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#39; value=&#39;1&#39; style=&#39;width: 50px;&#39;&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p><code>&lt;label for='quantity'&gt;Quantity: &lt;/label&gt;</code> - Creates a label for Quantity. Note that this label thing is quite interesting for the <code>for = 'quantity'</code> part. It tags this label as &ldquo;quantity&rdquo; for the next part:</p>
+<ul>
+<li><code>&lt;input type='number' id='quantity' min='1' max='&quot; + rset.getInt(&quot;qty&quot;) + &quot;' value='1' style='width: 50px;'&gt;</code>:</li>
+<li>
+<ul>
+<li>Notice the id = &lsquo;quantity&rsquo;, same tag as in the label. This ensures that when you click on the Quantity word from the label, the cursor jumps to the input box. Speaking of input:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>Input</code> has a lot of variations, like <code>text</code>, <code>number</code>, <code>checkbox</code> and so on. When we use <code>number</code>, we set min and max, in this case max is the amount of stock left, and min is 1. <code>value='1'</code> just sets the default value</li>
+</ul>
+</li>
+</ul>
+<h4 id="2258-escaping-single-quote">
+  2.2.5.8: Escaping Single Quote
+  <a class="heading-link" href="#2258-escaping-single-quote">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>model<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;model&#34;</span>).replace(<span style="color:#a5d6ff">&#34;&#39;&#34;</span>,<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\\&#39;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>As a precaution, we get the products model but replace any single quotes <code>'</code>with escaped single quotes <code>\'</code>. This is ensure that some products&rsquo; name don&rsquo;t mess up the quotation marks. For example, &ldquo;Iphone&rsquo;s Edition&rdquo; &ndash;&gt; &ldquo;Iphone's Edition&rdquo;</p>
+<h4 id="2259-buttons">
+  2.2.5.9: Buttons
+  <a class="heading-link" href="#2259-buttons">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;div&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;button onclick=&#39;addToCart(\&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getInt(<span style="color:#a5d6ff">&#34;id&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>model<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getFloat(<span style="color:#a5d6ff">&#34;price&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;category&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, document.getElementById(\&#34;quantity\&#34;).value)&#39;&gt;Add to Cart&lt;/button&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;button onclick=&#39;buyNow(\&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getInt(<span style="color:#a5d6ff">&#34;id&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>model<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getFloat(<span style="color:#a5d6ff">&#34;price&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, \&#34;&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>rset.getString(<span style="color:#a5d6ff">&#34;category&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;\&#34;, document.getElementById(\&#34;quantity\&#34;).value)&#39;&gt;Buy Now&lt;/button&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li>First we create a new div container for 2 buttons, &lsquo;Add to Cart&rsquo; and &lsquo;Buy Now&rsquo;</li>
+<li><code>&lt;button onclick='addToCart(\&quot;&quot; + rset.getInt(&quot;id&quot;) + &quot;\&quot;, \&quot;&quot; + model + &quot;\&quot;, \&quot;&quot; + rset.getFloat(&quot;price&quot;) + &quot;\&quot;, \&quot;&quot; + rset.getString(&quot;category&quot;) + &quot;\&quot;, document.getElementById(\&quot;quantity\&quot;).value)'&gt;Add to Cart&lt;/button&gt;</code> - This seems quite complex, let&rsquo;s break it down part by part:</li>
+<li>
+<ul>
+<li>Outer element: <code>&lt;button&gt;   Buy Now &lt;/button&gt;</code> - This is a HTML element for a clickable button which says &lsquo;Add to Cart&rsquo; on the button</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>onclick=..</code> - Execute whatever JavaScript is inside the quote, in this case, would be addToCart(&hellip;)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>addToCart(\&quot;&quot; + rset.getInt(&quot;id&quot;) + &quot;\&quot;, \&quot;&quot; + model + &quot;\&quot;, \&quot;&quot; + rset.getFloat(&quot;price&quot;) + &quot;\&quot;, \&quot;&quot; + rset.getString(&quot;category&quot;) + &quot;\&quot;, document.getElementById(\&quot;quantity\&quot;).value)</code>:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>rset.getInt(&quot;id&quot;)</code> - Product ID</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>mode</code> - Product model, but we did the escape quote just now so no need to do it again here</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>rset.getFloat(&quot;price&quot;)</code> - Price of the product</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>rset.getString(&quot;category&quot;)</code>  -Category of the product</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li><code>document.getElementById(\&quot;quantity\&quot;).value</code> - Gets the current value made by the user in the quantity input box, remember the tag thing? :3</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Second button is legit the same thing but called &ldquo;Buy Now&rdquo; instead</li>
+</ul>
+</li>
+<li>The actual scripts for &ldquo;Add to Cart&rdquo; and &ldquo;Buy Now&rdquo; will be explained later</li>
+</ul>
+<h4 id="22510-back-button">
+  2.2.5.10: Back Button
+  <a class="heading-link" href="#22510-back-button">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String<span style="color:#6e7681"> </span>brandParam<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;brand&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">!=</span><span style="color:#6e7681"> </span><span style="color:#79c0ff">null</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">?</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;brand&#34;</span>)<span style="color:#6e7681"> </span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#34;</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>String<span style="color:#6e7681"> </span>categoryParam<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;category&#34;</span>)<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">!=</span><span style="color:#6e7681"> </span><span style="color:#79c0ff">null</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">?</span><span style="color:#6e7681"> </span>request.getParameter(<span style="color:#a5d6ff">&#34;category&#34;</span>)<span style="color:#6e7681"> </span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&#34;</span>;<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;button onclick=\&#34;window.location.href=&#39;dripquery?brand=&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>brandParam<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&amp;category=&#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>categoryParam<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&amp;sort=desc&#39;\&#34;&gt;Back to Products&lt;/button&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;/div&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;/div&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li><code>request.getParameter(&quot;brand&quot;)</code> - Gets the brand of the product ID from the URL</li>
+<li><code>.... != null ? request.getParameter(&quot;brand&quot;) : &quot;&quot;</code> - If the parameter is missing, default to an empty string</li>
+<li>Same stuff with categoryParam</li>
+<li><code>&lt;button onclick=\&quot;window.location.href='dripquery?brand=&quot; + brandParam + &quot;&amp;category=&quot; + categoryParam + &quot;&amp;sort=desc'\&quot;&gt;Back to Products&lt;/button&gt;</code>:</li>
+<li>
+<ul>
+<li>Create a clickable button called Back to Products, onclick to execute a JavaScript file</li>
+</ul>
+</li>
+<li><code>window.location.href</code> - Redirects users to a specific URL</li>
+<li>
+<ul>
+<li>A dynamically generated URL, cool huh&rdquo;:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ExampleL: &ldquo;http://localhost:9999/BagusDrip/dripproduct?id=18&amp;brand=Adidas&amp;category=Joggers/Shorts&rdquo;</li>
+</ul>
+</li>
+</ul>
+<h4 id="22511-product-not-found">
+  2.2.5.11: Product not Found
+  <a class="heading-link" href="#22511-product-not-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>}<span style="color:#6e7681"> </span><span style="color:#ff7b72">else</span><span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;h3&gt;Product not found!&lt;/h3&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;&lt;a href=&#39;index.html&#39;&gt;Back to Home&lt;/a&gt;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>If <code>rset.next()</code> returns false, print out &ldquo;Product not found!&rdquo; and links them back to &ldquo;index.html&rdquo;</p>
+<h4 id="22512-exceptions">
+  2.2.5.12: Exceptions
+  <a class="heading-link" href="#22512-exceptions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>}<span style="color:#6e7681"> </span><span style="color:#ff7b72">catch</span><span style="color:#6e7681"> </span>(SQLException<span style="color:#6e7681"> </span>ex)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Error: &#34;</span><span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span>ex.getMessage()<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>out.println(<span style="color:#a5d6ff">&#34;&lt;p&gt;Check Tomcat console for details.&lt;/p&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>ex.printStackTrace();<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Refer to the end part in ProductServlet in Part 1. Literally the same thing, and I also don&rsquo;t really get it, sorry. :3</p>
+<h4 id="22513-javascript-functions---add-to-cart">
+  2.2.5.13: JavaScript Functions - Add to Cart
+  <a class="heading-link" href="#22513-javascript-functions---add-to-cart">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;&lt;script&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;function addToCart(id, model, price, category, quantity) {&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  let cart = JSON.parse(localStorage.getItem(&#39;cart&#39;)) || [];&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  let existingItem = cart.find(item =&gt; item.id === id);&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  if (existingItem) {&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;    existingItem.quantity += parseInt(quantity);&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  } else {&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;    cart.push({ id: id, model: model, price: price, category: category, quantity: parseInt(quantity) });&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  }&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  localStorage.setItem(&#39;cart&#39;, JSON.stringify(cart));&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  alert(&#39;Added &#39; + quantity + &#39; &#39; + model + &#39; to cart!&#39;);&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;}&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Interesting, when we use the <code>&lt;script&gt;</code> tag, the browser will know that it is a JavaScript function.</p>
+<ul>
+<li>
+<p><code>&lt;script&gt;  ... &lt;/script&gt;</code> - Wrap your script body using the script element</p>
+</li>
+<li>
+<p><code>function addToCart(id, model, price, category, quantity)</code> - Define our Add to Cart function to take in 5 variables, id, model, price, category and quantity -&gt; important above</p>
+</li>
+<li>
+<p><code>let cart = JSON.parse(localStorage.getItem('cart')) || []</code>:</p>
+</li>
+<li>
+<ul>
+<li><code>localStorage</code> is the browser storage that stores stuff even after we refresh or close it</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>.getItem('cart')</code> means we try to load the cart from said storage</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>JSON.parse(...)</code> means we convert the store JSON string into a JavaScript object</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>|| []</code> means if nothing was found, aka nothing in cart, use an empty array</li>
+</ul>
+</li>
+<li>
+<p><code>let existingItem = cart.find(item =&gt; item.id === id)</code>:</p>
+</li>
+<li>
+<ul>
+<li><code>cart.find(...)</code> is a built-in JavaScript array function where it looks through every element in an array and returns the first one that matches your given conditions. If it does not find any that matches, return &ldquo;undefined&rdquo;</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>item =&gt; ...</code> is a very intuitive modern JavaScript thing called <em>arrow function</em> because of how short it is compared to how one would write a Java function. Essentially, <code>item</code> serves as a temporary variable that represents every single elements in the <code>cart</code> array as <code>.find()</code> checks one by one.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>item.id === id</code> is the condition we set for <code>.find()</code>. It compares the <code>id</code> of the current <code>item</code> with the <code>id</code> that was passed into the <code>addToCart</code> function.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>===</code> is a strict equality operator which checks if both value and the type are the same</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#ff7b72">if</span><span style="color:#6e7681"> </span>(existingItem)<span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span>existingItem.quantity<span style="color:#6e7681"> </span><span style="color:#ff7b72;font-weight:bold">+=</span><span style="color:#6e7681"> </span>parseInt(quantity);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681"> </span><span style="color:#ff7b72">else</span><span style="color:#6e7681"> </span>{<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span>cart.push({<span style="color:#6e7681"> </span>id:<span style="color:#6e7681"> </span>id,<span style="color:#6e7681"> </span>model:<span style="color:#6e7681"> </span>model,<span style="color:#6e7681"> </span>price:<span style="color:#6e7681"> </span>price,<span style="color:#6e7681"> </span>category:<span style="color:#6e7681"> </span>category,<span style="color:#6e7681"> </span>quantity:<span style="color:#6e7681"> </span>parseInt(quantity)<span style="color:#6e7681"> </span>});<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>}<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>After checking through every single elements in the array and found any item, we check to see if we have a matching item, then we run the if block</p>
+<ul>
+<li>
+<p><code>existingItem.quantity += parseInt(quantity)</code> - Only runs is there is an existing item:</p>
+</li>
+<li>
+<ul>
+<li>Takes the <code>quantity</code> of <code>existingItem</code> and adds the new quantity to it. Basically, if there&rsquo;s already a same item in the cart, just increase the quantity of the item.</li>
+</ul>
+</li>
+<li>
+<p>Else, we can&rsquo;t find a similar item in the cart. Then, we add a new object with the 5 properties as a new object to the cart array</p>
+</li>
+<li>
+<p><code>localStorage.setItem('cart', JSON.stringify(cart))</code>:</p>
+</li>
+<li>
+<ul>
+<li><code>.setItem</code> is a method from <code>localStorage</code> to store stuff in your browser&rsquo;s  storage.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>The &lsquo;cart&rsquo; here is the name we are giving to the data stored</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>JSON.stringify(cart)</code> basically is the data stored. However, <code>cart</code> is a JavaScript array, and <code>localStorage</code> only stores strings. That&rsquo;s why we did <code>JSON.stringify()</code> to convert the array and its content into a string.</li>
+</ul>
+</li>
+<li>
+<p><code>alert('Added ' + quantity + ' ' + model + ' to cart!')</code></p>
+</li>
+<li>
+<p><code>alert()</code> is a neat built-in browser function that shows a small pop-up dialog box with a message and an &ldquo;OK&rdquo; button.</p>
+</li>
+<li>
+<p>We basically just tell the user that we have added their quantity of their chosen product in their cart</p>
+</li>
+</ul>
+<h4 id="22514-javascript-functions---buy-now">
+  2.2.5.14: JavaScript Functions - Buy Now
+  <a class="heading-link" href="#22514-javascript-functions---buy-now">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>out.println(<span style="color:#a5d6ff">&#34;function buyNow(id, model, price, category, quantity) {&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  let cart = JSON.parse(localStorage.getItem(&#39;cart&#39;)) || [];&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  cart = [{ id: id, model: model, price: price, category: category, quantity: parseInt(quantity) }];&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  localStorage.setItem(&#39;cart&#39;, JSON.stringify(cart));&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;  window.location.href = &#39;cart.html&#39;;&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;}&#34;</span>);<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span>out.println(<span style="color:#a5d6ff">&#34;&lt;/script&gt;&#34;</span>);<span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Same as before, we define another function called &ldquo;buyNow&rdquo; that takes in 5 of the same arguments as before.</p>
+<ul>
+<li>However, the only difference in this code is:</li>
+<li><code>window.location.href = 'cart.html'</code> which takes us straight to the cart page to finish their purchase.</li>
+</ul>
+<p>As compared to the &ldquo;Add to Cart&rdquo; function, users can continue shopping while the the &ldquo;Buy Now&rdquo; function just goes to the checkout page immediately.</p>
 
   </article>
 </section>
