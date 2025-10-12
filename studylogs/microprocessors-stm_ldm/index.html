@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors STM_LDM · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  STM/LDM Instructions
+  
+    
+    Link to heading
+  
+
+
+
+They just mean Store and Load Multiple Instructions
+
+
+Quite similar to STR/LDR
+
+
+STM: store content of affected registers before branching to a subroutine or handling exception
+
+
+LDM: Stored values to be restored to the respective registers upon returning from a subroutine
+
+
+Good stuffs: A single STM/LDM instruction can load / store up to 15 registers instead of using 15 separate instructions">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors STM_LDM">
+  <meta name="twitter:description" content="STM/LDM InstructionsLink to headingThey just mean Store and Load Multiple Instructions
+Quite similar to STR/LDR
+STM: store content of affected registers before branching to a subroutine or handling exception
+LDM: Stored values to be restored to the respective registers upon returning from a subroutine
+Good stuffs: A single STM/LDM instruction can load / store up to 15 registers instead of using 15 separate instructions">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-stm_ldm/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors STM_LDM">
+  <meta property="og:description" content="STM/LDM InstructionsLink to headingThey just mean Store and Load Multiple Instructions
+Quite similar to STR/LDR
+STM: store content of affected registers before branching to a subroutine or handling exception
+LDM: Stored values to be restored to the respective registers upon returning from a subroutine
+Good stuffs: A single STM/LDM instruction can load / store up to 15 registers instead of using 15 separate instructions">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-10-08T09:42:27+08:00">
+    <meta property="article:modified_time" content="2025-10-08T09:42:27+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-stm_ldm/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-stm_ldm/">
+          Microprocessors STM_LDM
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="stmldm-instructions">
+  STM/LDM Instructions
+  <a class="heading-link" href="#stmldm-instructions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>
+<p>They just mean Store and Load Multiple Instructions</p>
+</li>
+<li>
+<p>Quite similar to STR/LDR</p>
+</li>
+<li>
+<p>STM: store content of affected registers before branching to a subroutine or handling exception</p>
+</li>
+<li>
+<p>LDM: Stored values to be restored to the respective registers upon returning from a subroutine</p>
+</li>
+<li>
+<p>Good stuffs: A single STM/LDM instruction can load / store up to 15 registers instead of using 15 separate instructions</p>
+</li>
+<li>
+<p>Shorter execution time</p>
+</li>
+</ul>
+<p><strong><em>For both LDM and STM, the lowest register will always be loaded from the lowest address, regardless of the stack operations</em></strong></p>
+<h2 id="stm-syntax">
+  STM Syntax
+  <a class="heading-link" href="#stm-syntax">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><code>STM{&lt;cond&gt;}&lt;address-mode&gt; &lt;Rn&gt;{!},&lt;reg-list&gt;{^}</code></p>
+<ul>
+<li><code>{&lt;cond&gt;}</code> is an optional condition</li>
+<li><code>&lt;address-mode&gt;</code> specifies the addressing mode</li>
+<li><code>&lt;Rn&gt;</code> is the base register</li>
+<li><code>&lt;reg-list&gt;</code> is a comma delimited list of registers</li>
+</ul>
+<p>All of these sounds like jargons, let&rsquo;s look at some examples:</p>
+<h3 id="example-1-stm-r9-r4-r1-r3">
+  Example 1: <code>STM r9, {r4, r1-r3}</code>
+  <a class="heading-link" href="#example-1-stm-r9-r4-r1-r3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>Given that r9 holds the base address of <code>0x40000100</code></p>
+</li>
+<li>
+<p>This lines stores the content of register r1 to r4 into the memory address pointed by r9</p>
+</li>
+<li>
+<p>This single line is equivalent to 4 different instructions of:</p>
+</li>
+<li>
+<p><code>STR r1, [r9, #0]</code>, address at 0x40000100</p>
+</li>
+<li>
+<p><code>STR r2, [r9, #4]</code>, address at = 0x40000104</p>
+</li>
+<li>
+<p><code>STR r3, [r9, #8]</code>, address at = 0x40000108</p>
+</li>
+<li>
+<p><code>STR r4, [r9, #12]</code>, address at 0x4000010C</p>
+</li>
+<li>
+<p>r9 will remain unchanged after execution of the instruction</p>
+</li>
+</ul>
+<h3 id="demo-code-for-stm">
+  Demo Code for STM
+  <a class="heading-link" href="#demo-code-for-stm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">STMExample</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ram_base</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>      <span style="color:#8b949e;font-style:italic">; r9 = 0x40000100
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">STM</span>     <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r1-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><figure class="center"><img src="https://i.imgur.com/ZZ9kgP2.png"
+    alt="STMexample">
+</figure>
+
+<ul>
+<li>As you can see from the memory column, the content of low register will transfer to low memory address.</li>
+</ul>
+<h2 id="ldm-syntax">
+  LDM Syntax
+  <a class="heading-link" href="#ldm-syntax">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><code>LDM{&lt;cond&gt;}&lt;address-mode&gt; &lt;Rn&gt;{!},&lt;reg-list&gt;{^}</code></p>
+<ul>
+<li><code>{&lt;cond&gt;}</code> is an optional condition</li>
+<li><code>&lt;address-mode&gt;</code> specifies the addressing mode</li>
+<li><code>&lt;Rn&gt;</code> is the base register</li>
+<li><code>&lt;reg-list&gt;</code> is a comma delimited list of registers</li>
+</ul>
+<p>Same shit as before, confusing as hell, let&rsquo;s look at some examples:</p>
+<h3 id="example-1-ldm-r9-r4-r1-r3">
+  Example 1: LDM r9, {r4, r1-r3}
+  <a class="heading-link" href="#example-1-ldm-r9-r4-r1-r3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>Load whatever is r9 address memory into register 1 to 4</p>
+</li>
+<li>
+<p>Same as writing 4 instructions:</p>
+</li>
+<li>
+<p><code>LDR r1, [r9, #0]</code>, address at 0x40000100</p>
+</li>
+<li>
+<p><code>LDR r2, [r9, #4]</code>, address at 0x40000104</p>
+</li>
+<li>
+<p><code>LDR r3, [r9, #8]</code>, address at 0x40000108</p>
+</li>
+<li>
+<p><code>LDR r4, [r9, #12]</code>, address at 0x4000010C</p>
+</li>
+</ul>
+<h3 id="stm-demo-code">
+  STM Demo Code
+  <a class="heading-link" href="#stm-demo-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">LDMExample</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">LDR</span>		<span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">LDM</span>		<span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r1-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>	<span style="color:#79c0ff;font-weight:bold">B</span>		<span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">ramArea</span>, <span style="color:#79c0ff;font-weight:bold">DATA</span>, <span style="color:#79c0ff;font-weight:bold">READWRITE</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">SPACE</span> <span style="color:#a5d6ff">0x100</span>		<span style="color:#8b949e;font-style:italic">; leave a space of 0x100 bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">stack</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">DCD</span> <span style="color:#a5d6ff">1</span>,<span style="color:#a5d6ff">2</span>,<span style="color:#a5d6ff">3</span>,<span style="color:#a5d6ff">4</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><p>Do note that you need an initialization file that has the values inside the memory first:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>MAP 0x40000000, 0x40002000 EXEC READ WRITE
+</span></span><span style="display:flex;"><span>E LONG 0x40000100 = 1, 2, 3, 4
+</span></span></code></pre></div><ul>
+<li>Right click on Target 1</li>
+<li>Select &ldquo;Options for target &lsquo;Target 1&rsquo;&rdquo;</li>
+<li>Switch over to the &ldquo;Debug&rdquo; tab</li>
+<li>Under Initialization File, click on the three dots and look for the directory where you saved the initialization file</li>
+</ul>
+<h3 id="differences">
+  Differences
+  <a class="heading-link" href="#differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Code</th>
+          <th><code>STMExample</code></th>
+          <th><code>LDMExample</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Direction</td>
+          <td>Registers → Memory</td>
+          <td>Memory → Registers</td>
+      </tr>
+      <tr>
+          <td>Instruction</td>
+          <td><code>STM</code> (Store Multiple)</td>
+          <td><code>LDM</code> (Load Multiple)</td>
+      </tr>
+      <tr>
+          <td>Effect</td>
+          <td>Saves register contents into memory</td>
+          <td>Loads memory contents into registers</td>
+      </tr>
+  </tbody>
+</table>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
