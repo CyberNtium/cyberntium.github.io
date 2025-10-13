@@ -3,7 +3,7 @@
 
 <head>
   <title>
-  Microprocessors STM_LDM · cyberntium
+  Microprocessors STM, LDM &amp; Stack · cyberntium
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Microprocessors STM_LDM">
+  <meta name="twitter:title" content="Microprocessors STM, LDM & Stack">
   <meta name="twitter:description" content="STM/LDM InstructionsLink to headingThey just mean Store and Load Multiple Instructions
 Quite similar to STR/LDR
 STM: store content of affected registers before branching to a subroutine or handling exception
@@ -49,7 +49,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
 
 <meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-stm_ldm/">
   <meta property="og:site_name" content="cyberntium">
-  <meta property="og:title" content="Microprocessors STM_LDM">
+  <meta property="og:title" content="Microprocessors STM, LDM & Stack">
   <meta property="og:description" content="STM/LDM InstructionsLink to headingThey just mean Store and Load Multiple Instructions
 Quite similar to STR/LDR
 STM: store content of affected registers before branching to a subroutine or handling exception
@@ -179,7 +179,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
     <header>
       <h1 class="title">
         <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-stm_ldm/">
-          Microprocessors STM_LDM
+          Microprocessors STM, LDM &amp; Stack
         </a>
       </h1>
     </header>
@@ -212,6 +212,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
 </li>
 </ul>
 <p><strong><em>For both LDM and STM, the lowest register will always be loaded from the lowest address, regardless of the stack operations</em></strong></p>
+<hr>
 <h2 id="stm-syntax">
   STM Syntax
   <a class="heading-link" href="#stm-syntax">
@@ -288,6 +289,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
 <ul>
 <li>As you can see from the memory column, the content of low register will transfer to low memory address.</li>
 </ul>
+<hr>
 <h2 id="ldm-syntax">
   LDM Syntax
   <a class="heading-link" href="#ldm-syntax">
@@ -363,6 +365,7 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
 <li>Switch over to the &ldquo;Debug&rdquo; tab</li>
 <li>Under Initialization File, click on the three dots and look for the directory where you saved the initialization file</li>
 </ul>
+<hr>
 <h3 id="differences">
   Differences
   <a class="heading-link" href="#differences">
@@ -396,6 +399,358 @@ Good stuffs: A single STM/LDM instruction can load / store up to 15 registers in
       </tr>
   </tbody>
 </table>
+<hr>
+<h1 id="addressing-modes-for-ldm--stm">
+  Addressing Modes for LDM &amp; STM
+  <a class="heading-link" href="#addressing-modes-for-ldm--stm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Recall the syntax:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>General Syntax</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>LDM</td>
+          <td><code>LDM{&lt;cond&gt;}&lt;address-mode&gt; &lt;Rn&gt;{!},&lt;reg-list&gt;{^}</code></td>
+      </tr>
+      <tr>
+          <td>STM</td>
+          <td><code>STM{&lt;cond&gt;}&lt;address-mode&gt; &lt;Rn&gt;{!},&lt;reg-list&gt;{^}</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>So far we have discussed through the base register, <code>Rn</code> and the register list <code>reg-list</code>.<br>
+Now let&rsquo;s continue with the addressing modes:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Addressing Mode</th>
+          <th>Description</th>
+          <th>Stack Growth Direction</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>IA</strong></td>
+          <td>Increment After</td>
+          <td>Grows <strong>upward</strong></td>
+      </tr>
+      <tr>
+          <td><strong>IB</strong></td>
+          <td>Increment Before</td>
+          <td>Grows <strong>upward</strong></td>
+      </tr>
+      <tr>
+          <td><strong>DA</strong></td>
+          <td>Decrement After</td>
+          <td>Grows <strong>downward</strong></td>
+      </tr>
+      <tr>
+          <td><strong>DB</strong></td>
+          <td>Decrement Before</td>
+          <td>Grows <strong>downward</strong></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="stmdb-example">
+  STMDB Example
+  <a class="heading-link" href="#stmdb-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="example-stmdb-r9-r4-r1-r2-r3">
+  Example: STMDB r9, {r4, r1, r2-r3}
+  <a class="heading-link" href="#example-stmdb-r9-r4-r1-r2-r3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><code>STMDB</code> stands for <code>STM Decrement Before</code>, meaning that r9 is decremented first, before storing each register content into the memory.<br>
+Stores content of register r1-r4 into memory address pointed by r9<br>
+Given that r9 holds the address <code>0x40000100</code><br>
+The difference is that,</p>
+<p>Same thing as 4 separated STR operations:</p>
+<ul>
+<li><code>STR r1, [r9, #-16]</code></li>
+<li><code>STR r2, [r9, #-12]</code></li>
+<li><code>STR r3, [r9, #-8]</code></li>
+<li><code>STR r4, [r9, #-4]</code></li>
+</ul>
+<h3 id="demo-code">
+  Demo Code
+  <a class="heading-link" href="#demo-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">STMDBExample</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMDB</span>   <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r2-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Registers</th>
+          <th>Value</th>
+          <th>Memory Address</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r9</td>
+          <td>0x40000100</td>
+          <td>0x40000100</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>r4</td>
+          <td>4</td>
+          <td>0x400000FC</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>r3</td>
+          <td>3</td>
+          <td>0x400000F8</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>r2</td>
+          <td>2</td>
+          <td>0x400000F4</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>r1</td>
+          <td>1</td>
+          <td>0x400000F0</td>
+          <td>1</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>As we can see, initial start point is pointed at <code>0x40000100</code> by r9.</li>
+<li>However, since its <code>STM Decrement Before</code>, we decrement 4 bytes down to <code>0x400000FC</code> before storing. And same stuff with the rest of the register.</li>
+<li>Do keep in mind that any STM and LDM operations still follows the convention of lower register occupies lower address.</li>
+</ul>
+<hr>
+<h2 id="ldmda-example">
+  LDMDA Example:
+  <a class="heading-link" href="#ldmda-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="example-ldmda-r9-r4-r1-r2-r3">
+  Example: LDMDA r9, {r4, r1, r2, r3}
+  <a class="heading-link" href="#example-ldmda-r9-r4-r1-r2-r3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><code>LDMDA</code> stands for <code>LDM Decrement After</code>, meaning it will only decrement after loading the content from memory into register</li>
+<li>Load content from memory pointed by r9 into registers r1 to r4</li>
+<li>Same as doing 4 separated instructions using LDR</li>
+<li>
+<ul>
+<li><code>LDR r1, [r9, #-12]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r2, [r9, #-8]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r3, [r9, #-4]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r4, [r9, #0]</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="demo-code-1">
+  Demo Code
+  <a class="heading-link" href="#demo-code-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">LDMDAExample</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDMDA</span>   <span style="color:#79c0ff;font-weight:bold">r9</span>, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">ramArea</span>, <span style="color:#79c0ff;font-weight:bold">DATA</span>, <span style="color:#79c0ff;font-weight:bold">READWRITE</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SPACE</span> <span style="color:#a5d6ff">0xF4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stack</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">DCD</span> <span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">2</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">4</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Registers</th>
+          <th>Value</th>
+          <th>Memory Address</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r9</td>
+          <td>0x40000100</td>
+          <td>0x40000100</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>r4</td>
+          <td>4</td>
+          <td>0x400000FC</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>r3</td>
+          <td>3</td>
+          <td>0x400000F8</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>r2</td>
+          <td>2</td>
+          <td>0x400000F4</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>r1</td>
+          <td>1</td>
+          <td>0x400000F0</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="stack">
+  STACK
+  <a class="heading-link" href="#stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>
+<p>Usually used to handle a call to a subroutine</p>
+</li>
+<li>
+<ul>
+<li>Types, <em><strong>ascending</strong></em> and <strong><em>descending</em></strong> stack, <strong><em>Full</em></strong> or <strong><em>Empty</em></strong> (which we can refer to the sp, Stack Pointer)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Basic Operations, <strong>PUSH</strong> = store, <strong>POP</strong> = load</li>
+</ul>
+</li>
+<li>
+<p>Stack is only READWRITE memory, used to store data temporarily</p>
+</li>
+<li>
+<p>However, ARM does not have specific PUSH and POP operations, instead we have to use STM and LDM with register r13 as the base register</p>
+</li>
+<li>
+<p>r13 is the stack point (sp) which points to the address of the:</p>
+</li>
+<li>
+<ul>
+<li>next empty word (Empty)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>last pushed word (Full)</li>
+</ul>
+</li>
+</ul>
+<h2 id="type-of-stack">
+  Type of Stack
+  <a class="heading-link" href="#type-of-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Full Descending</td>
+          <td>FD</td>
+      </tr>
+      <tr>
+          <td>Full Ascending</td>
+          <td>FA</td>
+      </tr>
+      <tr>
+          <td>Empty Descending</td>
+          <td>ED</td>
+      </tr>
+      <tr>
+          <td>Empty Ascending</td>
+          <td>DA</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Initially, all stack must be empty</li>
+<li><strong>Full</strong> and <strong>Empty</strong> here do not refer to a full or empty stack, instead, it refers to where the sp is pointing at</li>
+<li>Full &ndash;&gt; sp is pointing at the last word pushed into the stack</li>
+<li>Empty &ndash;&gt; sp is pointing at the next empty</li>
+</ul>
+<figure class="center"><img src="https://i.imgur.com/ujpvyxu.jpeg"
+    alt="sp">
+</figure>
+
+<hr>
+<h3 id="full-descending-fd-stack">
+  Full Descending (FD) Stack
+  <a class="heading-link" href="#full-descending-fd-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 
   </article>
 </section>
