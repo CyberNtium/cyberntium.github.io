@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors Subroutines · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Subroutines
+  
+    
+    Link to heading
+  
+
+
+If you are familiar to class in OOP languages like Java or C&#43;&#43;, subroutine is very similar to it.
+Subroutines are basically reusing code to simplify your code structure. You can kinda think of it as a mini-program within your program
+
+
+  Requirements For Subroutines
+  
+    
+    Link to heading
+  
+
+
+We must use Stack to save and restore affected registers and return address
+Our trusty LDM and STM to save and restore
+We can call a subroutine using the BL, &ldquo;Branch and Link&rdquo; instruction:
+
+
+We then first need to transfer the return address to the Link Register, r14, also known as &ldquo;lr&rdquo;
+
+
+
+
+lr = pc - 4, pc is program counter
+
+
+
+
+We then transfer the branch target (starting address of subroutine) to the program counter, pc
+
+
+
+
+
+
+
+  Branch Link (BL) Instruction
+  
+    
+    Link to heading
+  
+
+
+As mentioned above, to call a subroutine, we usually use a Branch Link, BL instruction
+BL label - where label is the target address of the first instruction of the subroutine
+Actions by BL:
+
+
+Copy the return address, as in the the address of the instruction immeddiate after the &ldquo;BL Subroutine1&rdquo; instruction to link register, lr (pc - 4)
+
+
+
+
+Copy the target address of the subroutine (first line) to program counter, pc
+
+
+
+
+
+  Subroutine Example
+  
+    
+    Link to heading
+  
+
+        AREA simpleSub, CODE, READONLY
+        ENTRY
+
+        MOV     r0, #1
+        BL      simple
+        MOV     r2, #2
+
+stop    B       stop
+
+simple  
+        ADD     r3, r2, #1
+        MOV     pc, lr
+        ; or we can do &#39;BX lr&#39;
+
+        END
+
+Below is the table form of the instruction with their respective instructions:
+
+
+  
+      
+          Address
+          Instructions
+      
+  
+  
+      
+          0x0
+          MOV r0, #1
+      
+      
+          0x4
+          BL simple
+      
+      
+          0x8
+          MOV r2, #2
+      
+      
+          0xC
+          stop B stop
+      
+      
+          0x10
+          simple ADD r3, r2, #1
+      
+      
+          0x14
+          MOV pc, lr
+      
+      
+          0x1C
+          
+      
+  
+
+
+
+Basically all we need to know is, pc will also point at the next instruction that will be executed.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors Subroutines">
+  <meta name="twitter:description" content="SubroutinesLink to headingIf you are familiar to class in OOP languages like Java or C&#43;&#43;, subroutine is very similar to it. Subroutines are basically reusing code to simplify your code structure. You can kinda think of it as a mini-program within your program Requirements For SubroutinesLink to headingWe must use Stack to save and restore affected registers and return address Our trusty LDM and STM to save and restore We can call a subroutine using the BL, “Branch and Link” instruction: We then first need to transfer the return address to the Link Register, r14, also known as “lr” lr = pc - 4, pc is program counter We then transfer the branch target (starting address of subroutine) to the program counter, pc Branch Link (BL) InstructionLink to headingAs mentioned above, to call a subroutine, we usually use a Branch Link, BL instruction BL label - where label is the target address of the first instruction of the subroutine Actions by BL: Copy the return address, as in the the address of the instruction immeddiate after the “BL Subroutine1” instruction to link register, lr (pc - 4) Copy the target address of the subroutine (first line) to program counter, pc Subroutine ExampleLink to headingAREA simpleSub, CODE, READONLY ENTRY MOV r0, #1 BL simple MOV r2, #2 stop B stop simple ADD r3, r2, #1 MOV pc, lr ; or we can do &#39;BX lr&#39; END Below is the table form of the instruction with their respective instructions: Address Instructions 0x0 MOV r0, #1 0x4 BL simple 0x8 MOV r2, #2 0xC stop B stop 0x10 simple ADD r3, r2, #1 0x14 MOV pc, lr 0x1C Basically all we need to know is, pc will also point at the next instruction that will be executed.">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-subroutines/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors Subroutines">
+  <meta property="og:description" content="SubroutinesLink to headingIf you are familiar to class in OOP languages like Java or C&#43;&#43;, subroutine is very similar to it. Subroutines are basically reusing code to simplify your code structure. You can kinda think of it as a mini-program within your program Requirements For SubroutinesLink to headingWe must use Stack to save and restore affected registers and return address Our trusty LDM and STM to save and restore We can call a subroutine using the BL, “Branch and Link” instruction: We then first need to transfer the return address to the Link Register, r14, also known as “lr” lr = pc - 4, pc is program counter We then transfer the branch target (starting address of subroutine) to the program counter, pc Branch Link (BL) InstructionLink to headingAs mentioned above, to call a subroutine, we usually use a Branch Link, BL instruction BL label - where label is the target address of the first instruction of the subroutine Actions by BL: Copy the return address, as in the the address of the instruction immeddiate after the “BL Subroutine1” instruction to link register, lr (pc - 4) Copy the target address of the subroutine (first line) to program counter, pc Subroutine ExampleLink to headingAREA simpleSub, CODE, READONLY ENTRY MOV r0, #1 BL simple MOV r2, #2 stop B stop simple ADD r3, r2, #1 MOV pc, lr ; or we can do &#39;BX lr&#39; END Below is the table form of the instruction with their respective instructions: Address Instructions 0x0 MOV r0, #1 0x4 BL simple 0x8 MOV r2, #2 0xC stop B stop 0x10 simple ADD r3, r2, #1 0x14 MOV pc, lr 0x1C Basically all we need to know is, pc will also point at the next instruction that will be executed.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-10-13T14:30:31+08:00">
+    <meta property="article:modified_time" content="2025-10-13T14:30:31+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-subroutines/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-subroutines/">
+          Microprocessors Subroutines
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="subroutines">
+  Subroutines
+  <a class="heading-link" href="#subroutines">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>If you are familiar to class in OOP languages like Java or C++, subroutine is very similar to it.</li>
+<li>Subroutines are basically reusing code to simplify your code structure. You can kinda think of it as a mini-program within your program</li>
+</ul>
+<h2 id="requirements-for-subroutines">
+  Requirements For Subroutines
+  <a class="heading-link" href="#requirements-for-subroutines">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>We must use Stack to save and restore affected registers and return address</li>
+<li>Our trusty <code>LDM</code> and <code>STM</code> to save and restore</li>
+<li>We can call a subroutine using the <code>BL</code>, &ldquo;Branch and Link&rdquo; instruction:</li>
+<li>
+<ul>
+<li>We then first need to transfer the return address to the Link Register, r14, also known as &ldquo;lr&rdquo;</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>lr = pc - 4, pc is program counter</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We then transfer the branch target (starting address of subroutine) to the program counter, pc</li>
+</ul>
+</li>
+</ul>
+<figure class="-&#34;center&#34;"><img src="https://i.imgur.com/cKyzTPe.jpeg"
+    alt="subroutine">
+</figure>
+
+<h3 id="branch-link-bl-instruction">
+  Branch Link (BL) Instruction
+  <a class="heading-link" href="#branch-link-bl-instruction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>As mentioned above, to call a subroutine, we usually use a Branch Link, BL instruction</li>
+<li><code>BL label</code> - where <strong><em>label</em></strong> is the target address of the first instruction of the subroutine</li>
+<li>Actions by BL:</li>
+<li>
+<ul>
+<li>Copy the return address, as in the the address of the instruction immeddiate <em>after</em> the &ldquo;BL Subroutine1&rdquo; instruction to link register, lr (pc - 4)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Copy the target address of the subroutine (first line) to program counter, pc</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="subroutine-example">
+  Subroutine Example
+  <a class="heading-link" href="#subroutine-example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">simpleSub</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">simple</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">simple</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">pc</span>, <span style="color:#79c0ff;font-weight:bold">lr</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b949e;font-style:italic">; or we can do &#39;BX lr&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>Below is the table form of the instruction with their respective instructions:</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address</th>
+          <th>Instructions</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x0</td>
+          <td>MOV r0, #1</td>
+      </tr>
+      <tr>
+          <td>0x4</td>
+          <td>BL simple</td>
+      </tr>
+      <tr>
+          <td>0x8</td>
+          <td>MOV r2, #2</td>
+      </tr>
+      <tr>
+          <td>0xC</td>
+          <td>stop B stop</td>
+      </tr>
+      <tr>
+          <td>0x10</td>
+          <td>simple ADD r3, r2, #1</td>
+      </tr>
+      <tr>
+          <td>0x14</td>
+          <td>MOV pc, lr</td>
+      </tr>
+      <tr>
+          <td>0x1C</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>Basically all we need to know is, pc will also point at the next instruction that will be executed.</p>
+</li>
+<li>
+<p>When we execute <code>BL simple</code> at <code>0x4</code>, pc will point to the address of the first line of <code>simple</code> which is <code>0x10</code>, meaning the next line ARM will execute is at <code>0x10</code></p>
+</li>
+<li>
+<p>At the same time, the instruction immediate after <code>BL simple</code> at <code>0x8</code> will be stored in lr. This will serve as the returning address for pc.</p>
+</li>
+<li>
+<p>After going through the subroutine&rsquo;s body, we end with <code>MOV pc, lr</code> basically copying the returning address to pc, meaning the next instruction will be back at the main code.</p>
+</li>
+</ul>
+<h2 id="nested-subroutines-">
+  Nested Subroutines ?
+  <a class="heading-link" href="#nested-subroutines-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<blockquote>
+<p>What if we have another subroutine nested within the first one? Will the pc and lr still work as intended?</p></blockquote>
+<figure class="center"><img src="https://i.imgur.com/klHEVcE.jpeg"
+    alt="nestedSubroutine">
+</figure>
+
+<ul>
+<li>As we can see, when we call the first subroutine, the initial address that <code>lr</code> holds is the address for the instruction immediately after the <code>BL sub1</code></li>
+<li>In Sub1 however, the moment we call the 2nd subroutine, we will override the initial <code>lr</code> value, and now <code>lr</code> points to the immediately instruction after <code>BL sub2</code>. Thus, we can never go back to main, resulting with an endless loop</li>
+</ul>
+<h3 id="correct-implementation">
+  Correct Implementation
+  <a class="heading-link" href="#correct-implementation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<figure class="center"><img src="https://i.imgur.com/sTBsvH8.jpeg"
+    alt="CorrectNestedSubroutine">
+</figure>
+
+<ul>
+<li>When we call the first subroutine, everything goes normally with <code>lr</code> and <code>pc</code></li>
+<li>The moment we enter Sub1, we need to store the initial <code>lr</code> pointed address into a stack</li>
+<li>Then we do the nested stuff, and come back to Sub1</li>
+<li>Now, we need to load the store <code>lr</code> pointed address into <code>pc</code>, so that <code>pc</code> can point back at main.</li>
+</ul>
+<h2 id="passing-parameters-through-registers">
+  Passing Parameters Through Registers
+  <a class="heading-link" href="#passing-parameters-through-registers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">PassParamatersRegister</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">main</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x00012340</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#0xA
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">shiftfunction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>            <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">shiftfunction</span>   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#79c0ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVEQ</span>   <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">LSL</span> <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVNE</span>   <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">LSR</span> <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><p>This is a weird ass example from the lecture notes, I do not particularly enjoy it but it&rsquo;s good to include here I guess:</p>
+<ul>
+<li>The only thing we need to focus on is the <code>r4</code> value before <code>BL</code> and after <code>BL</code>, and also <code>r3</code></li>
+<li>The moment we enter the subroutine, we do:</li>
+<li>
+<ul>
+<li><code>STMDB sp!, {r4, lr}</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We need to store <code>lr</code> because that&rsquo;s the returning address</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We also need to store previous the <code>r4</code> value because we will be using the register again in the subroutine.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Meaning, if we don&rsquo;t store the previous <code>r4</code> value, it will be overwritten.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MOV r4, #0</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>As such, <code>r4</code> value is now changed.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We continue about whatever is the subroutine body</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDMFD sp!, {r4, pc}</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Load the returning address of <code>lr</code> into <code>pc</code> because we need to go back to main</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We also need to load the value initial <code>r4</code> back to current <code>r4</code></li>
+</ul>
+</li>
+</ul>
+<figure class="center"><img src="https://i.imgur.com/kTGRBLN.png"
+    alt="register">
+</figure>
+
+<ul>
+<li>As we can see, after running the entire thing, r4 still remains the same since we use a stack to retain its value</li>
+<li>We can also see that register initialise inside a subroutine can be pass out into main, that&rsquo;s why we can see the shifted <code>0x00123400</code> in r3</li>
+</ul>
+<h2 id="passing-parameters-through-stack">
+  Passing Parameters Through Stack
+  <a class="heading-link" href="#passing-parameters-through-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">PassParaStack</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">main</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#0     
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDr</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x00001234</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">shiftFunc</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>            <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">shiftfunc</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r7</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#20]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#24]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r6</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#28]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVEQ</span>   <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">LSL</span> <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVNE</span>   <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">LSR</span> <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STR</span>     <span style="color:#79c0ff;font-weight:bold">r7</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#32]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r7</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div>
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
