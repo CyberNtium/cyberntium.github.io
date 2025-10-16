@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  R Programming - CART · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Classification and Regression Tree (CART) - Continuous Y
+  
+    
+    Link to heading
+  
+
+We will be using the mtcars built in RStudio for this part.
+
+  Import Libraries and Dataset
+  
+    
+    Link to heading
+  
+
+library(rpart)
+library(rpart.plot)
+
+data(mtcars)
+
+
+rpart full form is Recursive partitioning and Regression Trees - This builds decision trees
+
+
+rpart.plot is used to plot out trees in a graphical form">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="R Programming - CART">
+  <meta name="twitter:description" content="Classification and Regression Tree (CART) - Continuous YLink to headingWe will be using the mtcars built in RStudio for this part.
+Import Libraries and DatasetLink to headinglibrary(rpart) library(rpart.plot) data(mtcars) rpart full form is Recursive partitioning and Regression Trees - This builds decision trees
+rpart.plot is used to plot out trees in a graphical form">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/rprogramming_cart/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="R Programming - CART">
+  <meta property="og:description" content="Classification and Regression Tree (CART) - Continuous YLink to headingWe will be using the mtcars built in RStudio for this part.
+Import Libraries and DatasetLink to headinglibrary(rpart) library(rpart.plot) data(mtcars) rpart full form is Recursive partitioning and Regression Trees - This builds decision trees
+rpart.plot is used to plot out trees in a graphical form">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-10-15T17:46:59+08:00">
+    <meta property="article:modified_time" content="2025-10-15T17:46:59+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/rprogramming_cart/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/rprogramming_cart/">
+          R Programming - CART
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="classification-and-regression-tree-cart---continuous-y">
+  Classification and Regression Tree (CART) - Continuous Y
+  <a class="heading-link" href="#classification-and-regression-tree-cart---continuous-y">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>We will be using the <code>mtcars</code> built in RStudio for this part.</p>
+<h2 id="import-libraries-and-dataset">
+  Import Libraries and Dataset
+  <a class="heading-link" href="#import-libraries-and-dataset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">library</span>(rpart)
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">library</span>(rpart.plot)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">data</span>(mtcars)
+</span></span></code></pre></div><ul>
+<li>
+<p><code>rpart</code> full form is Recursive partitioning and Regression Trees - This builds decision trees</p>
+</li>
+<li>
+<p><code>rpart.plot</code> is used to plot out trees in a graphical form</p>
+</li>
+<li>
+<p><code>data(mtcars)</code> for importing the &ldquo;mtcars&rdquo; dataset</p>
+</li>
+</ul>
+<h2 id="building-the-cart-model">
+  Building the Cart Model
+  <a class="heading-link" href="#building-the-cart-model">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">set.seed</span>(<span style="color:#a5d6ff">2014</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cart1 <span style="color:#ff7b72;font-weight:bold">&lt;-</span> <span style="color:#d2a8ff;font-weight:bold">rpart</span>(mpg <span style="color:#ff7b72;font-weight:bold">~</span> ., data <span style="color:#ff7b72;font-weight:bold">=</span> mtcars, method <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">&#34;anova&#34;</span>, 
+</span></span><span style="display:flex;"><span>                control <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#d2a8ff;font-weight:bold">rpart.control</span>(minsplit <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">2</span>, cp <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>))
+</span></span></code></pre></div><ul>
+<li><code>set.seed(2014)</code> - This is to ensure producibility of the results</li>
+<li><code>cart1 &lt;- rpart</code> - We first call the rpart function and store it in a variable named &ldquo;cart1&rdquo;</li>
+<li><code>mpg ~ .</code> basically means &ldquo;Predict <em>mpg</em> (Miles per Gallon) using all the other variables in the dataset. The period ( <em>.</em> ) is just a shorthand for &ldquo;all other columns of variables&rdquo;</li>
+<li><code>data = mtcars</code> - Use the <code>mtcars</code> dataset</li>
+<li><code>method = &quot;anova&quot;</code> - For all Y variables that are continuous, we have to use the &ldquo;anova&rdquo; method for CART as &ldquo;anova&rdquo; stands for Analysis of Variance (ANOVA)</li>
+<li><code>control = rpart.control()</code> - Controls specific parameters for tree-building process</li>
+<li><code>minsplit = 2</code> - This sets the minimum number of observations (cars) required in a node for the CART algorithm to do a split.</li>
+<li><code>cp - 0</code> - Complexity Parameter. Setting to zero means that the tree will ignore any cost-complexity prunning and just build into the largest possible tree until theres&rsquo; no further split or any improvement</li>
+</ul>
+<h2 id="results-and-tree">
+  Results and Tree
+  <a class="heading-link" href="#results-and-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Regression tree:
+</span></span><span style="display:flex;"><span>rpart(formula = mpg ~ ., data = mtcars, method = &#34;anova&#34;, control = rpart.control(minsplit = 2, 
+</span></span><span style="display:flex;"><span>    cp = 0))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Variables actually used in tree construction:
+</span></span><span style="display:flex;"><span>[1] cyl  disp drat hp   qsec vs   wt  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Root node error: 1126/32 = 35.189
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n= 32 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>           CP nsplit  rel error  xerror     xstd
+</span></span><span style="display:flex;"><span>1  6.5266e-01      0 1.0000e+00 1.06389 0.252198
+</span></span><span style="display:flex;"><span>2  1.9470e-01      1 3.4734e-01 0.68629 0.160870
+</span></span><span style="display:flex;"><span>3  4.5774e-02      2 1.5264e-01 0.47604 0.119551
+</span></span><span style="display:flex;"><span>4  2.5328e-02      3 1.0686e-01 0.44324 0.117846
+</span></span><span style="display:flex;"><span>5  2.3250e-02      4 8.1534e-02 0.40281 0.115329
+</span></span><span style="display:flex;"><span>6  1.2488e-02      5 5.8285e-02 0.38559 0.106955
+</span></span><span style="display:flex;"><span>7  1.2149e-02      6 4.5796e-02 0.35818 0.105197
+</span></span><span style="display:flex;"><span>8  1.1647e-02      7 3.3648e-02 0.34943 0.105751
+</span></span><span style="display:flex;"><span>9  9.6700e-03      8 2.2000e-02 0.34357 0.104871
+</span></span><span style="display:flex;"><span>10 1.8010e-03      9 1.2330e-02 0.33605 0.112381
+</span></span><span style="display:flex;"><span>11 1.8010e-03     10 1.0529e-02 0.31304 0.099915
+</span></span><span style="display:flex;"><span>12 1.5156e-03     11 8.7282e-03 0.29965 0.090460
+</span></span><span style="display:flex;"><span>13 1.2868e-03     12 7.2125e-03 0.30216 0.090476
+</span></span><span style="display:flex;"><span>14 9.9907e-04     14 4.6389e-03 0.29853 0.089054
+</span></span><span style="display:flex;"><span>15 9.2506e-04     15 3.6399e-03 0.29704 0.089144
+</span></span><span style="display:flex;"><span>16 8.5254e-04     16 2.7148e-03 0.29628 0.089205
+</span></span><span style="display:flex;"><span>17 7.5041e-04     17 1.8623e-03 0.29221 0.089117
+</span></span><span style="display:flex;"><span>18 3.5967e-04     18 1.1119e-03 0.29642 0.088779
+</span></span><span style="display:flex;"><span>19 2.8418e-04     19 7.5219e-04 0.29642 0.088779
+</span></span><span style="display:flex;"><span>20 2.0011e-04     20 4.6801e-04 0.29479 0.088862
+</span></span><span style="display:flex;"><span>21 1.1101e-04     21 2.6790e-04 0.29055 0.086900
+</span></span><span style="display:flex;"><span>22 7.1045e-05     22 1.5689e-04 0.29013 0.086937
+</span></span><span style="display:flex;"><span>23 3.9963e-05     23 8.5846e-05 0.29080 0.086896
+</span></span><span style="display:flex;"><span>24 5.9204e-06     25 5.9204e-06 0.29159 0.086831
+</span></span><span style="display:flex;"><span>25 0.0000e+00     26 0.0000e+00 0.29237 0.087231
+</span></span></code></pre></div><p>Let&rsquo;s slow down and interpret the column names:</p>
+<ul>
+<li><code>nsplit</code> - How many internal nodes the tree has or just number of splits</li>
+<li><code>rel error</code> - Relative Training Error, this always decreases as the tree grows</li>
+<li><code>xerror</code> - Cross-Validation Error. The error on unseen data, estimated using the 10-fold cross-validation</li>
+<li><code>xstd</code> - Standard Deviation for the Cross-Validation Error.</li>
+<li><code>CP</code> - Complexity Parameter. The minimum improvement in relative error required at that step to justify another split. This is the value one should use when we want to prune the tree</li>
+</ul>
+<p>We also see above the table there is: Root node error: 1126/32 = 35.189</p>
+<ul>
+<li>This is the total Sum of Squared Error (SSE) for the entire dataset before any split</li>
+</ul>
+<h3 id="implications">
+  Implications
+  <a class="heading-link" href="#implications">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>1.) We first find the minimum Cross-Validation Error from the <code>xerror</code> column which is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>           CP nsplit  rel error  xerror     xstd
+</span></span><span style="display:flex;"><span>23 3.9963e-05     23 8.5846e-05 0.29080 0.086896
+</span></span></code></pre></div><p>2.) Next, we need to find the target threshold:<br>
+<code>target = Minimum xerror + xstd at minimum</code><br>
+<code>target = 0.29080 + 0.086896 = 0.377696</code></p>
+<p>3.) Finally, apply the 1-SE Rule. Search for the smallest tree whose xerror is just less than the Target Threshold. Include it and one node above it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Text" data-lang="Text"><span style="display:flex;"><span>           CP nsplit  rel error  xerror     xstd
+</span></span><span style="display:flex;"><span>6  1.2488e-02      5 5.8285e-02 0.38559 0.106955
+</span></span><span style="display:flex;"><span>7  1.2149e-02      6 4.5796e-02 0.35818 0.105197
+</span></span></code></pre></div><p>Since the 7th tree is the most optimal, we pick any CP value between the 6th and the 7th using squareroot function:
+<code>cp1 &lt;- sqrt(1.2149e-02*1.2488e-02)</code><br>
+which gives us <code>0.01231733</code></p>
+<h2 id="pruning-the-max-tree-using-a-particular-cp-value">
+  Pruning The Max Tree using a Particular CP Value
+  <a class="heading-link" href="#pruning-the-max-tree-using-a-particular-cp-value">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>So, now we have a maximum tree grown with parameters <code>cp = 0</code> using <code>rpart</code>. However, this also means that the tree is quite big and overfitting is unavoidable.<br>
+Since we found out the CP value, <code>cp1</code> that we calculated from the 6th and 7th node, we can now prune the tree to a smaller tree, <code>cart2</code> which might reduce the error to less than <code>cp1</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>cart2 <span style="color:#ff7b72;font-weight:bold">&lt;-</span> <span style="color:#d2a8ff;font-weight:bold">prune</span>(cart1, cp <span style="color:#ff7b72;font-weight:bold">=</span> cp1)
+</span></span></code></pre></div><h3 id="check-the-pruned-tree-complexity-table">
+  Check the Pruned Tree Complexity Table
+  <a class="heading-link" href="#check-the-pruned-tree-complexity-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Again, we can use the <code>printcp()</code> like before to check:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">printcp</span>(cart2, digits <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">3</span>) <span style="color:#8b949e;font-style:italic"># digits just means the number of significant figure displayed in the table</span>
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Regression tree:
+</span></span><span style="display:flex;"><span>rpart(formula = mpg ~ ., data = mtcars, method = &#34;anova&#34;, control = rpart.control(minsplit = 2, 
+</span></span><span style="display:flex;"><span>    cp = 0))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Variables actually used in tree construction:
+</span></span><span style="display:flex;"><span>[1] cyl  disp qsec wt  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Root node error: 1126/32 = 35.2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n= 32 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      CP nsplit rel error xerror  xstd
+</span></span><span style="display:flex;"><span>1 0.6527      0    1.0000  1.064 0.252
+</span></span><span style="display:flex;"><span>2 0.1947      1    0.3473  0.686 0.161
+</span></span><span style="display:flex;"><span>3 0.0458      2    0.1526  0.476 0.120
+</span></span><span style="display:flex;"><span>4 0.0253      3    0.1069  0.443 0.118
+</span></span><span style="display:flex;"><span>5 0.0232      4    0.0815  0.403 0.115
+</span></span><span style="display:flex;"><span>6 0.0125      5    0.0583  0.386 0.107
+</span></span><span style="display:flex;"><span>7 0.0123      6    0.0458  0.358 0.105
+</span></span></code></pre></div><h3 id="implications-1">
+  Implications
+  <a class="heading-link" href="#implications-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Since this model has a continuous Y, it makes sense to calculate the Trainset Mean Sqaure Error (MSE) and the Cross-Validation (CV) MSE:</p>
+<ul>
+<li>
+<p>Trainset MSE measures how well the tree fits the training data</p>
+</li>
+<li>
+<p>Trainset MSE = Minimum rel error x Root Node Error</p>
+</li>
+<li>
+<p>Trainset MSE = 0.0458 * 35.2 = 1.6</p>
+</li>
+<li>
+<p>CV MSE measures how well the tree generalise to unseen data which detects overfitting or underfitting</p>
+</li>
+<li>
+<p>CV MSE = xerror x Root Node Error</p>
+</li>
+<li>
+<p>CV MSE = 0.358 * 35.2 = 12.6</p>
+</li>
+</ul>
+<h2 id="final-tree">
+  Final Tree
+  <a class="heading-link" href="#final-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>We can see how the tree looks like in text form using the print function:<br>
+<code>print(cart2)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Text" data-lang="Text"><span style="display:flex;"><span>n= 32 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>node), split, n, deviance, yval
+</span></span><span style="display:flex;"><span>      * denotes terminal node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> 1) root 32 1126.047000 20.09062  
+</span></span><span style="display:flex;"><span>   2) wt&gt;=2.26 26  346.566500 17.78846  
+</span></span><span style="display:flex;"><span>     4) cyl&gt;=7 14   85.200000 15.10000  
+</span></span><span style="display:flex;"><span>       8) disp&gt;=450 2    0.000000 10.40000 *
+</span></span><span style="display:flex;"><span>       9) disp&lt; 450 12   33.656670 15.88333 *
+</span></span><span style="display:flex;"><span>     5) cyl&lt; 7 12   42.122500 20.92500  
+</span></span><span style="display:flex;"><span>      10) wt&gt;=3.3275 3    1.086667 18.36667 *
+</span></span><span style="display:flex;"><span>      11) wt&lt; 3.3275 9   14.855560 21.77778 *
+</span></span><span style="display:flex;"><span>   3) wt&lt; 2.26 6   44.553330 30.06667  
+</span></span><span style="display:flex;"><span>     6) qsec&lt; 19.185 4   14.907500 28.52500  
+</span></span><span style="display:flex;"><span>      12) wt&gt;=1.775 2    0.845000 26.65000 *
+</span></span><span style="display:flex;"><span>      13) wt&lt; 1.775 2    0.000000 30.40000 *
+</span></span><span style="display:flex;"><span>     7) qsec&gt;=19.185 2    1.125000 33.15000 *
+</span></span></code></pre></div><p>&hellip; or we can use <code>rpart.plot(cart2)</code> to see some visuals:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">rpart.plot</span>(cart2, nn <span style="color:#ff7b72;font-weight:bold">=</span> T, main <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">&#34;Optimal Tree in mtcars&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"># nn means node numbering, we let it be true </span>
+</span></span></code></pre></div><p>Output:
+<figure class="center"><img src="https://i.imgur.com/kbNoNxA.png"
+    alt="tree">
+</figure>
+</p>
+<ul>
+<li>The numbers inside each node is simply the mean mpg for that group.</li>
+</ul>
+<h2 id="variable-importance">
+  Variable Importance
+  <a class="heading-link" href="#variable-importance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>cart2<span style="color:#ff7b72;font-weight:bold">$</span>variable.importance
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Text" data-lang="Text"><span style="display:flex;"><span>       wt      disp        hp      drat       cyl      qsec        vs      carb 
+</span></span><span style="display:flex;"><span>965.37479 914.94074 699.65200 393.23532 341.73192 218.72553 164.43303  14.26042 
+</span></span></code></pre></div><ul>
+<li>This line of code can help us determine how important each predictor was in contructing the final tree</li>
+<li>Each value measures how much they have reduced the modal&rsquo;s total error (SSE) across all the splits</li>
+<li>We can see very clearly that it goes from highest significance from the left and decrements to the right</li>
+</ul>
+<pre class="mermaid">
+  sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice-&gt;&gt;John: Hello John, how are you?
+</pre>
+<pre class="mermaid">
+  graph TD
+    A[Start University] --&gt; B{Choose a Major?};
+    B -- Yes --&gt; C[Study Hard];
+    B -- No --&gt; D[Explore Interests];
+    C --&gt; E[Graduate];
+    D --&gt; E;
+    E --&gt; F(Get a Job and Be Happy!);
+</pre>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  
+</body>
+</html>

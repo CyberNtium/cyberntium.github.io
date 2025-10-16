@@ -6,8 +6,22 @@
     <description>Recent content on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Oct 2025 14:30:31 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Oct 2025 06:10:28 +0800</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DigitalCommunicationSystems</title>
+      <link>https://cyberntium.github.io/studylogs/digitalcommunicationsystems/</link>
+      <pubDate>Thu, 16 Oct 2025 06:10:28 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/digitalcommunicationsystems/</guid>
+      <description>&lt;h1 id=&#34;elements&#34;&gt;&#xD;&#xA;  Elements&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#elements&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>R Programming - CART</title>
+      <link>https://cyberntium.github.io/studylogs/rprogramming_cart/</link>
+      <pubDate>Wed, 15 Oct 2025 17:46:59 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/rprogramming_cart/</guid>
+      <description>&lt;h1 id=&#34;classification-and-regression-tree-cart---continuous-y&#34;&gt;&#xD;&#xA;  Classification and Regression Tree (CART) - Continuous Y&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#classification-and-regression-tree-cart---continuous-y&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;We will be using the &lt;code&gt;mtcars&lt;/code&gt; built in RStudio for this part.&lt;/p&gt;&#xA;&lt;h2 id=&#34;import-libraries-and-dataset&#34;&gt;&#xD;&#xA;  Import Libraries and Dataset&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#import-libraries-and-dataset&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;library&lt;/span&gt;(rpart)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;library&lt;/span&gt;(rpart.plot)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;data&lt;/span&gt;(mtcars)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;rpart&lt;/code&gt; full form is Recursive partitioning and Regression Trees - This builds decision trees&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;rpart.plot&lt;/code&gt; is used to plot out trees in a graphical form&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Microprocessors Subroutines</title>
       <link>https://cyberntium.github.io/studylogs/microprocessors-subroutines/</link>
