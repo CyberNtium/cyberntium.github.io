@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors TUT8 · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Tutorial 8
+  
+    
+    Link to heading
+  
+
+
+  TUT7 Q2
+  
+    
+    Link to heading
+  
+
+Write an ARM subroutine in assembly to compute factorial of n, using a full descending stack, for each of the following methods of passing parameters. Assume that register r0 contains n (=10) and the result will be stored in register r1.
+
+a) Passing parameters to/from the subroutine using pass-by-register.
+b) Passing parameters to/from the subroutine using pass-by-stack.
+
+
+  Pass by Register Method
+  
+    
+    Link to heading
+  
+
+        AREA FactorialPassByRegister, CODE, READONLY
+
+ramBase EQU  0x40000000
+
+        ENTRY
+
+        LDR     sp, =ramBase &#43; 0x100        ; initial stack pointer
+        MOV     r0, #10                     ; n = 10, pass by register
+        BL      factSub                     ; call the factorial subroutine
+
+stop    B       stop
+
+factSub
+        STMFD   sp!, {r4, r5, lr}           ; preserve r4, r5 and lr by pushing to stack
+        MOV     r4, r0                      ; copy n to a temporary counter
+        MOV     r1, r4                      ;
+
+loop
+        SUBS    r4, r4, #1                  ; decrease counter and upadate flag 
+        MULNE   r5, r1, r4                  ; multiply if r1 and r4 not equal, store in r5
+        MOVNE   r1, r5                      ; move r5 into r1 if not equal
+        BNE     loop1                       ; branch back to loop if SUBS flag not equal zero
+        LDMFD   sp!, {r4, r5, pc}           ; pop r4 and r5 from stack, also with pc so that the pc goes back to main sub
+
+        END
+
+  Explanation
+  
+    
+    Link to heading
+  
+
+
+
+ramBase EQU  0x40000000 - We first define a constant ramBase with value 0x40000000. This is used as the base address">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors TUT8">
+  <meta name="twitter:description" content="Tutorial 8Link to headingTUT7 Q2Link to headingWrite an ARM subroutine in assembly to compute factorial of n, using a full descending stack, for each of the following methods of passing parameters. Assume that register r0 contains n (=10) and the result will be stored in register r1.
+a) Passing parameters to/from the subroutine using pass-by-register. b) Passing parameters to/from the subroutine using pass-by-stack. Pass by Register MethodLink to headingAREA FactorialPassByRegister, CODE, READONLY ramBase EQU 0x40000000 ENTRY LDR sp, =ramBase &#43; 0x100 ; initial stack pointer MOV r0, #10 ; n = 10, pass by register BL factSub ; call the factorial subroutine stop B stop factSub STMFD sp!, {r4, r5, lr} ; preserve r4, r5 and lr by pushing to stack MOV r4, r0 ; copy n to a temporary counter MOV r1, r4 ; loop SUBS r4, r4, #1 ; decrease counter and upadate flag MULNE r5, r1, r4 ; multiply if r1 and r4 not equal, store in r5 MOVNE r1, r5 ; move r5 into r1 if not equal BNE loop1 ; branch back to loop if SUBS flag not equal zero LDMFD sp!, {r4, r5, pc} ; pop r4 and r5 from stack, also with pc so that the pc goes back to main sub END ExplanationLink to headingramBase EQU 0x40000000 - We first define a constant ramBase with value 0x40000000. This is used as the base address">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-tut8/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors TUT8">
+  <meta property="og:description" content="Tutorial 8Link to headingTUT7 Q2Link to headingWrite an ARM subroutine in assembly to compute factorial of n, using a full descending stack, for each of the following methods of passing parameters. Assume that register r0 contains n (=10) and the result will be stored in register r1.
+a) Passing parameters to/from the subroutine using pass-by-register. b) Passing parameters to/from the subroutine using pass-by-stack. Pass by Register MethodLink to headingAREA FactorialPassByRegister, CODE, READONLY ramBase EQU 0x40000000 ENTRY LDR sp, =ramBase &#43; 0x100 ; initial stack pointer MOV r0, #10 ; n = 10, pass by register BL factSub ; call the factorial subroutine stop B stop factSub STMFD sp!, {r4, r5, lr} ; preserve r4, r5 and lr by pushing to stack MOV r4, r0 ; copy n to a temporary counter MOV r1, r4 ; loop SUBS r4, r4, #1 ; decrease counter and upadate flag MULNE r5, r1, r4 ; multiply if r1 and r4 not equal, store in r5 MOVNE r1, r5 ; move r5 into r1 if not equal BNE loop1 ; branch back to loop if SUBS flag not equal zero LDMFD sp!, {r4, r5, pc} ; pop r4 and r5 from stack, also with pc so that the pc goes back to main sub END ExplanationLink to headingramBase EQU 0x40000000 - We first define a constant ramBase with value 0x40000000. This is used as the base address">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-11-02T01:03:17+08:00">
+    <meta property="article:modified_time" content="2025-11-02T01:03:17+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-tut8/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-tut8/">
+          Microprocessors TUT8
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="tutorial-8">
+  Tutorial 8
+  <a class="heading-link" href="#tutorial-8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="tut7-q2">
+  TUT7 Q2
+  <a class="heading-link" href="#tut7-q2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Write an ARM subroutine in assembly to compute factorial of n, using a full descending stack, for each of the following methods of passing parameters. Assume that register r0 contains n (=10) and the result will be stored in register r1.</p>
+<ul>
+<li>a) Passing parameters to/from the subroutine using pass-by-register.</li>
+<li>b) Passing parameters to/from the subroutine using pass-by-stack.</li>
+</ul>
+<h3 id="pass-by-register-method">
+  Pass by Register Method
+  <a class="heading-link" href="#pass-by-register-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">FactorialPassByRegister</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span>  <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>        <span style="color:#8b949e;font-style:italic">; initial stack pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#10                     ; n = 10, pass by register
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">factSub</span>                     <span style="color:#8b949e;font-style:italic">; call the factorial subroutine
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">factSub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>           <span style="color:#8b949e;font-style:italic">; preserve r4, r5 and lr by pushing to stack
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>                      <span style="color:#8b949e;font-style:italic">; copy n to a temporary counter
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>                      <span style="color:#8b949e;font-style:italic">;
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#1                  ; decrease counter and upadate flag 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MULNE</span>   <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>                  <span style="color:#8b949e;font-style:italic">; multiply if r1 and r4 not equal, store in r5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOVNE</span>   <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>                      <span style="color:#8b949e;font-style:italic">; move r5 into r1 if not equal
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop1</span>                       <span style="color:#8b949e;font-style:italic">; branch back to loop if SUBS flag not equal zero
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>           <span style="color:#8b949e;font-style:italic">; pop r4 and r5 from stack, also with pc so that the pc goes back to main sub
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><h3 id="explanation">
+  Explanation
+  <a class="heading-link" href="#explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><code>ramBase EQU  0x40000000</code> - We first define a constant ramBase with value <code>0x40000000</code>. This is used as the base address</p>
+</li>
+<li>
+<p><code>LDR sp, =ramBase + 0x100</code> - Load <code>0x40000000 + 0x100 = 0x40000100</code> into the stack pointer, sp</p>
+</li>
+<li>
+<ul>
+<li>We do this so that when we branch into the subroutine, we can push and pop registers easily in the stack</li>
+</ul>
+</li>
+<li>
+<p><code>MOV r0, #10</code> - Moves value #10 into r0, this is the input for <code>n</code> for the factorial function. Meaning, in this case, we will be outputing what is <code>n! = 10!</code></p>
+</li>
+<li>
+<p><code>BL factsub</code> - Finally, we branch into the factorial subroutine.</p>
+</li>
+<li>
+<ul>
+<li>Remember that BL does 2 things:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>The program counter, pc will point to the address of the first line of the subroutine</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<ul>
+<li>The address of the immediate next instruction of <code>BL factsub</code>, which is <code>stop B stop</code>, will be store in lr. This serves as the returning address for pc</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Instruction</th>
+          <th>Comment</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x0000</code></td>
+          <td><code>LDR sp, =ramBase + 0x100</code></td>
+          <td>4 bytes</td>
+      </tr>
+      <tr>
+          <td><code>0x0004</code></td>
+          <td><code>MOV r0, #10</code></td>
+          <td>4 bytes</td>
+      </tr>
+      <tr>
+          <td><code>0x0008</code></td>
+          <td><code>BL factSub</code></td>
+          <td>4 bytes</td>
+      </tr>
+      <tr>
+          <td><code>0x000C</code></td>
+          <td><code>stop B stop</code></td>
+          <td>next instruction after BL</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p><code>factSub</code></p>
+</li>
+<li>
+<p><code>STMFD sp!, {r4, r5, lr}</code> - Upon entering the subroutine, we perform a Store Multiple Full Descending (STMFD), this pushes r4, r5 and lr into the stack</p>
+</li>
+<li>
+<ul>
+<li>Why? Because we will be using r4 and r5 in the subroutine, so it&rsquo;s always good to preserve the original value of them even if they are holding nothing</li>
+</ul>
+</li>
+<li>
+<p><code>MOV r4, r0</code> - Copies the value in r0 into r4. r4 now serves as the loop counter</p>
+</li>
+<li>
+<p><code>MOV r1, r4</code> - Copies the value of r4 to r1, which serves as the first and current factorial result</p>
+</li>
+<li>
+<p><code>loop</code></p>
+</li>
+<li>
+<p><code>SUBS r4, r4, #1</code> - We now enter the loop. Subtract loop counter by 1 each loop, update the status flag for branching at the loop end</p>
+</li>
+<li>
+<p><code>MULNE r5, r1, r4</code> - if r4 not zero, multiply r1 and r4 then store inside r5</p>
+</li>
+<li>
+<ul>
+<li>Before loop, n = 10, r4 = 10, r1 = 10</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>First loop, r4 = 9, r1 = 10 &ndash;&gt; r5 = r4 x r1 = 9 x 10</li>
+</ul>
+</li>
+<li>
+<p><code>MOVNE r1, r5</code> - if r4 still not zero, store the product r5 into r1 to update it.</p>
+</li>
+<li>
+<ul>
+<li>Basically we keep doing this since we only update r4 minus subtracting 1, essentially creating a factorial of n*(n-1)*(n-2)&hellip;</li>
+</ul>
+</li>
+<li>
+<p><code>BNE loop</code> - Branch back to loop if r4 not zero</p>
+</li>
+<li>
+<p><code>LDMFD sp!, {r4, r5, pc}</code> - Load Multiple Full Descending, we pop r4, r5 and lr from the stack</p>
+</li>
+<li>
+<ul>
+<li>Why pc this time? Remember when we push r4, r5 and lr into the stack? Since we are popping them out in the reversed order, the lr value will be loaded into pc, meaning the return address just now is in pc, meaning we can go back to the main sub.</li>
+</ul>
+</li>
+</ul>
+<h3 id="pass-by-stack-method">
+  Pass By Stack Method
+  <a class="heading-link" href="#pass-by-stack-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">FactorialPassByStack</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">factSub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">factSub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r6</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#16]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MULNE</span>   <span style="color:#79c0ff;font-weight:bold">r6</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOVNE</span>   <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#20]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDMFD</span> <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-46</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><h3 id="explanation-1">
+  Explanation
+  <a class="heading-link" href="#explanation-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Passing by stack is very confusing without using a table, so I recommend that you write it out in a table during practice or exams.</p>
+<p>Initial Stack Table:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Instruction</th>
+          <th>Comment</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x0000</code></td>
+          <td></td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<p>There&rsquo;s nothing here yet since we have not pushed anything in.</p>
+<ul>
+<li>
+<p><code>LDR sp, =ramBase + 0x100</code></p>
+</li>
+<li>
+<ul>
+<li>Similar to passing by register, we first define where our stack will be at, which is pointed by the sp at <code>0x40000000 + 0x100 = 0x40000100</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>This means from now on, all shit we push into the stack will start at <code>0x40000100</code></li>
+</ul>
+</li>
+<li>
+<p><code>MOV r0, #10</code> - Input of factorial, <code>n! = 10!</code></p>
+</li>
+<li>
+<p><code>STMFD sp!, {r0, r1}</code></p>
+</li>
+<li>
+<ul>
+<li>Here we push r0 and r1 into the stack as parameters that we will use in the subroutine. Note that this is Full Descending post increment for sp, this means that sp will decrement (go down) after pushing in a value</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>As such:</li>
+</ul>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r0</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>Stack will always have the smallest register at the bottom, that&rsquo;s why r0 is pushed in first</p>
+</li>
+<li>
+<p>I recommend doing everything in decimal first, then change to hexadecimal. For example:</p>
+</li>
+<li>
+<ul>
+<li>256 = 0x100</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>252 = 0x0FC , decrement 4 bytes</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>248 = 0x0F8 , decrement 4 bytes</li>
+</ul>
+</li>
+<li>
+<p><code>BL factSub</code>  Branch into the factorial subroutine</p>
+</li>
+<li>
+<p><code>factSub</code></p>
+</li>
+<li>
+<p><code>STMFD sp!, {r4-r6, lr}</code></p>
+</li>
+<li>
+<p>After we branch into the subroutine, we also push r4, r5, r6 and lr into the stack. But, this time, the purpose is to perserve the value of these registers as compared to r0 and r1 which are used for parameters of the factorial function</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r0</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>Same convention as before, bigger register then smaller register</p>
+</li>
+<li>
+<p><code>LDR r4, [sp, #16]</code></p>
+</li>
+<li>
+<ul>
+<li>Read up on <code>LDR</code> for more details. <a href="https://cyberntium.github.io/studylogs/microprocessors-ldr-str-instructions/"  class="external-link" target="_blank" rel="noopener">Link</a></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Essentially, this is pre-indexing of LDR, meaning we offset sp by a set number and load the stuff its pointing at into r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>In this case, <code>[sp, #16]</code>, we will be offsetting by 16 bytes. If you look at the table above, sp is currently at <code>0x400000E8</code>. So, we increase that by #16, which lands at <code>0x400000F8</code>, which houses value of r0.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Finally, store that value in r4. Now r4 holds the value #10</li>
+</ul>
+</li>
+<li>
+<p><code>MOV r5, r4</code> - Copies r4 value into r5</p>
+</li>
+<li>
+<p><code>loop</code></p>
+</li>
+<li>
+<p><code>SUBS r4, r4, #1</code> - Decrement loop counter and update status flag</p>
+</li>
+<li>
+<p><code>MULNE r6, r5, r4</code> - If r4 is not equal to zero, multiply r5 and r4, store the product in r6</p>
+</li>
+<li>
+<p><code>MOVNE r5, r6</code> - If r4 still not equal to zero, copy product of r6 into r5 again. Essentially update r5</p>
+</li>
+<li>
+<p><code>BNE loop</code> - If r4 not equal to zero, branch back to loop</p>
+</li>
+<li>
+<p><code>STR r5, [sp, #20]</code> - Stores values held by r5 into the memory address pointed at by sp</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r0</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<ul>
+<li>Let&rsquo;s take a look at the table again:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>[sp, #20]</code> - This time its 20 bytes, so we increase by 20, which gives us:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>232 (0xE8) + 20 (0x14) = 252 (0xFC)</code> - Which is r1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Essentially, we store the product of r5 into r1</li>
+</ul>
+</li>
+<li>
+<p><code>LDMFD sp!, {r4-r6, pc}</code> - Finally, pop out the registers we pushed in at the start of the subroutine. Most importantly, the sp will go up after popping, meaning the order will stay the same,</p>
+</li>
+<li>
+<p>After popping:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r0</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p><code>LDMFD sp!, {r0, r1}</code> - We made it back to the main routine. But notice that the stack still have shit inside, so pop them out accordingly.</p>
+</li>
+<li>
+<p>Final table:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Perfectly balanced, as all things should be</p>
+</li>
+</ul>
+<figure class="center"><img src="https://i.imgur.com/JOPpyrM.jpeg"
+    alt="thanos">
+</figure>
+
+<hr>
+<h2 id="tut7-q3">
+  TUT7 Q3
+  <a class="heading-link" href="#tut7-q3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Write an ARM assembly program to sum the square of 4 numbers (sum = x1<em>x1 + x2</em>x2 + x3<em>x3 + x4</em>x4). The main program should call a subroutine to add a list of number. This subroutine would then call another subroutine to perform the square operation. Test it out using Keil uVision and observe the content of registers sp, lr and pc during subroutine calls and returns. Let register r0 be the pointer to the numbers and register r1 contains the final result.</p>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
