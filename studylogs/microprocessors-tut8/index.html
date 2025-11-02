@@ -527,7 +527,7 @@ a) Passing parameters to/from the subroutine using pass-by-register. b) Passing 
 </table>
 <ul>
 <li>
-<p>Stack will always have the smallest register at the bottom, that&rsquo;s why r0 is pushed in first</p>
+<p>Stack will always have the smallest register at the bottom, that&rsquo;s why r1 is pushed in first and then sp goes down, then push in r0</p>
 </li>
 <li>
 <p>I recommend doing everything in decimal first, then change to hexadecimal. For example:</p>
@@ -793,6 +793,416 @@ a) Passing parameters to/from the subroutine using pass-by-register. b) Passing 
   </a>
 </h2>
 <p>Write an ARM assembly program to sum the square of 4 numbers (sum = x1<em>x1 + x2</em>x2 + x3<em>x3 + x4</em>x4). The main program should call a subroutine to add a list of number. This subroutine would then call another subroutine to perform the square operation. Test it out using Keil uVision and observe the content of registers sp, lr and pc during subroutine calls and returns. Let register r0 be the pointer to the numbers and register r1 contains the final result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">TwoSubroutineCall</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stackBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">stackBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">dataTable</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">AddSqNum</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">dataTable</span>       <span style="color:#79c0ff;font-weight:bold">DCD</span>     <span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">2</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">AddSqNum</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r6</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">r0</span>], <span style="color:#8b949e;font-style:italic">#4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r6</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">squareSub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r6</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r6</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">squareSub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#12]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MUL</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#16]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><h3 id="explanation-2">
+  Explanation
+  <a class="heading-link" href="#explanation-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We will be skipping over to the subroutine code immediately since the first few lines are pretty simple to understand, refer to question 2 for easy examples.</p>
+<p>Initial Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="addsqnum-subroutine">
+  AddSqNum Subroutine
+  <a class="heading-link" href="#addsqnum-subroutine">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">AddSqNum</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r6</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#0  
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span></code></pre></div><ul>
+<li><code>STMFD sp!, {r4-r6, lr}</code> - As usual, we push the original registers into stack to preserve their values. In this case, r4, r5 and r6. lr is the returning address thus we also need it. (refer to TUT7Q2 to see why lr is here)</li>
+<li><code>MOV r1, #0</code> - Initialise the sum value in r1 as zero</li>
+<li><code>MOV r4, #4</code> - Initialise loop counter, in this case we have 4 numbers in the dataTable, thus 4 loops</li>
+</ul>
+<p>Current Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">r0</span>], <span style="color:#8b949e;font-style:italic">#4
+</span></span></span></code></pre></div><ul>
+<li>We now enter the loop of the AddSqNum subroutine.</li>
+<li><code>LDR r5, [r0], #4</code> - This is post-indexing LOAD, meaning after we load the value in the address of <code>[r0]</code>, increase by 4 bytes</li>
+<li>
+<ul>
+<li>A very easy way to visualise this is, again, draw it out:</li>
+</ul>
+</li>
+<li>dataTable:</li>
+<li><figure><img src="https://i.imgur.com/ciItX5e.jpeg"
+    alt="LDR">
+</figure>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">STMFD</span> <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r6</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">squareSub</span>
+</span></span></code></pre></div><ul>
+<li>Before we branch into the second subroutine, we need to push in some parameters. In this case, r5 and r6. Not gonna lie, I have no idea why we are pushing r6 but it&rsquo;s the prof&rsquo;s code, so let&rsquo;s just go with it.</li>
+</ul>
+<p>Current Stack:
+Current Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r4</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r5</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Then we branch into the squareSub subroutine</li>
+</ul>
+<h4 id="squaresub-subroutine">
+  squareSub Subroutine
+  <a class="heading-link" href="#squaresub-subroutine">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span></code></pre></div><ul>
+<li>As usual, every time we branch into a subroutine, push to preserve the initial register values:
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r4</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E4</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E0</code></td>
+          <td>l5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000DC</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#12] 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">MUL</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#79c0ff;font-weight:bold">STR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>,<span style="color:#8b949e;font-style:italic">#16] 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!,<span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li><code>LDR r4, [sp, #12]</code> - Take a look at the stack table: We offset the sp by 12 bytes, which will land at <code>0x400000E8</code>, which houses r5. Thus, we load the r5 value into r4.</li>
+<li><code>MUL r5, r4, r4</code> - This is essentially the square function since we are multiplying r4 by itself, then storing it inside r5</li>
+<li><code>STR r5, [sp, #16]</code> - Again, offset by 16 bytes, this times it lands at <code>0x400000EC</code> which houses r6. Since this is STR, we store the product r5 into r6 pointed at by the address.</li>
+<li><code>LDMFD sp!, {r4, r5, pc}</code> - Finally, when the subroutine ends, pop out the values. In this case, r4 and r5 since we pushed them in just now. But pushing out lr, we push it into pc, because it functions as the returning address to AddSqNum subroutine.</li>
+</ul>
+<p>Current Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r4</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r5</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="back-to-addsqnum">
+  Back to AddSqNum
+  <a class="heading-link" href="#back-to-addsqnum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r6</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#79c0ff;font-weight:bold">r6</span> 
+</span></span><span style="display:flex;"><span><span style="color:#79c0ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#1 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">BNE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r6</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span> 
+</span></span></code></pre></div><ul>
+<li>
+<p><code>LDMFD sp!, {r5, r6}</code> - After returning from squareSub, remember to also pop out the original r5 and r6 that we pushed in before entering sqaureSub
+Current Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Since we are still inside the loop, let&rsquo;s continue:</p>
+</li>
+<li>
+<p><code>ADD r1, r1, r6</code> - We add r6 with r1, and store inside r1 itself. Now, if you remember from the squareSub, we stored the product of the square inside the offset, which happens to be r6. Essentially, we are adding r6 to the culmulative sum, r1 which currently is just zero. When we update the loop counter, r5 which is the input parameter will produce a different r6 square value in the squareSub. Then again, back in AddSqNum, add to r1, rinse and repeat. Take some time to understand this.</p>
+</li>
+<li>
+<p><code>SUBS r4, r4, #1</code> - Decrement loop counter</p>
+</li>
+<li>
+<p><code>BNE loop</code> - If r4 not equal to zero, branch back to loop</p>
+</li>
+<li>
+<p><code>LDMFD sp!, {r4-r6, pc}</code> - Finally, before we go back to the main routine, pop out the registers we preserved at the start of AddSqNum.
+Current Stack:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+<p><em>Magnificent, isn&rsquo;t it?</em></p>
 
   </article>
 </section>
