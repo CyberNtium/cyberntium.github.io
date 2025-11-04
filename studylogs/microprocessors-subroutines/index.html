@@ -597,7 +597,428 @@ Basically all we need to know is, pc will also point at the next instruction tha
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">END</span>
-</span></span></code></pre></div>
+</span></span></code></pre></div><ul>
+<li>So what&rsquo;s the difference here between passing by stack versus passing by register?</li>
+</ul>
+<h3 id="the-arm-apcs-aapcs---application-procedure-call-standard">
+  The ARM APCS (AAPCS) - Application Procedure Call Standard
+  <a class="heading-link" href="#the-arm-apcs-aapcs---application-procedure-call-standard">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Don&rsquo;t be afraid of the long ass name, it is just a standard, like any rules and regulation.<br>
+Imagine a Standard Operating Procedure (SOP) during the the Covid-19 era, where only half the class is allowed to come to school while the other half stays online.<br>
+AAPCS is essentially similar.</p>
+<ul>
+<li>AAPCS defines how subroutines should be written</li>
+<li>Most importantly, which registers are parameters and which registers should be preserved
+<table>
+  <thead>
+      <tr>
+          <th>Registers</th>
+          <th>Implications</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r0 - r3</td>
+          <td>Parameters into and results from subroutines</td>
+      </tr>
+      <tr>
+          <td>r4 - r11</td>
+          <td>Perserved</td>
+      </tr>
+      <tr>
+          <td>r12</td>
+          <td>Scratch Register</td>
+      </tr>
+      <tr>
+          <td>r13</td>
+          <td>stack pointer (sp)</td>
+      </tr>
+      <tr>
+          <td>r14</td>
+          <td>link register (lr)</td>
+      </tr>
+      <tr>
+          <td>r15</td>
+          <td>Program counter (pc)</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<ul>
+<li>Basically:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>r0 - r3</code> is used as parameters to send into subroutines. If we only were to use 4 registers max, then it&rsquo;s okay just use passing by register method.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>However, when programs get complicated, we tend to use more than 4 registers, thus why we will be using passing by stack, which is when we need to use <code>r4 - r11</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>But at the end, it still depends on the question, if they ask for stack then do stack and vice versa</li>
+</ul>
+</li>
+</ul>
+<p>Anyway, that was kinda boring, let&rsquo;s get back to passing by stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#0     
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDr</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x00001234</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#4
+</span></span></span></code></pre></div><p>The initial part remains totally similar to passing by register</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">shiftFunc</span>
+</span></span></code></pre></div><ul>
+<li>This part is more important, let&rsquo;s take a closer look:</li>
+<li>
+<ul>
+<li><code>STMFD sp!, {r0-r3}</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Initial stack:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>STORE MULTIPLE FULL DESCENDING, with post indexing of your sp for r0 to r3</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>What we are doing here is pushing r0 to r3 into the stack but also updating the sp location with the &ldquo;!&rdquo; symbol:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r3</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r0</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>As you can see, full descending means that whenever we want to push something in, sp will decrement first then it pushes shit in. Right now, our stack contains these registers which will be the parameters that will be used in the subroutine</li>
+<li>Note that everything you push anything in stack, bigger register number stays top and smaller stays bottom</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">shiftfunc</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r7</span>, <span style="color:#79c0ff;font-weight:bold">lr</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#20]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#24]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r6</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#28]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">CMP</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVEQ</span>   <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">LSL</span> <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">MOVNE</span>   <span style="color:#79c0ff;font-weight:bold">r7</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">LSR</span> <span style="color:#79c0ff;font-weight:bold">r6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STR</span>     <span style="color:#79c0ff;font-weight:bold">r7</span>, [<span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#8b949e;font-style:italic">#32]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4-r7</span>, <span style="color:#79c0ff;font-weight:bold">pc</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>Now that we are in the subroutine, it&rsquo;s healthy practice to perserve registers that we will be using inside the subroutine:</li>
+<li>
+<ul>
+<li><code>STMFD sp!, {r4-r7, lr}</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>We push r4 to r7 into the stack for preserving, but lr is pushed also because it is the return address, thats why it has to be reserved</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Current stack:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r3</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r0</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000EC</code></td>
+          <td>lr</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E8</code></td>
+          <td>r7</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E4</code></td>
+          <td>r6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000E0</code></td>
+          <td>r5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000DC</code></td>
+          <td>r4</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>Same convention, lr is bigger so it goes in first and so on and so forth</li>
+<li>
+<ul>
+<li>So back to the parameters thing, what does that mean actually?</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r4, [sp, #20]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r5, [sp, #24]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDR r6, [sp, #28]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>As we learnt from LDR with preindexing offset, we add the #number to the sp and load it into register</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>First case: since sp is at <code>0x400000DC</code>, we add 20 bytes, which becomes, <code>0x400000F0</code> which houses r0. Thus, we load r0 value into r4.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Second case, same thing, <code>0x400000DC</code>, add 24 bytes -&gt; <code>0x400000F4</code> which houses r1, load it into r5</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Third case, add 28 bytes, <code>0x400000F8</code> which houses r2, load it into r6</li>
+</ul>
+</li>
+<li>So essentially, we are &ldquo;using&rdquo; r0, r1 and r2 as parameters, just that we copy their values into r4, r5 and r6</li>
+<li>And that&rsquo;s it. After this is just your normal operations</li>
+<li>Then before we go back to main routine:</li>
+<li>
+<ul>
+<li><code>STR r7, [sp, #32]</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>add 32 bytes -&gt; <code>0x400000FC</code> which houses r3, store the output r7 into r3</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>LDMFD sp!, {r4-r7, pc}</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Finally, when subroutine is done, pop up all preserved registers:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Current Stack:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000FC</code></td>
+          <td>r3</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F8</code></td>
+          <td>r2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F4</code></td>
+          <td>r1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><code>0x400000F0</code></td>
+          <td>r0</td>
+          <td>&lt;&mdash; sp</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Note that lr is pop into pc, because remember, lr has the returning addressing, and pc now knows where to return to, back to main</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">STMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0-r3</span><span style="color:#f85149">}</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">shiftFunc</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#d2a8ff;font-weight:bold">LDMFD</span>   <span style="color:#79c0ff;font-weight:bold">sp</span>!, <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r0-r3</span><span style="color:#f85149">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we reached <code>LDMFD sp!, {r0-r3}</code></li>
+<li>We pop out the registers that we initially pass as parameters through stack:</li>
+<li>Current stack:</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stack Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>&ndash;</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Note that r0, r1 and r2 still has the same value as before. but r3 now has the final output we did inside the subroutine</li>
+</ul>
+</li>
+</ul>
+
   </article>
 </section>
 

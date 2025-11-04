@@ -19,19 +19,88 @@
     
     Link to heading
   
-">
+
+
+  TUT7 Q1
+  
+    
+    Link to heading
+  
+
+State the validity for each of the following instructions. Explain why for those that is not valid.
+
+  a.) STM r4, {r4-r6}
+  
+    
+    Link to heading
+  
+
+Valid.
+
+Given that r4 is the base register with a given base address, let&rsquo;s say, 0x40000100:
+
+
+
+
+  
+      
+          Address (hex)
+          Stored Value
+      
+  
+  
+      
+          0x40000100
+          r4
+      
+      
+          0x40000104
+          r5
+      
+      
+          0x40000108
+          r6
+      
+  
+
+
+
+
+
+
+Funny thing about this is that, we are storing the value of r4 which is 0x40000100, into the address of r4 which is also 0x40000100
+
+
+
+
+The rest is just normal
+
+
+
+
+  b.) LDM r4, {r4, r7}
+  
+    
+    Link to heading
+  
+
+Valid.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Microprocessors TUT7">
-  <meta name="twitter:description" content="Tutorial 7Link to heading">
+  <meta name="twitter:description" content="Tutorial 7Link to headingTUT7 Q1Link to headingState the validity for each of the following instructions. Explain why for those that is not valid.
+a.) STM r4, {r4-r6}Link to headingValid.
+Given that r4 is the base register with a given base address, let’s say, 0x40000100: Address (hex) Stored Value 0x40000100 r4 0x40000104 r5 0x40000108 r6 Funny thing about this is that, we are storing the value of r4 which is 0x40000100, into the address of r4 which is also 0x40000100 The rest is just normal b.) LDM r4, {r4, r7}Link to headingValid.">
 
 <meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-tut7/">
   <meta property="og:site_name" content="cyberntium">
   <meta property="og:title" content="Microprocessors TUT7">
-  <meta property="og:description" content="Tutorial 7Link to heading">
+  <meta property="og:description" content="Tutorial 7Link to headingTUT7 Q1Link to headingState the validity for each of the following instructions. Explain why for those that is not valid.
+a.) STM r4, {r4-r6}Link to headingValid.
+Given that r4 is the base register with a given base address, let’s say, 0x40000100: Address (hex) Stored Value 0x40000100 r4 0x40000104 r5 0x40000108 r6 Funny thing about this is that, we are storing the value of r4 which is 0x40000100, into the address of r4 which is also 0x40000100 The rest is just normal b.) LDM r4, {r4, r7}Link to headingValid.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="studylogs">
@@ -168,6 +237,311 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
+<h2 id="tut7-q1">
+  TUT7 Q1
+  <a class="heading-link" href="#tut7-q1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>State the validity for each of the following instructions. Explain why for those that is not valid.</p>
+<h3 id="a-stm-r4-r4-r6">
+  a.) STM r4, {r4-r6}
+  <a class="heading-link" href="#a-stm-r4-r4-r6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><em><em>Valid</em></em>.</p>
+<ul>
+<li>Given that r4 is the base register with a given base address, let&rsquo;s say, <code>0x40000100</code>:</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Stored Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>r4</td>
+      </tr>
+      <tr>
+          <td><code>0x40000104</code></td>
+          <td>r5</td>
+      </tr>
+      <tr>
+          <td><code>0x40000108</code></td>
+          <td>r6</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Funny thing about this is that, we are storing the value of r4 which is <code>0x40000100</code>, into the address of r4 which is also <code>0x40000100</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>The rest is just normal</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-ldm-r4-r4-r7">
+  b.) LDM r4, {r4, r7}
+  <a class="heading-link" href="#b-ldm-r4-r4-r7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><em><em>Valid</em></em>.</p>
+<ul>
+<li>Given that r4 is also the base register with the same base address, <code>0x40000100</code>, now we load whatever is in that address into r4 and r7:</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Loaded into</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td>r4</td>
+      </tr>
+      <tr>
+          <td><code>0x40000104</code></td>
+          <td>r7</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Similar to (a), we are loading whatever is in <code>0x40000100</code> into r4 again.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>r7 is just normal LDR operation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="c-stmia-r5-r5-r4-r9">
+  c.) STMIA r5!, {r5, r4, r9}
+  <a class="heading-link" href="#c-stmia-r5-r5-r4-r9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><em><em>Invalid</em></em>. Technically it is possible but the prof said it&rsquo;s not, so i dunno</p>
+<ul>
+<li>
+<p>Recall that STMIA = Store Multiple Increment After. Increment After means after you store something, then you increment the stack pointer</p>
+</li>
+<li>
+<p>But in this case, we are not using sp, we are using r5 as the pointer, indicated by the &ldquo;!&rdquo; symbol.</p>
+</li>
+<li>
+<p>This is not encouraged as sp is used generally for pointing, and using normal registers will result in unpredictable stuff:</p>
+</li>
+<li>
+<ul>
+<li>What&rsquo;s happening here is just updating the r5 address after storing everything:</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>updated r5 address</th>
+          <th>stored value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000100</code></td>
+          <td><code>0x40000104</code></td>
+          <td>value of r5</td>
+      </tr>
+      <tr>
+          <td><code>0x40000104</code></td>
+          <td><code>0x40000108</code></td>
+          <td>value of r4</td>
+      </tr>
+      <tr>
+          <td><code>0x40000108</code></td>
+          <td><code>0x4000010C</code></td>
+          <td>value of r9</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>As you can see, what ends up happening is just updating r5&rsquo;s address after storing each register, so at the end r5 will have <code>0x40000100 + 12 bytes = 0x4000010C</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="ldmda-r2">
+  LDMDA r2,
+  <a class="heading-link" href="#ldmda-r2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><em><em>Invalid</em></em>
+Very simple, there must be at least one register to be loaded into, unpredictable results</p>
+<h3 id="stmdb-r15-r0-r3-r4-lr">
+  STMDB r15!, {r0-r3, r4, lr}
+  <a class="heading-link" href="#stmdb-r15-r0-r3-r4-lr">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><em><em>Invalid</em></em>.
+I&rsquo;m just gonna take the prof&rsquo;s words:</p>
+<ul>
+<li>Using the program counter as the base pointer will results in unpredictable behaviour</li>
+</ul>
+<h2 id="tut7-q2">
+  TUT7 Q2
+  <a class="heading-link" href="#tut7-q2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>If register r6 holds the address 0x8000 and you execute the instruction <code>STMIA r6, {r7, r4, r0, lr}</code>. Write the memory address that now holds the value that was in registers r0, r4, r7 and lr respectively.<br>
+(Assume r0=0x10, r4=0x14, r7=0x17, lr=0xAB)</p>
+<ul>
+<li>STMIA = Store Multiple Increment After, so store something first then increment</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Registers</th>
+          <th>Stored Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x8010</code></td>
+          <td>&ndash;</td>
+          <td>&mdash;-</td>
+      </tr>
+      <tr>
+          <td><code>0x800C</code></td>
+          <td>lr</td>
+          <td>0x000000AB</td>
+      </tr>
+      <tr>
+          <td><code>0x8008</code></td>
+          <td>r7</td>
+          <td>0x00000017</td>
+      </tr>
+      <tr>
+          <td><code>0x8004</code></td>
+          <td>r4</td>
+          <td>0x00000014</td>
+      </tr>
+      <tr>
+          <td><code>0x8000</code></td>
+          <td>r0</td>
+          <td>0x00000010</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="tut7-q3">
+  TUT7 Q3
+  <a class="heading-link" href="#tut7-q3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Assume that the memory and registers r0-r3 of an ARM processor appears as follows:
+Given that r3 has the base address of 0x40000000</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (hex)</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>0x40000010</code></td>
+          <td>0x00000001</td>
+      </tr>
+      <tr>
+          <td><code>0x4000000C</code></td>
+          <td>0xFEEDDEAF</td>
+      </tr>
+      <tr>
+          <td><code>0x40000008</code></td>
+          <td>0x00008888</td>
+      </tr>
+      <tr>
+          <td><code>0x40000004</code></td>
+          <td>0x12340000</td>
+      </tr>
+      <tr>
+          <td><code>0x40000000</code></td>
+          <td>0xBABE0000</td>
+      </tr>
+  </tbody>
+</table>
+<p>Give the contents of the memory and registers that have been changed after executing the instruction <code>LDMIA r3!, {r0, r1, r2}</code></p>
+<p>LDMIA = Load Multiple Increment After, load from memory into the registers then increment</p>
+<ul>
+<li>In this case, r3 is the pointer as we need to update its address after each increment.</li>
+<li>Final register content and r3 address</li>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>register</th>
+          <th>value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r0</td>
+          <td>0xBABE0000</td>
+      </tr>
+      <tr>
+          <td>r1</td>
+          <td>0x12340000</td>
+      </tr>
+      <tr>
+          <td>r2</td>
+          <td>0x00008888</td>
+      </tr>
+      <tr>
+          <td>r3</td>
+          <td>0x4000000C</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
 
   </article>
 </section>
