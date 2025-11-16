@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors TUT10 · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  Tutorial 10
+  
+    
+    Link to heading
+  
+
+
+  Question 1
+  
+    
+    Link to heading
+  
+
+Which bit in the registers CPSR and SPSR indicate whether you are in ARM or THUMB state?
+
+
+
+Bit 5, or the T bit:
+
+0 represents ARM state
+1 represents THUMB state
+
+
+  Question 2
+  
+    
+    Link to heading
+  
+
+Explain how the branch instruction BX rd is used to switch between the ARM and THUMB states.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors TUT10">
+  <meta name="twitter:description" content="Tutorial 10Link to headingQuestion 1Link to headingWhich bit in the registers CPSR and SPSR indicate whether you are in ARM or THUMB state?
+Bit 5, or the T bit:
+0 represents ARM state 1 represents THUMB state Question 2Link to headingExplain how the branch instruction BX rd is used to switch between the ARM and THUMB states.">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-tut10/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors TUT10">
+  <meta property="og:description" content="Tutorial 10Link to headingQuestion 1Link to headingWhich bit in the registers CPSR and SPSR indicate whether you are in ARM or THUMB state?
+Bit 5, or the T bit:
+0 represents ARM state 1 represents THUMB state Question 2Link to headingExplain how the branch instruction BX rd is used to switch between the ARM and THUMB states.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-11-16T22:01:13+08:00">
+    <meta property="article:modified_time" content="2025-11-16T22:01:13+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-tut10/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-tut10/">
+          Microprocessors TUT10
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="tutorial-10">
+  Tutorial 10
+  <a class="heading-link" href="#tutorial-10">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="question-1">
+  Question 1
+  <a class="heading-link" href="#question-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Which bit in the registers CPSR and SPSR indicate whether you are in ARM or THUMB state?</p>
+<figure class="center"><img src="https://i.imgur.com/nFLf3fC.png"
+    alt="tbits">
+</figure>
+
+<p>Bit 5, or the T bit:</p>
+<ul>
+<li>0 represents ARM state</li>
+<li>1 represents THUMB state</li>
+</ul>
+<h2 id="question-2">
+  Question 2
+  <a class="heading-link" href="#question-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Explain how the branch instruction <code>BX rd</code> is used to switch between the ARM and THUMB states.</p>
+<p>Recall from the THUMB blog, <code>BX rd</code> allows us to essentially switch between states by controlling the Least Significant Bit (LSB) of the <code>rd</code> address.</p>
+<ul>
+<li>If the LSB of rd = 0 (default), switch to ARM state</li>
+<li>If the LSB of rd = 1, switch to THUMB state</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>    <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#f85149">=</span><span style="color:#a5d6ff">0x2001</span>     <span style="color:#8b949e;font-style:italic">; LSB = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>    <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r0</span>
+</span></span></code></pre></div><p>After we ran the <code>BX r0</code> line, the T flag will be updated to T = 1, THUMB state initiated.
+<figure class="center"><img src="https://i.imgur.com/IgTfbHi.png"
+    alt="thumbcode">
+</figure>
+
+<em>ignore the codes part</em></p>
+<h2 id="question-3">
+  Question 3
+  <a class="heading-link" href="#question-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Write the THUMB instructions that are equivalent to the following ARM instructions:</p>
+<ul>
+<li>a.) ADDS r0, r3, r2, LSL #2</li>
+<li>b.) LDR  r1, [r4, r5, LSL #2]</li>
+</ul>
+<h3 id="part-a">
+  Part a
+  <a class="heading-link" href="#part-a">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>ARM instruction: <code>ADDS r0, r3, r2, LSL #2</code></p>
+<p>THUMB instruction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>
+</span></span></code></pre></div><ul>
+<li><code>LSL r2, #2</code> - We move r2 value by 2 bits first, or in order words times 4</li>
+<li><code>ADD r3, r2</code> - Add r3 and r2 and store in r3. Remember in THUMB mode, if the storing register is same as one of the addition registers, you can omit out the first register</li>
+<li><code>MOV r0, r3</code> - Finally store it inside r0 like how the ARM instruction does it</li>
+</ul>
+<p>But there&rsquo;s a faster way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span></code></pre></div><ul>
+<li>Remember again, not putting the storing register is optional, but sometimes doing so can lead to shorter code</li>
+<li>Depends on the situation</li>
+</ul>
+<h3 id="part-a-source-registers-not-modified">
+  Part a (source registers not modified)
+  <a class="heading-link" href="#part-a-source-registers-not-modified">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>THUMB instruction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span></code></pre></div><ul>
+<li>The only thing different this time is copying the r2 value into a temporary register r4</li>
+<li>This is because in the original THUMB code, we do <code>LSL r2, #2</code> which modifies r2&rsquo;s original value</li>
+<li>So here we are just literally copying its value into a temporary register</li>
+</ul>
+<h3 id="part-b">
+  Part b
+  <a class="heading-link" href="#part-b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>ARM Instruction: <code>LDR r1, [r4, r5, LSL#2]</code></p>
+<p>THUMB Instruction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, [<span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>]
+</span></span></code></pre></div><ul>
+<li>Essentially, since we can&rsquo;t do shifting in THUMB mode, we can just separate the LSL part into one line and the rest follow suite</li>
+</ul>
+<h3 id="part-b-source-registers-not-modified">
+  Part b (source registers not modified)
+  <a class="heading-link" href="#part-b-source-registers-not-modified">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>THUMB Instruction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, [<span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>]
+</span></span></code></pre></div><ul>
+<li>Same shit with part a, copy r5 (which we want to shift) into a temporary register r3, the rest are the same but uses r3</li>
+</ul>
+<h2 id="question-4">
+  Question 4
+  <a class="heading-link" href="#question-4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The following program fragment is written in ARM code. Determine what it is doing and compute the code size of this fragment. Convert it into a THUMB program fragment and also determine its code size.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#8b949e;font-style:italic">; IN: r0 (value), r1 (divisor)
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#8b949e;font-style:italic">; OUT: r2 (remainder), r3 (quotient)
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">CODE32</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#10         ; value = 10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#3          ; divisor = 3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#0          ; quotient = 0 (initially)
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUBS</span>    <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>      <span style="color:#8b949e;font-style:italic">; r0 = r0 - r1 and set S flag
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADDGE</span>   <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#1      ; if r0 &gt;= 0, quotient increase by 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>            <span style="color:#8b949e;font-style:italic">; if result &gt;= 0, branch back to loop
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>      <span style="color:#8b949e;font-style:italic">; remainder = r0 + divisor 
+</span></span></span></code></pre></div><p>This is essentially a repeated subtraction method to mimick division. It looks daunting at first, but let&rsquo;s look at each iteration of the loop and you can get the idea better:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Iteration</th>
+          <th>r3 (quotient)</th>
+          <th>r0 (value)</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>start</td>
+          <td>0</td>
+          <td>10</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>7</td>
+          <td>OK (≥0)</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>2</td>
+          <td>4</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>3</td>
+          <td>1</td>
+          <td>OK</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>-</td>
+          <td>-2</td>
+          <td><strong>negative → exit loop</strong></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>The loop ends when the result of <code>SUBS &lt;= 0</code></p>
+</li>
+<li>
+<p>And finally, the remainder will be r0 + divisor = -2 + 3 = 1</p>
+</li>
+<li>
+<p>To get a clearer picture, look at the illustration below:
+<figure class="center"><img src="https://i.imgur.com/6JTAbiy.jpeg"
+    alt="thumbcode">
+</figure>
+</p>
+</li>
+<li>
+<p>The most important we need to know is that, it will always overshoot, and after correcting the value by adding the divisor value, it will always end up with the remainder value</p>
+</li>
+<li>
+<p>Try out different r0 value like &lsquo;9&rsquo; or &lsquo;13&rsquo;. You&rsquo;ll always get the correct remainder</p>
+</li>
+<li>
+<p>The code size is pretty straightforward, there&rsquo;s 7 lines of ARM code, 7 x 4 bytes = 28 bytes</p>
+</li>
+</ul>
+<p>Well that was pretty long just for the ARM part. Time for THUMB:</p>
+<h3 id="thumb-code">
+  Thumb Code
+  <a class="heading-link" href="#thumb-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE16</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#10
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">loop</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#1      ; increment the quotient first
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>      <span style="color:#8b949e;font-style:italic">; subtract the divisor 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BGE</span>     <span style="color:#79c0ff;font-weight:bold">loop</span>        <span style="color:#8b949e;font-style:italic">; branch back to loop if result &gt;= 0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#1      ; undo the last quotient increment
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>      <span style="color:#8b949e;font-style:italic">; fix overshooting by adding divisor
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>Before the loop everything is similar, so let&rsquo;s skip into the loop body:</p>
+</li>
+<li>
+<p>The main difference with the THUMB code is that we do the addition part first, which is why we need to undo the increment later when we exit the loop. We can see this happening if we look at each iteration again:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Iteration</th>
+          <th>r3 (quotient) after ADD</th>
+          <th>r0 after SUB (value)</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>start</td>
+          <td>0</td>
+          <td>10</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>7</td>
+          <td>7 ≥ 0 → continue</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>2</td>
+          <td>4</td>
+          <td>4 ≥ 0 → continue</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>3</td>
+          <td>1</td>
+          <td>1 ≥ 0 → continue</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>4</td>
+          <td>-2</td>
+          <td><strong>negative → exit loop</strong></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>As compared to the table from the ARM code, our quotient, r3 stops at 4 instead of 3, that&rsquo;s why after we exit the loop using BGE, we have to undo the increment by <code>SUB r3, #1</code></p>
+</li>
+<li>
+<p>But after this line, everything is essentially the same as ARM</p>
+</li>
+<li>
+<p>Just keep in mind that THUMB mode does not have conditions for operations like ADD or SUB, but it can use conditions for Branch, B</p>
+</li>
+<li>
+<p>Final code size = 9 lines of code x 4 bytes = 18 bytes</p>
+</li>
+</ul>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

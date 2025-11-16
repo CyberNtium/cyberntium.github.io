@@ -6,8 +6,15 @@
     <description>Recent content on cyberntium</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Nov 2025 14:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Nov 2025 22:01:13 +0800</lastBuildDate>
     <atom:link href="https://cyberntium.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Microprocessors TUT10</title>
+      <link>https://cyberntium.github.io/studylogs/microprocessors-tut10/</link>
+      <pubDate>Sun, 16 Nov 2025 22:01:13 +0800</pubDate>
+      <guid>https://cyberntium.github.io/studylogs/microprocessors-tut10/</guid>
+      <description>&lt;h1 id=&#34;tutorial-10&#34;&gt;&#xD;&#xA;  Tutorial 10&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#tutorial-10&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;h2 id=&#34;question-1&#34;&gt;&#xD;&#xA;  Question 1&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#question-1&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Which bit in the registers CPSR and SPSR indicate whether you are in ARM or THUMB state?&lt;/p&gt;&#xA;&lt;figure class=&#34;center&#34;&gt;&lt;img src=&#34;https://i.imgur.com/nFLf3fC.png&#34;&#xA;    alt=&#34;tbits&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Bit 5, or the T bit:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;0 represents ARM state&lt;/li&gt;&#xA;&lt;li&gt;1 represents THUMB state&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;question-2&#34;&gt;&#xD;&#xA;  Question 2&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#question-2&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Explain how the branch instruction &lt;code&gt;BX rd&lt;/code&gt; is used to switch between the ARM and THUMB states.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Microprocessors THUMB</title>
       <link>https://cyberntium.github.io/studylogs/microprocessors-thumb/</link>
