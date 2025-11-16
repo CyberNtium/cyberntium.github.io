@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Microprocessors THUMB · cyberntium
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Carl Ho">
+<meta name="description" content="
+  What is THUMB?
+  
+    
+    Link to heading
+  
+
+As we have learnt throughout the entire IE3102 course, ARM instructions are 32 bits.
+For this part of the course, we are using THUMB instructions, which are 16 bits.
+
+  But why?
+  
+    
+    Link to heading
+  
+
+Apparently, since obviously 16-bits instruction is half of that of 32-bit instructions, you can fit more code into the same amount of 32-bit memory.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Microprocessors THUMB">
+  <meta name="twitter:description" content="What is THUMB?Link to headingAs we have learnt throughout the entire IE3102 course, ARM instructions are 32 bits.
+For this part of the course, we are using THUMB instructions, which are 16 bits.
+But why?Link to headingApparently, since obviously 16-bits instruction is half of that of 32-bit instructions, you can fit more code into the same amount of 32-bit memory.">
+
+<meta property="og:url" content="https://cyberntium.github.io/studylogs/microprocessors-thumb/">
+  <meta property="og:site_name" content="cyberntium">
+  <meta property="og:title" content="Microprocessors THUMB">
+  <meta property="og:description" content="What is THUMB?Link to headingAs we have learnt throughout the entire IE3102 course, ARM instructions are 32 bits.
+For this part of the course, we are using THUMB instructions, which are 16 bits.
+But why?Link to headingApparently, since obviously 16-bits instruction is half of that of 32-bit instructions, you can fit more code into the same amount of 32-bit memory.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="studylogs">
+    <meta property="article:published_time" content="2025-11-16T14:37:56+08:00">
+    <meta property="article:modified_time" content="2025-11-16T14:37:56+08:00">
+
+
+
+
+<link rel="canonical" href="https://cyberntium.github.io/studylogs/microprocessors-thumb/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.ebdf1a5dca6a69142e979b32668c69f2a95448b145a168104c5808b14d2b75b0.css" integrity="sha256-698aXcpqaRQul5syZoxp8qlUSLFFoWgQTFgIsU0rdbA=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://cyberntium.github.io/">
+      cyberntium
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/blog/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/studylogs/">Study Log</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/music/">Music</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://cyberntium.github.io/studylogs/microprocessors-thumb/">
+          Microprocessors THUMB
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="what-is-thumb">
+  What is THUMB?
+  <a class="heading-link" href="#what-is-thumb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>As we have learnt throughout the entire IE3102 course, ARM instructions are 32 bits.<br>
+For this part of the course, we are using THUMB instructions, which are 16 bits.</p>
+<h2 id="but-why">
+  But why?
+  <a class="heading-link" href="#but-why">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Apparently, since obviously 16-bits instruction is half of that of 32-bit instructions, you can fit more code into the same amount of 32-bit memory.</p>
+<h2 id="register-sets-in-arm-vs-thumb">
+  Register Sets in ARM vs THUMB
+  <a class="heading-link" href="#register-sets-in-arm-vs-thumb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>ARM</th>
+          <th>THUMB</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r0</td>
+          <td>r0</td>
+      </tr>
+      <tr>
+          <td>r1</td>
+          <td>r1</td>
+      </tr>
+      <tr>
+          <td>r2</td>
+          <td>r2</td>
+      </tr>
+      <tr>
+          <td>r3</td>
+          <td>r3</td>
+      </tr>
+      <tr>
+          <td>r4</td>
+          <td>r4</td>
+      </tr>
+      <tr>
+          <td>r5</td>
+          <td>r5</td>
+      </tr>
+      <tr>
+          <td>r6</td>
+          <td>r6</td>
+      </tr>
+      <tr>
+          <td>r7</td>
+          <td>r7</td>
+      </tr>
+      <tr>
+          <td>r8</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>r9</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>r10</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>r11</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>r12</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>r13 (sp)</td>
+          <td>sp</td>
+      </tr>
+      <tr>
+          <td>r14 (lr)</td>
+          <td>lr</td>
+      </tr>
+      <tr>
+          <td>r15 (pc)</td>
+          <td>pc</td>
+      </tr>
+  </tbody>
+</table>
+<p>As we can see clearly, for THUMB, only r0 to r7 are full accessible. This makes sense because:</p>
+<ul>
+<li>ARM has access to all 16 registers, it can use log2(16) = 4 bits (0000 to 1111)</li>
+<li>but THUMB only has access to 8 registers, half of ARM, log2(8) = 3 bits (000 to 111)</li>
+</ul>
+<p>For r8 to r12, its only accessible for MOV, ADD and CMP. r13, r14 and r15 also has limited accessibility. Unfortunately, CPSR / SPSR cannot be accessed in THUMB mode</p>
+<hr>
+<h1 id="how-to-enter-thumb">
+  How to enter THUMB?
+  <a class="heading-link" href="#how-to-enter-thumb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Recall <code>BX lr</code> instruction when we want to branch to a subroutine from the subroutine chapter.<br>
+Well, <code>BX</code> stands for <em><em>Branch and Exchange</em></em>. And, we can use <code>BX rd</code> to branch to THUMB state where <code>rd</code> stands for the target address<br>
+As such, by controlling the Least Significant Bit (LSB) of <code>rd</code>, we can effectively branch to THUMB or ARM with :</p>
+<ul>
+<li>LSB = 1, ARM to THUMB</li>
+<li>LSB = 0, THUMB to ARM</li>
+</ul>
+<h2 id="what-the-heck-is-this-lsb-thing">
+  What the heck is this LSB thing?
+  <a class="heading-link" href="#what-the-heck-is-this-lsb-thing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Let&rsquo;s look at the ARM architecture as a whole:</p>
+<ul>
+<li>The fundamental unit of memory access in a 32-bit architecture is usually a <strong>word</strong>, which is 4 bytes (32 bits):</li>
+<li>
+<ul>
+<li>ARM -&gt; 32 bits or 4 bytes</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>THUMB -&gt; 16 bits or 2 bytes</li>
+</ul>
+</li>
+</ul>
+<p>But since both ARM and THUMB instructions are multiples of 2 bytes, they must begin at a memory address that is a mutliple of 2.</p>
+<h3 id="the-least-significant-bit-lsb">
+  The Least Significant Bit (LSB)
+  <a class="heading-link" href="#the-least-significant-bit-lsb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>if we consider how addresses are represented in binary like so:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Address (Decimal)</th>
+          <th>Address (Binary)</th>
+          <th>LSB (Bit 0)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>&hellip;00000</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>&hellip;00001</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>&hellip;00010</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>&hellip;00011</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>&hellip;00100</td>
+          <td>0</td>
+      </tr>
+  </tbody>
+</table>
+<p>&hellip;address that are multiple of 2 always have an LSB of 0.<br>
+As such, for all valid instructions that is a multiple of 2 (both ARM and THUMB), their LSB is always going to be &lsquo;0&rsquo;.</p>
+<h3 id="how-to-switch-mode">
+  How to switch mode?
+  <a class="heading-link" href="#how-to-switch-mode">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>    <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#f85149">=</span> <span style="color:#a5d6ff">0x2001</span>    <span style="color:#8b949e;font-style:italic">; LSB = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>    <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r0</span>
+</span></span></code></pre></div><ul>
+<li>Your CPU check the LSB bit, which is 1, switches to THUMB mode.</li>
+<li>But it clears the LSB bit again, back to zero so everything aligns normally</li>
+<li>Essentially, you are jumping to 0x2000 address to do THUMB code not 0x2001. The extra 1 bit is just to tell your CPU its time to switch to THUMB mode</li>
+<li>Think of the 1 bit as setting the T flag</li>
+</ul>
+<hr>
+<h1 id="thumb-limitation">
+  THUMB Limitation
+  <a class="heading-link" href="#thumb-limitation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Here is a summary of the stuff for THUMB mode:</p>
+<ul>
+<li>Conditional execution is not used (no stuff like <code>MULEQ</code> or <code>ADDEQ</code>) but branch conditions are still allowed</li>
+<li>Source and destination register can be identical (ADD r1, #1  &ndash;&gt; r1 = r1 + 1)</li>
+<li>Only low registers can used ( r0 to r7 )</li>
+<li>No barrel shifter</li>
+<li>Limited size for constants</li>
+<li>For stack pushing and popping,  THUMB uses</li>
+<li>
+<ul>
+<li>PUSH {reg, lr} for storing</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>POP {reg, pc} for loading</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Keep in mind that by default, THUMB PUSH POP is a Full Descending stack (FD)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="example-1">
+  Example 1
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Give the mnemonic for a THUMB instruction that is equivalent to the ARM instruction:<br>
+<code>SUB r3, r2, r1, LSL #2</code></p>
+<ul>
+<li>The original code can be understood as <code>r3 = r2 - r1 * 2^2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>    <span style="color:#8b949e;font-style:italic">; THUMB version
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>    <span style="color:#d2a8ff;font-weight:bold">LSL</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>    <span style="color:#d2a8ff;font-weight:bold">SUB</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#79c0ff;font-weight:bold">r2</span>
+</span></span></code></pre></div><ul>
+<li>First we do LSL on r1 by 2 bits, or in other words, multiplying by 4</li>
+<li>Substract r2 by r1, and storing it into r2 again. Remember for THUMB, there&rsquo;s no need to mention the stored register like in ARM (SUB r2, r2, r1)</li>
+<li>Finally, we move the result of r2 into r3</li>
+</ul>
+<h2 id="arm-version">
+  ARM Version
+  <a class="heading-link" href="#arm-version">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<figure class="center"><img src="https://i.imgur.com/LriCvdI.png"
+    alt="armcode">
+</figure>
+
+<ul>
+<li>Notice how its 16 bytes, from the first <code>MOV</code> to <code>stop B stop</code>, its <code>4 x 4 bytes = 16 bytes</code></li>
+</ul>
+<h2 id="thumb-version">
+  THUMB Version
+  <a class="heading-link" href="#thumb-version">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<figure class="center"><img src="https://i.imgur.com/PLiKRIh.png"
+    alt="thumbcode">
+</figure>
+
+<ul>
+<li>
+<p>CODE32: 4 bytes x 2 = 8 bytes</p>
+</li>
+<li>
+<p>CODE16: 2 bytes x 6 = 12 bytes</p>
+</li>
+<li>
+<p>Total code size = 8 bytes + 12 bytes + 4 (literal pool) = 24 bytes</p>
+</li>
+<li>
+<p>Looking at the T flag when we run <code>BX r0</code>:
+<figure class="center"><img src="https://i.imgur.com/IgTfbHi.png"
+    alt="thumbcode">
+</figure>
+</p>
+</li>
+<li>
+<p>T flag becomes &lsquo;1&rsquo;, we are in THUMB mode</p>
+</li>
+</ul>
+<h1 id="example-2---branch-from-arm-to-thumb-and-back-to-arm">
+  Example 2 - Branch from ARM to THUMB and back to ARM
+  <a class="heading-link" href="#example-2---branch-from-arm-to-thumb-and-back-to-arm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">arm2thumb</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">main</span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#79c0ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">thumbProg</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">1</span>      <span style="color:#8b949e;font-style:italic">; Set LSB to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r0</span>                      <span style="color:#8b949e;font-style:italic">; branch to thumbProg
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE16</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">thumbProg</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#8b949e;font-style:italic">#20                 ; Move #20 into r2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r3</span>, <span style="color:#8b949e;font-style:italic">#30                 ; Move #30 into r3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r3</span>                  <span style="color:#8b949e;font-style:italic">; r2 = r2 + r3 = 20 + 30 = 50
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">armProg</span>            <span style="color:#8b949e;font-style:italic">; LSB is 0, so we are back to ARM state
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r0</span>                      <span style="color:#8b949e;font-style:italic">; Branch to ARM state
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE32</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">armProg</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#40                 ; Move #40 into r4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#8b949e;font-style:italic">#50                 ; Move $50 into r5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>              <span style="color:#8b949e;font-style:italic">; Notice how we need to mention to storing register
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>                                        <span style="color:#8b949e;font-style:italic">; in CODE32
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>But what if we want to return to the main routine? <code>BX rd</code> never actually intend to return to the main routine, we need to use <code>BL</code>, but BL cannot be used to switch to THUMB. So how?</li>
+</ul>
+<h1 id="example-3---jump-into-thumb-subroutine-and-return-to-main">
+  Example 3 - Jump into THUMB subroutine and return to main
+  <a class="heading-link" href="#example-3---jump-into-thumb-subroutine-and-return-to-main">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>We need to introduce a new thing called veneer. Essentially, we <code>BL</code> into this veneer subroutine, which we will then do the usual THUMB mode switch in the veneer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span>    <span style="color:#79c0ff;font-weight:bold">ToThumbSub</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">main</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BL</span>      <span style="color:#79c0ff;font-weight:bold">veneer</span>                  <span style="color:#8b949e;font-style:italic">; call veneer
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">veneer</span>                                  <span style="color:#8b949e;font-style:italic">; Put the switch to THUMB code in here
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">thumbSub</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">1</span>       <span style="color:#8b949e;font-style:italic">; Set LSB to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r0</span>                      <span style="color:#8b949e;font-style:italic">; Branch to thumbSub subroutine
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE16</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">thumbSub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#8b949e;font-style:italic">#40
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#8b949e;font-style:italic">#50
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">SUB</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">lr</span>                      <span style="color:#8b949e;font-style:italic">; return to main and switch back to ARM
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div>
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Carl Ho 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
