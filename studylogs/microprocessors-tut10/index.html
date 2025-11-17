@@ -486,6 +486,123 @@ Bit 5, or the T bit:
 <p>Final code size = 9 lines of code x 4 bytes = 18 bytes</p>
 </li>
 </ul>
+<h2 id="question-5">
+  Question 5
+  <a class="heading-link" href="#question-5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Write an assembly program that will call a subroutine (written in THUMB code) with register <code>r0 = 5</code> and register <code>r1 = 3</code>. The THUMB subroutine computes the sum of the square of the values stored in register r0 and register r1. It should place the result in register r2. You should write code (veneer) that will enable the switch to different states and also ensure that any other registers used in the subroutine are preserved upon entry and restored before return.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ASM" data-lang="ASM"><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">AREA</span> <span style="color:#79c0ff;font-weight:bold">thumbSub</span>, <span style="color:#79c0ff;font-weight:bold">CODE</span>, <span style="color:#79c0ff;font-weight:bold">READONLY</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">ramBase</span> <span style="color:#79c0ff;font-weight:bold">EQU</span> <span style="color:#a5d6ff">0x40000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">ENTRY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE32</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">sp</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">ramBase</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">0x100</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r0</span>, <span style="color:#8b949e;font-style:italic">#5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r1</span>, <span style="color:#8b949e;font-style:italic">#3
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BL</span> <span style="color:#79c0ff;font-weight:bold">veneer</span>                       <span style="color:#8b949e;font-style:italic">; call veneer 
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">stop</span>    <span style="color:#79c0ff;font-weight:bold">B</span>       <span style="color:#79c0ff;font-weight:bold">stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">veneer</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">LDR</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#f85149">=</span><span style="color:#79c0ff;font-weight:bold">thumbAdd</span> <span style="color:#f85149">+</span> <span style="color:#a5d6ff">1</span>       <span style="color:#8b949e;font-style:italic">; set LSB to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">r4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">CODE16</span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">thumbAdd</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">PUSH</span>    <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span><span style="color:#f85149">}</span>                <span style="color:#8b949e;font-style:italic">; preserve original r4, r5 value
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>                  <span style="color:#8b949e;font-style:italic">; copies r0 into r4
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MOV</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>                  <span style="color:#8b949e;font-style:italic">; copies r1 into r5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MUL</span>     <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r0</span>                  <span style="color:#8b949e;font-style:italic">; r4 = r4 * r0 = r0 * r0
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">MUL</span>     <span style="color:#79c0ff;font-weight:bold">r5</span>, <span style="color:#79c0ff;font-weight:bold">r1</span>                  <span style="color:#8b949e;font-style:italic">; r5 = r5 * r1 = r1 * r1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>        <span style="color:#d2a8ff;font-weight:bold">ADD</span>     <span style="color:#79c0ff;font-weight:bold">r2</span>, <span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span>              <span style="color:#8b949e;font-style:italic">; r2 = r4 + r5
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">POP</span>     <span style="color:#f85149">{</span><span style="color:#79c0ff;font-weight:bold">r4</span>, <span style="color:#79c0ff;font-weight:bold">r5</span><span style="color:#f85149">}</span>                <span style="color:#8b949e;font-style:italic">; pop out original r4, r5 value
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">BX</span>      <span style="color:#79c0ff;font-weight:bold">lr</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d2a8ff;font-weight:bold">END</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>We start off in CODE32:</p>
+</li>
+<li>
+<ul>
+<li><code>MOV r0, #5</code> - Initialise r0 with #5</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MOV r1, #3</code> - Initialise r1 with #3</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>BL veneer</code> - Branch into the veneer routine</li>
+</ul>
+</li>
+<li>
+<p>In veneer:</p>
+</li>
+<li>
+<ul>
+<li><code>LDR r4, =thumbAdd+1</code> - Set the LSB of address of thumbAdd to 1, switching to THUMB mode</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>BX r4</code> - Switch to thumb mode, set T flag to 1</li>
+</ul>
+</li>
+<li>
+<p>In CODE16, thumbAdd:</p>
+</li>
+<li>
+<ul>
+<li><code>PUSH {r4, r5}</code> - According to the question, we need to perserve all register value upon entry. Since original r4 and r5 is zero, we should perserve them since we are going to use them later. To do so, we push r4 and r5 to the stack.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MOV r4, r0</code> - Since we also don&rsquo;t want to override the original r0 value when we square it, we can copy it into r4 as a temporary register.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MOV r5, r1</code> - Same thing with r1 into r5</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MUL r4, r0</code> - Basically squaring r0, but we store in r4</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>MUL r5, r1</code> - Same thing, squaring r1</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>ADD r2, r4, r5</code> - According to the question, we need to store the final results inside r2. So, add r4 and r5 and store inside r2</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>POP {r4, r5}</code> - After we are done with the final results r2, we can safely pop out the original r4 and r5 value to override the ones we have messed around in here.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>BX lr</code> - Return to main routine</li>
+</ul>
+</li>
+</ul>
 
   </article>
 </section>
